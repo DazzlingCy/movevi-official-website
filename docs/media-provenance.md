@@ -45,3 +45,12 @@
 两项素材页已核验作者、Free 标记与画面。地点信息来自素材的城市标签或标题：纽约的城市/河畔标签与曼哈顿画面，巴黎标题及 Montmartre 标签。使用依据为 Pexels License https://www.pexels.com/license/，允许网站与推广用途及修改，不暗示人物或品牌为 MOVEVI 背书。两个视频均 H.264、25 fps、静音、faststart，未改动人物、添加品牌或替换运动设备。
 
 只在结束邀请页作为“世界城市跑步氛围影像 · 素材示意”；不表示 MOVEVI 用户案例、已上线路线或真实设备联动。试选素材 19538560 未进入发布包。
+
+## 城市卡片：伦敦运动影像 · 2026-10-13
+
+- 作品：Man Running on the Stairs / Sam Jae。
+- 原始页面：https://www.pexels.com/video/man-running-on-the-stairs-6138309/ 。页面标记 Free，说明地点为伦敦千禧桥与圣保罗大教堂；已核对影像中桥梁、教堂与楼梯跑步者。
+- 下载链接来自该页面 Free download：https://videos.pexels.com/video-files/6138309/6138309-uhd_3840_2160_24fps.mp4 。
+- 授权：Pexels License https://www.pexels.com/license/ 。允许商业展示及修改，不暗示人物或地标为 MOVEVI 背书。
+- 从第 1 秒截取 9 秒，1920 × 1080、24fps、H.264、静音、faststart，1,027,728 bytes。海报取原片第 3 秒、1600px、WebP，103,686 bytes。
+- 用途：方案页城市卡片的运动氛围。与既有纽约、巴黎跑步素材组成三城展示；非 MOVEVI 实拍、用户案例或已上线路线。

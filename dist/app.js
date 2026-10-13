@@ -35,21 +35,4 @@ function selectStep(index,focus=false){
 }
 function tabKeys(event,index,count,select){let next;if(event.key==='ArrowDown'||event.key==='ArrowRight')next=(index+1)%count;if(event.key==='ArrowUp'||event.key==='ArrowLeft')next=(index+count-1)%count;if(event.key==='Home')next=0;if(event.key==='End')next=count-1;if(next!==undefined){event.preventDefault();select(next,true);}}
 stepButtons.forEach((button,index)=>{button.addEventListener('click',()=>selectStep(index));button.addEventListener('keydown',event=>tabKeys(event,index,panels.length,selectStep));});
-const destinations={
-  tokyo:{name:'东京',country:'JAPAN / 日本',description:'穿过街巷，发现城市的细密节奏。',poster:'assets/video/tokyo-poster.webp'},
-  paris:{name:'巴黎',country:'FRANCE / 法国',description:'在塞纳河畔，遇见日常的浪漫。',poster:'assets/video/paris-poster.webp'},
-  'new-york':{name:'纽约',country:'UNITED STATES / 美国',description:'跟随脚步，感受城市向前的生命力。',poster:'assets/new-york.jpg'},
-  sydney:{name:'悉尼',country:'AUSTRALIA / 澳大利亚',description:'沿着海岸，把脚步交给海风。',poster:'assets/sydney.jpg'}
-};
-const destinationButtons=[...document.querySelectorAll('[data-destination]')];
-function selectDestination(index,focus=false){
-  const button=destinationButtons[index],key=button.dataset.destination,city=destinations[key];
-  destinationButtons.forEach(b=>{const selected=b===button;b.setAttribute('aria-selected',String(selected));b.tabIndex=selected?0:-1;});
-  document.querySelector('#world-country').textContent=city.country;document.querySelector('#world-city').textContent=city.name;document.querySelector('#world-description').textContent=city.description;
-  const poster=document.querySelector('#world-poster');poster.src=city.poster;poster.alt=`${city.name}城市风景`;
-  document.querySelector('#world-panel').setAttribute('aria-labelledby',button.id);document.querySelector('#world-selection').textContent=`${city.name} · 城市氛围展示`;
-  document.dispatchEvent(new CustomEvent('movevi:destination',{detail:{key}}));if(focus)button.focus();
-}
-destinationButtons.forEach((button,index)=>{button.addEventListener('click',()=>selectDestination(index));button.addEventListener('keydown',event=>tabKeys(event,index,destinationButtons.length,selectDestination));});
-document.addEventListener('movevi:select-city',event=>{const index=destinationButtons.findIndex(button=>button.dataset.destination===event.detail.key);if(index>=0)selectDestination(index);});
 document.querySelector('#year').textContent=new Date().getFullYear();

@@ -3,25 +3,30 @@ import vm from 'node:vm';
 import {readFile} from 'node:fs/promises';
 const source=(await readFile('dist/hero-earth.js','utf8')).replace(/^import .*;\s*/,'');
 class Element{
- constructor(){this.events={};this.attrs={};this.dataset={};this.classes=new Set();this.classList={contains:x=>this.classes.has(x),add:x=>this.classes.add(x),remove:x=>this.classes.delete(x)};}
+ constructor(){this.events={};this.attrs={};this.dataset={};this.classes=new Set();this.classList={contains:x=>this.classes.has(x),add:x=>this.classes.add(x),remove:x=>this.classes.delete(x),toggle:(x,v)=>v?this.classes.add(x):this.classes.delete(x)};}
  addEventListener(k,fn){(this.events[k]??=[]).push(fn);}
  fire(k,event={}){for(const fn of this.events[k]||[])fn(event);}
  setAttribute(k,v){this.attrs[k]=v;}
- getBoundingClientRect(){return {width:1000,height:800};}
+ getBoundingClientRect(){return {left:0,top:0,width:1000,height:800};}
+ setPointerCapture(id){this.capture=id;}
+ hasPointerCapture(id){return this.capture===id;}
+ releasePointerCapture(){this.capture=null;}
 }
 async function setup({gpuFailure=false,textureFailure=false,saveData=false}={}){
  const stage=new Element(),canvas=new Element(),button=new Element(),hero=new Element(),root=new Element(),doc=new Element(),win=new Element(),media=new Element(),connection=new Element();
  connection.saveData=saveData;doc.documentElement=root;doc.hidden=false;media.matches=false;
  const nodes={'.hero-earth-stage':stage,'#hero-earth-canvas':canvas,'#earth-toggle':button,'.hero-earth':hero};doc.querySelector=x=>nodes[x];
- let observer,mutation,renders=0,disposed=false,textureURL;const frames=new Map();let next=0;
+ let observer,mutation,renders=0,disposed=false,textureURL,group,hit=true;const frames=new Map();let next=0;
  class Vec{set(){return this;}copy(){return this;}clone(){return new Vec();}multiplyScalar(){return this;}}
- class Obj{constructor(){this.position=new Vec();this.rotation={set(){},y:0};}add(){}lookAt(){}updateProjectionMatrix(){}}
+ class Obj{constructor(){this.position=new Vec();this.rotation={x:0,y:0,z:0,set(x,y,z){this.x=x;this.y=y;this.z=z;}};}add(){}lookAt(){}updateProjectionMatrix(){}}
+ class Group extends Obj{constructor(){super();group=this;}}
+ class Raycaster{setFromCamera(){}intersectObject(){return hit?[{}]:[];}}
  class Renderer{constructor(){if(gpuFailure)throw Error('No GPU');this.capabilities={getMaxAnisotropy:()=>4};}setClearColor(){}setPixelRatio(){}setSize(){}render(){renders++;}dispose(){disposed=true;}}
  class Loader{async loadAsync(url){textureURL=url;if(textureFailure)throw Error('Missing texture');return {};}}
- const THREE={WebGLRenderer:Renderer,Scene:Obj,PerspectiveCamera:Obj,Group:Obj,TextureLoader:Loader,Mesh:Obj,Vector3:Vec,MathUtils:{degToRad:n=>n*Math.PI/180},SphereGeometry:Obj,MeshBasicMaterial:Obj,ShaderMaterial:Obj,RingGeometry:Obj};
+ const THREE={WebGLRenderer:Renderer,Scene:Obj,PerspectiveCamera:Obj,Group,Raycaster,Vector2:Vec,TextureLoader:Loader,Mesh:Obj,Vector3:Vec,MathUtils:{degToRad:n=>n*Math.PI/180},SphereGeometry:Obj,MeshBasicMaterial:Obj,ShaderMaterial:Obj,RingGeometry:Obj};
  const context={THREE,document:doc,window:win,navigator:{connection},matchMedia:()=>media,devicePixelRatio:2,innerWidth:1440,console:{warn(){}},requestAnimationFrame:fn=>{frames.set(++next,fn);return next;},cancelAnimationFrame:id=>frames.delete(id),IntersectionObserver:class{constructor(fn){observer=fn;}observe(){}},MutationObserver:class{constructor(fn){mutation=fn;}observe(){}},ResizeObserver:class{observe(){}}};
  vm.runInNewContext(source,context);await new Promise(r=>setImmediate(r));
- return {stage,canvas,button,root,doc,win,media,frames,get renders(){return renders;},get disposed(){return disposed;},get textureURL(){return textureURL;},visible(value){observer([{isIntersecting:value}]);},reduce(value){value?root.classes.add('reduce-motion'):root.classes.delete('reduce-motion');mutation();},tick(time){const batch=[...frames.values()];frames.clear();batch.forEach(fn=>fn(time));}};
+ return {stage,canvas,button,root,doc,win,media,frames,get rotation(){return group.rotation;},hit(value){hit=value;},get renders(){return renders;},get disposed(){return disposed;},get textureURL(){return textureURL;},visible(value){observer([{isIntersecting:value}]);},reduce(value){value?root.classes.add('reduce-motion'):root.classes.delete('reduce-motion');mutation();},tick(time){const batch=[...frames.values()];frames.clear();batch.forEach(fn=>fn(time));}};
 }
 const app=await setup();
 assert.equal(app.frames.size,0,'No animation before intersection');
@@ -38,4 +43,15 @@ app.canvas.fire('webglcontextrestored');assert.equal(app.frames.size,1);assert(a
 app.win.fire('pagehide');assert.equal(app.frames.size,0);app.win.fire('pageshow');assert.equal(app.frames.size,1);
 const data=await setup({saveData:true});data.visible(true);assert.equal(data.frames.size,0);assert.equal(data.textureURL,'assets/globe/earth-night.jpg');
 for(const options of [{gpuFailure:true},{textureFailure:true}]){const fail=await setup(options);fail.visible(true);assert.equal(fail.stage.dataset.earthState,'fallback');assert.equal(fail.frames.size,0);assert(fail.button.hidden);}
-console.log('Passed: Three.js hero lifecycle, manual pause, offscreen/background, reduced motion, save-data, context restoration and GPU/texture fallbacks.');
+const interactive=await setup();interactive.visible(true);interactive.reduce(true);
+const pointer={pointerId:1,pointerType:'mouse',button:0,clientX:400,clientY:300,preventDefault(){}};
+interactive.hit(false);interactive.canvas.fire('pointerdown',pointer);assert.equal(interactive.canvas.capture,undefined,'Empty canvas does not capture');
+interactive.hit(true);interactive.canvas.fire('pointerdown',pointer);assert.equal(interactive.stage.dataset.earthState,'dragging');
+interactive.canvas.fire('pointermove',{...pointer,clientX:600,clientY:800});interactive.tick(100);
+assert(interactive.rotation.y>Math.PI);assert.equal(interactive.rotation.x,1.15,'Latitude bounded against flipping');
+interactive.canvas.fire('pointerup',pointer);assert.equal(interactive.frames.size,0);assert.equal(interactive.stage.dataset.earthState,'paused');
+interactive.reduce(false);assert.equal(interactive.frames.size,0,'Drag pause persists when motion is restored');
+interactive.canvas.fire('dblclick',pointer);assert.equal(interactive.rotation.y,Math.PI);
+interactive.canvas.fire('keydown',{key:'ArrowLeft',preventDefault(){}});assert(interactive.rotation.y<Math.PI);
+interactive.canvas.fire('keydown',{key:'Home',preventDefault(){}});assert.equal(interactive.rotation.x,.13);
+console.log('Passed: Three.js lifecycle, dragging/hit testing, keyboard rotation/reset, bounded latitude, pause persistence, reduced motion and recovery.');

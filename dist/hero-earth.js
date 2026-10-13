@@ -7,8 +7,8 @@ const hero=document.querySelector('.hero-earth');
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
 const connection=navigator.connection;
 const root=document.documentElement;
-let renderer,scene,camera,earth,ready=false,visible=false,lost=false,failed=false;
-let frame=0,previous=0,paused=false,pointer=0,targetPointer=0;
+let renderer,scene,camera,earth,sphere,raycaster,ready=false,visible=false,lost=false,failed=false;
+let frame=0,previous=0,paused=false,pointer=0,targetPointer=0,drag=null;
 const limit=()=>reduced.matches||root.classList.contains('reduce-motion')||connection?.saveData;
 const running=()=>ready&&visible&&!document.hidden&&!paused&&!limit()&&!lost&&!failed;
 
@@ -27,7 +27,8 @@ function sync(){
  button.textContent=stopped?'静态地球':paused?'播放地球 ▷':'暂停地球 Ⅱ';
  button.setAttribute('aria-label',stopped?'地球动画已按动态偏好关闭':paused?'播放地球动画':'暂停地球动画');
  button.setAttribute('aria-pressed',String(paused||!!stopped));
- stage.dataset.earthState=failed?'fallback':lost?'context-lost':running()?'playing':'paused';
+ stage.dataset.earthState=failed?'fallback':lost?'context-lost':drag?'dragging':running()?'playing':'paused';
+ canvas.tabIndex=ready&&!failed&&!lost?0:-1;
  if(visible)draw();
  if(running())frame=requestAnimationFrame(tick);
 }
@@ -51,7 +52,7 @@ async function boot(){
   earth=new THREE.Group();earth.rotation.set(.13,Math.PI, -.12);scene.add(earth);
   const map=await new THREE.TextureLoader().loadAsync(connection?.saveData?'assets/globe/earth-night.jpg':'assets/globe/earth-night-hd.jpg');
   map.colorSpace=THREE.SRGBColorSpace;map.anisotropy=Math.min(4,renderer.capabilities.getMaxAnisotropy());
-  const sphere=new THREE.Mesh(new THREE.SphereGeometry(1,96,64),new THREE.MeshBasicMaterial({map,color:0xf3faff}));earth.add(sphere);
+  sphere=new THREE.Mesh(new THREE.SphereGeometry(1,96,64),new THREE.MeshBasicMaterial({map,color:0xf3faff}));earth.add(sphere);raycaster=new THREE.Raycaster();
   const atmosphere=new THREE.Mesh(new THREE.SphereGeometry(1.012,64,48),new THREE.ShaderMaterial({
    transparent:true,depthWrite:false,side:THREE.FrontSide,
    vertexShader:'varying vec3 n;varying vec3 eye;void main(){vec4 p=modelViewMatrix*vec4(position,1.);n=normalize(normalMatrix*normal);eye=normalize(-p.xyz);gl_Position=projectionMatrix*p;}',
@@ -70,14 +71,46 @@ async function boot(){
 }
 
 button.addEventListener('click',()=>{if(limit())return;paused=!paused;sync();});
-hero.addEventListener('pointermove',event=>{if(event.pointerType==='mouse'&&running())targetPointer=(event.clientX/innerWidth-.5)*.13;},{passive:true});
-hero.addEventListener('pointerleave',()=>{targetPointer=0;});
+function hit(event){
+ if(!ready||lost||failed)return false;
+ const box=canvas.getBoundingClientRect();
+ raycaster.setFromCamera(new THREE.Vector2((event.clientX-box.left)/box.width*2-1,-(event.clientY-box.top)/box.height*2+1),camera);
+ return raycaster.intersectObject(sphere).length>0;
+}
+function requestDraw(){if(!frame)frame=requestAnimationFrame(()=>{frame=0;draw();});}
+function release(){
+ if(!drag)return;
+ const id=drag.id;drag=null;canvas.classList.remove('is-dragging');
+ if(canvas.hasPointerCapture(id))canvas.releasePointerCapture(id);
+ sync();
+}
+function reset(){if(!ready||lost)return;paused=true;earth.rotation.set(.13,Math.PI,-.12);pointer=targetPointer=0;sync();}
+canvas.addEventListener('pointerdown',event=>{
+ if(event.pointerType==='touch'||event.button!==0||!hit(event))return;
+ event.preventDefault();paused=true;drag={id:event.pointerId,x:event.clientX,y:event.clientY,lon:earth.rotation.y,lat:earth.rotation.x};
+ canvas.setPointerCapture(event.pointerId);canvas.classList.add('is-dragging');sync();
+});
+canvas.addEventListener('pointermove',event=>{
+ if(drag&&event.pointerId===drag.id){
+  earth.rotation.y=drag.lon+(event.clientX-drag.x)*.006;
+  earth.rotation.x=Math.max(-1.15,Math.min(1.15,drag.lat+(event.clientY-drag.y)*.004));requestDraw();
+ }else canvas.classList.toggle('is-hovered',event.pointerType!=='touch'&&hit(event));
+});
+canvas.addEventListener('pointerup',release);canvas.addEventListener('pointercancel',release);canvas.addEventListener('lostpointercapture',release);
+canvas.addEventListener('pointerleave',()=>canvas.classList.remove('is-hovered'));
+canvas.addEventListener('dblclick',event=>{if(hit(event))reset();});
+canvas.addEventListener('keydown',event=>{
+ if(!ready||lost||!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home'].includes(event.key))return;
+ event.preventDefault();if(event.key==='Home'){reset();return;}
+ paused=true;earth.rotation.y+=event.key==='ArrowLeft'?-.16:event.key==='ArrowRight'?.16:0;
+ earth.rotation.x=Math.max(-1.15,Math.min(1.15,earth.rotation.x+(event.key==='ArrowUp'?-.12:event.key==='ArrowDown'?.12:0)));sync();
+});
 new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;sync();},{threshold:.03}).observe(hero);
 new ResizeObserver(resize).observe(canvas);
 new MutationObserver(sync).observe(root,{attributes:true,attributeFilter:['class']});
 reduced.addEventListener('change',sync);connection?.addEventListener?.('change',sync);
-document.addEventListener('visibilitychange',sync);
-canvas.addEventListener('webglcontextlost',event=>{event.preventDefault();lost=true;cancel();stage.classList.remove('is-ready');sync();});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)release();sync();});
+canvas.addEventListener('webglcontextlost',event=>{event.preventDefault();lost=true;release();cancel();stage.classList.remove('is-ready');sync();});
 canvas.addEventListener('webglcontextrestored',()=>{lost=false;if(ready){stage.classList.add('is-ready');resize();sync();}});
 window.addEventListener('pagehide',()=>{cancel();});
 window.addEventListener('pageshow',sync);

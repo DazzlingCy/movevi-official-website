@@ -32,7 +32,7 @@
     const observer=new IntersectionObserver(entries=>{state.visible=entries[0].isIntersecting;sync();},{threshold:.1});observer.observe(video.closest('.media-stage'));
     controllers.set(video.id,{sync,change(key){++state.epoch;video.pause();video.classList.remove('is-playing');state.key=key;state.blocked=false;if(!window.MOVEVI_MEDIA[key]){video.removeAttribute('src');video.load();state.loadedKey=null;}label();sync();}});label();
   });
-  document.addEventListener('movevi:destination',event=>controllers.get('world-video').change(event.detail.key));
+  document.addEventListener('movevi:destination',event=>controllers.get('world-video')?.change(event.detail.key));
   document.addEventListener('visibilitychange',()=>controllers.forEach(c=>c.sync()));
   connection?.addEventListener?.('change',()=>controllers.forEach(c=>c.sync()));
 

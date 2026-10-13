@@ -3,6 +3,11 @@
 .hero-earth-stage canvas,.hero-earth-stage .earth-fallback{position:absolute;right:-4%;top:8%;width:72%;height:88%;object-fit:contain}
 .hero-earth-stage canvas{opacity:0;transition:opacity 1s}
 .hero-earth-stage.is-ready canvas{opacity:1}
+.hero-earth-stage.is-ready canvas{pointer-events:auto;cursor:default;touch-action:pan-y}
+.hero-earth-stage canvas.is-hovered{cursor:grab}
+.hero-earth-stage canvas.is-dragging{cursor:grabbing}
+.hero-earth-stage canvas:focus-visible{outline:2px solid #c64731;outline-offset:-10px;border-radius:12px}
+.earth-interaction-hint{display:none}
 .hero-earth-stage.is-ready .earth-fallback{opacity:0}
 .earth-fallback{transition:opacity .6s}
 .earth-halo{position:absolute;width:70%;height:95%;right:-3%;top:6%;background:radial-gradient(ellipse,#b7cdd478,transparent 65%)}
@@ -10,7 +15,9 @@
  .hero.hero-earth{background:#f5f2ec;color:#263c38;isolation:isolate}
  .hero-earth .hero-film{z-index:-2;transform:none!important}
  .hero-earth .hero-shade{z-index:-1;background:linear-gradient(90deg,#f5f2ec 0%,#f5f2ecf5 20%,#f5f2ec99 35%,transparent 55%),linear-gradient(0deg,#f5f2ec 0%,#f5f2ecaa 9%,transparent 25%);pointer-events:none}
- .hero-earth .hero-copy{padding-top:26svh}
+ .hero-earth .hero-copy{padding-top:26svh;pointer-events:none}
+ .hero-earth .hero-copy a,.hero-earth .hero-copy button{pointer-events:auto}
+ .hero-earth .earth-interaction-hint{display:block;position:absolute;left:68%;top:15%;transform:translateX(-50%);padding:9px 15px;border-radius:30px;background:#f5f2eceb;color:#43594f;font-size:11px;letter-spacing:1px;pointer-events:none;z-index:1}
  .hero-earth .hero-copy>.eyebrow{color:#586c65}
  .hero-earth h1{font-size:clamp(72px,6.5vw,110px);font-weight:400;letter-spacing:-4px}
  .hero-earth h1 .accent{color:#dd563e}
@@ -27,6 +34,12 @@
  .hero-earth .scroll-cue:hover .scroll-disc{background:#364d43;color:#fff}
  .hero-earth .video-toggle{border-color:#52665b70;color:#344a40;background:transparent;min-width:106px}
  .header .header-cta svg{display:block}
+ .header .header-cta,.header .header-cta.is-light{min-width:144px;height:46px;padding:0 18px;background:#c94932;color:#fffaf5;border:1px solid #c94932;border-radius:6px;gap:20px;text-shadow:none;box-shadow:0 4px 12px #91311b12;transition:background .2s,border-color .2s,transform .2s}
+ .header .header-cta:before,.header .header-cta:after{display:none}
+ .header .header-cta>span{border:0;width:20px;height:20px;color:inherit}
+ .header .header-cta:hover,.header .header-cta.is-light:hover{background:#bf422d;border-color:#bf422d;color:white;transform:translateY(-1px)}
+ .header .header-cta:active{transform:translateY(0)}
+ .header .header-cta:focus-visible{outline:2px solid #273f34;outline-offset:4px}
 }
 @media(min-width:901px) and (max-height:800px){
  .hero-earth .hero-copy{padding-top:22svh}.hero-earth h1{font-size:clamp(68px,6vw,94px)}
