@@ -43,3 +43,9 @@ Verified on 2026-10-13. The globe is an exploration interface illustration, not 
 - Checked source JPEG: 794,479 bytes; SHA-256 `373e5a08c9f378a2ce6320214a613148e4b1e3946b3f39a516c9093b76cb7124`.
 - [NASA SVS record 30028](https://svs.gsfc.nasa.gov/30028/) describes the April and October 2012 Suomi NPP VIIRS composite, mapped over MODIS Blue Marble imagery. Credit: NASA Earth Observatory image by Robert Simmon, using Suomi NPP VIIRS data provided courtesy of Chris Elvidge, NOAA National Geophysical Data Center.
 - The existing App texture is not asserted to be an exact derivative of this alternate NASA JPEG. The shipped file is the smaller SVS download identified above.
+
+## Homepage Three.js Earth · 2026-10-13
+
+- User-requested Three.js 0.186.1 globe with slow rotation, atmosphere and geographic city points; points do not represent launched routes.
+- dist/assets/globe/earth-night-hd.jpg is the byte-identical NASA 3600 × 1800 JPEG documented above: 794,479 bytes, matching SHA-256. Credit remains in the world's NASA link. Save-data uses the existing smaller texture; GPU or texture failure retains the geographic SVG.
+- Three.js 0.186.1, MIT, obtained from the official npm three package. Original module/core and LICENSE are self-hosted in dist/assets/vendor/three, with no runtime CDN dependency.

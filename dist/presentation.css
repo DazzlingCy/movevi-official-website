@@ -26,7 +26,16 @@
   .hero-landscape .film-caption{color:#fffaf3;font-size:10px;gap:24px}
   .hero-landscape .video-toggle{background:transparent;border-color:#ffffff70;font-size:11px}
   .header{border:0}.header .desktop-nav{font-size:14px;font-weight:400}.header .desktop-nav a{opacity:1}
-  .header .header-cta{font-size:13px}.header .wordmark{font-weight:650}
+  .header .header-cta{position:relative;display:inline-flex;align-items:center;justify-content:space-between;flex-shrink:0;min-width:134px;height:48px;padding:0 0 8px;gap:22px;border:0;font-size:14px;line-height:1;font-weight:500;letter-spacing:.04em;transition:color .25s}
+  .header .header-cta:before,.header .header-cta:after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;opacity:.4}
+  .header .header-cta:after{opacity:1;transform:scaleX(0);transform-origin:left;transition:transform .3s}
+  .header .header-cta>span{display:grid;place-items:center;width:30px;height:30px;border:1px solid currentColor;border-radius:50%;color:inherit}
+  .header .header-cta svg{width:17px;height:17px;transition:transform .3s}
+  .header .header-cta:hover:after,.header .header-cta:focus-visible:after{transform:scaleX(1)}
+  .header .header-cta:hover svg{transform:translate(2px,-2px)}
+  .header .header-cta:focus-visible{outline:2px solid currentColor;outline-offset:6px}
+  .header .header-cta.is-light>span{color:inherit}.header .header-cta.is-light:hover{color:#ffc4ad}
+  .header .wordmark{font-weight:650}
 
   /* A twelve-column editorial grid replaces the collage-shaped brand block. */
   .brand-intro{display:block;background:#f5f2ec;color:var(--story-ink);padding:116px 0 62px}

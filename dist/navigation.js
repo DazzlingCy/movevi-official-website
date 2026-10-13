@@ -25,7 +25,7 @@
     for(const control of contrastTargets){
       const box=control.getBoundingClientRect(),x=Math.min(innerWidth-1,Math.max(1,box.left+box.width/2));
       const behind=document.elementsFromPoint(x,38).find(element=>!element.closest('.header'));
-      const image=behind?.closest('.world-stage,.portal-window,.validation-intro,.benefit-world,.intro-city,.globe-panel,.city-carousel')||(desktop.matches&&behind?.closest('.hero-landscape'));
+      const image=behind?.closest('.world-stage,.portal-window,.validation-intro,.benefit-world,.intro-city,.globe-panel,.city-carousel')||(desktop.matches&&behind?.closest('.hero-landscape:not(.hero-earth)'));
       control.classList.toggle('is-light',!!image&&mobile.hidden);
     }
   }
