@@ -47,5 +47,9 @@ Verified on 2026-10-13. The globe is an exploration interface illustration, not 
 ## Homepage Three.js Earth · 2026-10-13
 
 - User-requested Three.js 0.186.1 globe with slow rotation, atmosphere and geographic city points; points do not represent launched routes.
-- dist/assets/globe/earth-night-hd.jpg is the byte-identical NASA 3600 × 1800 JPEG documented above: 794,479 bytes, matching SHA-256. Credit remains in the world's NASA link. Save-data uses the existing smaller texture; GPU or texture failure retains the geographic SVG.
+- dist/assets/globe/earth-night-hd.jpg is the byte-identical NASA 3600 × 1800 JPEG documented above: 794,479 bytes, matching SHA-256. Source credits are retained in this material record; the visible NASA link was removed at the user's request. Save-data uses the existing smaller texture; GPU or texture failure retains the geographic SVG.
 - Three.js 0.186.1, MIT, obtained from the official npm three package. Original module/core and LICENSE are self-hosted in dist/assets/vendor/three, with no runtime CDN dependency.
+
+## 2026-10-13：地球持续自转与视觉优化
+
+删除首屏英文标语、播放按钮和拖动提示。地球在首屏可见、前台状态下自动自转；鼠标拖动、取消拖动、双击复位和键盘操作结束后恢复自转。继续尊重系统减少动态及节省流量设置，离屏和后台停止渲染。原 NASA 高清纹理保持不变，加入柔和侧光、夜景自发光、双层蓝色大气和更细的城市光点；球体轮廓完整呈现，不再用底部白色渐变覆盖。动画目标 60 fps，像素比上限 2。自动回归检查通过，桌面实测拖动释放后状态恢复 playing。

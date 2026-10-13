@@ -42,8 +42,9 @@
  .story-index.is-enhanced b{background:#fff;color:var(--ink);border-radius:8px;box-shadow:var(--shadow-float)}
  /* Hero: one statement, one action, and an interactive world. */
  .hero.hero-earth{background:#fff;color:var(--ink)}
- .hero-earth .hero-shade{background:linear-gradient(90deg,#fff 0%,#fffffff5 20%,#ffffff99 35%,transparent 55%),linear-gradient(0deg,#fff 0%,#ffffffaa 9%,transparent 25%)}
- .earth-halo{background:radial-gradient(ellipse,#dce9f766,transparent 65%)}
+ .hero-earth .hero-shade{background:linear-gradient(90deg,#fff 0%,#fff 22%,#ffffff80 34%,transparent 46%)}
+ .earth-halo{background:radial-gradient(ellipse,#bcd8ff33,transparent 66%);width:65%;right:1%;top:8%;height:84%}
+ .hero-earth-stage canvas,.hero-earth-stage .earth-fallback{right:-1%;top:7%;width:70%;height:86%}
  .hero-earth .hero-copy{padding-top:25svh}
  .hero-earth h1{font-size:clamp(68px,6.2vw,104px);font-weight:650;line-height:1.14;letter-spacing:-.055em}
  .hero-earth h1 .accent{color:var(--ink)}
