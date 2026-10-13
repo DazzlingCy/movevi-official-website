@@ -50,4 +50,5 @@ function selectDestination(index,focus=false){
   document.dispatchEvent(new CustomEvent('movevi:destination',{detail:{key}}));if(focus)button.focus();
 }
 destinationButtons.forEach((button,index)=>{button.addEventListener('click',()=>selectDestination(index));button.addEventListener('keydown',event=>tabKeys(event,index,destinationButtons.length,selectDestination));});
+document.addEventListener('movevi:select-city',event=>{const index=destinationButtons.findIndex(button=>button.dataset.destination===event.detail.key);if(index>=0)selectDestination(index);});
 document.querySelector('#year').textContent=new Date().getFullYear();

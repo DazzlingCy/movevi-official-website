@@ -21,7 +21,7 @@
     }
     async function sync(explicit=false){
       const epoch=++state.epoch,config=window.MOVEVI_MEDIA[state.key];
-      if(!config||reduce()||!state.visible||document.hidden||state.userPaused||(!explicit&&(state.blocked||connection?.saveData))){video.pause();label();return;}
+      if(!config||reduce()||!state.visible||document.hidden||state.userPaused||(!explicit&&(state.blocked||connection?.saveData))){video.pause();if(reduce()||connection?.saveData)video.classList.remove('is-playing');label();return;}
       if(state.loadedKey!==state.key){video.classList.remove('is-playing');video.poster=config.poster;video.src=matchMedia('(max-width:800px)').matches?config.mobile:config.src;video.setAttribute('aria-label',`${config.label}城市氛围影像`);state.loadedKey=state.key;}
       video.muted=true;
       try{await video.play();if(epoch===state.epoch){video.classList.add('is-playing');label();}}catch{if(epoch===state.epoch){state.blocked=true;label();}}
@@ -35,16 +35,30 @@
   document.addEventListener('movevi:destination',event=>controllers.get('world-video').change(event.detail.key));
   document.addEventListener('visibilitychange',()=>controllers.forEach(c=>c.sync()));
   connection?.addEventListener?.('change',()=>controllers.forEach(c=>c.sync()));
-  const scene=document.querySelector('.portal-scene'),section=document.querySelector('.portal-section');
-  let inView=false,frame=0;
-  function draw(){frame=0;if(reduce()||!desktop.matches){scene.style.setProperty('--journey',0);return;}const bounds=section.getBoundingClientRect();const distance=section.offsetHeight-innerHeight;const progress=Math.min(1,Math.max(0,-bounds.top/Math.max(1,distance)));scene.style.setProperty('--journey',progress.toFixed(4));}
-  function requestDraw(){if(inView&&!frame)frame=requestAnimationFrame(draw);}
-  new IntersectionObserver(entries=>{inView=entries[0].isIntersecting;if(inView)requestDraw();}).observe(section);
+  const sequences=[
+    {section:document.querySelector('.portal-section'),scene:document.querySelector('.portal-scene'),property:'--journey',visible:false},
+    {section:document.querySelector('.world-journey'),scene:document.querySelector('.world-journey'),property:'--world-open',visible:false}
+  ].filter(item=>item.section&&item.scene);
+  let frame=0;
+  function draw(){
+    frame=0;
+    for(const item of sequences){
+      const progress=reduce()||!desktop.matches||(item.property==='--world-open'&&innerHeight<780)?0:Math.min(1,Math.max(0,-item.section.getBoundingClientRect().top/Math.max(1,item.section.offsetHeight-innerHeight)));
+      item.scene.style.setProperty(item.property,progress.toFixed(4));
+      if(item.property==='--world-open'){
+        const panel=document.querySelector('.globe-panel'),hidden=progress>.68;
+        if(hidden&&panel.contains(document.activeElement))document.querySelector('[data-destination][aria-selected="true"]').focus({preventScroll:true});
+        panel.inert=hidden;panel.setAttribute('aria-hidden',String(hidden));
+      }
+    }
+  }
+  function requestDraw(){if(sequences.some(item=>item.visible)&&!frame&&!document.hidden)frame=requestAnimationFrame(draw);}
+  for(const item of sequences)new IntersectionObserver(entries=>{item.visible=entries[0].isIntersecting;if(item.visible)requestDraw();}).observe(item.section);
   addEventListener('scroll',requestDraw,{passive:true});addEventListener('resize',requestDraw,{passive:true});desktop.addEventListener('change',draw);
   const reveals=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.remove('awaiting');reveals.unobserve(entry.target);}}),{threshold:.1});
   document.querySelectorAll('[data-reveal]').forEach(el=>{el.classList.add('awaiting');reveals.observe(el);});
   function applyPreference(){root.classList.toggle('reduce-motion',reduce());control.setAttribute('aria-pressed',String(reduce()));control.disabled=reduced.matches;control.textContent=reduced.matches?'已跟随系统减少动态':userReduced?'恢复动态效果':'减少动态效果';controllers.forEach(c=>c.sync());draw();}
   control.addEventListener('click',()=>{userReduced=!userReduced;try{localStorage.setItem('movevi-reduce-motion',String(userReduced));}catch{}applyPreference();});reduced.addEventListener('change',applyPreference);
-  document.addEventListener('movevi:step',()=>{if(!reduce())document.querySelector('#app-screen').animate([{opacity:.2,transform:'translateY(8px)'},{opacity:1,transform:'translateY(0)'}],{duration:300,easing:'ease-out'});});
+  document.addEventListener('movevi:step',()=>{if(!reduce())document.querySelector('#app-screen').animate([{opacity:.15,transform:'scale(1.035) translateY(6px)'},{opacity:1,transform:'scale(1) translateY(0)'}],{duration:420,easing:'cubic-bezier(.2,.7,.2,1)'});});
   root.classList.add('motion-ready');applyPreference();
 })();

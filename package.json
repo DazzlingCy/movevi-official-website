@@ -3,5 +3,5 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "scripts": {"dev": "node scripts/serve.mjs", "start": "node scripts/serve.mjs", "check": "node --check dist/app.js && node --check dist/products.js && node --check dist/motion.js && node --check dist/media-config.js && node scripts/check.mjs && node scripts/check-motion.mjs"}
+  "scripts": {"dev": "node scripts/serve.mjs", "start": "node scripts/serve.mjs", "check": "node --check dist/app.js && node --check dist/products.js && node --check dist/motion.js && node --check dist/globe.js && node --check dist/media-config.js && node scripts/check.mjs && node scripts/check-motion.mjs && node scripts/check-globe.mjs"}
 }
