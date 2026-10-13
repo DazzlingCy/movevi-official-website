@@ -1,0 +1,176 @@
+/* MOVEVI desktop visual system.
+   Reference: apple.com, reviewed 2026-10-13. Original MOVEVI assets and interactions.
+   Desktop first; responsive layout work follows desktop approval. */
+@media (min-width:901px){
+ :root{
+  --bg:#fff;--surface:#f5f5f7;--ink:#1d1d1f;--muted:#6e6e73;
+  --accent:#0071e3;--mint:#0071e3;--link:#0066cc;--line:#d2d2d7;
+  --warm:#fff;--orange:#0071e3;--story-paper:#fff;--story-ink:#1d1d1f;--story-copy:#6e6e73;
+  --font:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  --display-weight:600;--card-radius:28px;--radius-small:16px;
+  --shadow-card:0 8px 28px #00000006;--shadow-float:0 16px 48px #00000012;
+ }
+ body{background:var(--bg);color:var(--ink);font-family:var(--font);-webkit-font-smoothing:antialiased}
+ ::selection{background:#cce5ff;color:var(--ink)}
+ :is(button,a,summary,[tabindex]):focus-visible{outline:3px solid #0071e3;outline-offset:4px}
+ h1,h2,h3{font-weight:600;letter-spacing:-.035em}
+ h2{line-height:1.18}#main h2{font-weight:600}
+ .accent{color:var(--ink)}
+ .eyebrow,.chapter-label{color:var(--muted);letter-spacing:.08em}
+ .chapter-dot{background:var(--accent);width:5px;height:5px}
+ .chapter-label{border-color:var(--line);font-size:11px}
+ .underlined,.scene-expand{color:var(--link);border-color:transparent;font-size:14px}
+ .underlined:hover,.scene-expand:hover{color:var(--link);border-color:currentColor}
+ .button,.hero-landscape .button,.contact-dialog .button,.product-detail-cta .button,.city-carousel .button{
+  background:var(--accent);color:#fff;border:1px solid transparent;border-radius:980px;
+  font-size:15px;font-weight:400;letter-spacing:0;min-height:48px;padding:12px 24px;gap:20px;
+  box-shadow:none;transition:background .2s,transform .2s;
+ }
+ .button:hover,.hero-landscape .button:hover,.contact-dialog .button:hover,.product-detail-cta .button:hover,.city-carousel .button:hover{background:#0077ed;color:#fff;transform:translateY(-1px)}
+ /* A restrained, transparent navigation retains the established collapse behavior. */
+ .header,.header.is-scrolled{color:var(--ink);background:transparent;height:80px;gap:24px}
+ .header .wordmark{font-size:23px;font-weight:650;letter-spacing:-.7px}
+ .header .brand-logo{width:36px;height:36px}
+ .header .desktop-nav{font-size:12px;gap:32px;font-weight:400;letter-spacing:0}
+ .header .desktop-nav a:hover{color:var(--link)}
+ .header .header-cta,.header .header-cta.is-light{height:38px;min-height:38px;min-width:128px;padding:0 19px;gap:16px;border:0;border-radius:980px;background:var(--accent);color:#fff;box-shadow:none;font-size:12px;font-weight:400;letter-spacing:0;text-shadow:none}
+ .header .header-cta:hover,.header .header-cta.is-light:hover{background:#0077ed;border-color:transparent;color:#fff}
+ .header .header-cta>span{color:inherit}.header .header-cta:focus-visible{outline-color:var(--accent)}
+ .header .brand.is-light,.header .nav-cluster.is-light,.header .menu-button.is-light{color:#fff}
+ .story-index.is-enhanced{background:#f5f5f7e6;color:var(--muted);border:1px solid #e8e8ed;box-shadow:var(--shadow-card)}
+ .story-index.is-enhanced a[aria-current]{background:var(--accent);color:#fff}
+ .story-index.is-enhanced b{background:#fff;color:var(--ink);border-radius:8px;box-shadow:var(--shadow-float)}
+ /* Hero: one statement, one action, and an interactive world. */
+ .hero.hero-earth{background:#fff;color:var(--ink)}
+ .hero-earth .hero-shade{background:linear-gradient(90deg,#fff 0%,#fffffff5 20%,#ffffff99 35%,transparent 55%),linear-gradient(0deg,#fff 0%,#ffffffaa 9%,transparent 25%)}
+ .earth-halo{background:radial-gradient(ellipse,#dce9f766,transparent 65%)}
+ .hero-earth .hero-copy{padding-top:25svh}
+ .hero-earth h1{font-size:clamp(68px,6.2vw,104px);font-weight:650;line-height:1.14;letter-spacing:-.055em}
+ .hero-earth h1 .accent{color:var(--ink)}
+ .hero-earth .hero-copy>.eyebrow{color:var(--muted);font-size:13px;letter-spacing:.08em}
+ .hero-earth .hero-description{color:var(--muted);font-size:18px;line-height:1.65;width:410px}
+ .hero-earth .hero-description>span{color:var(--ink);font-weight:500}
+ .hero-earth .earth-interaction-hint{background:#f5f5f7dd;color:var(--muted);font-size:11px;letter-spacing:0;border:1px solid #e8e8ed}
+ .hero-earth .hero-world-target{background:#f5f5f7e6;border:0;border-radius:24px;box-shadow:var(--shadow-card);color:var(--muted);padding:20px 26px}
+ .hero-earth .hero-world-target strong{color:var(--ink);font-weight:600;letter-spacing:-2px}
+ .hero-earth .hero-world-target>span:first-child{color:var(--muted);letter-spacing:.04em}
+ .hero-earth .hero-bottom{border-color:var(--line);color:var(--muted)}
+ .hero-earth .scroll-cue,.hero-earth .scroll-cue small,.hero-earth .film-caption{color:var(--muted)}
+ .hero-earth .scroll-disc{border-color:var(--line);color:var(--ink);background:var(--surface)}
+ .hero-earth .scroll-cue:hover .scroll-disc{background:#e8e8ed;color:var(--ink)}
+ .hero-earth .video-toggle{background:var(--surface);color:var(--muted);border-color:transparent}
+ .hero-earth .video-toggle:hover{background:#e8e8ed;color:var(--ink)}
+ .hero-earth-stage canvas:focus-visible{outline-color:var(--accent)}
+ /* Neutral surfaces let MOVEVI's photography carry the color. */
+ .brand-intro,.story,.system-principles,.experience,.validation,.brand-benefits,.faq{background:#fff;color:var(--ink)}
+ .world-journey,.products,.brand-values{background:var(--surface);color:var(--ink)}
+ .portal-section,.portal-machine{background:#fff;color:var(--ink)}
+ .brand-intro h2,.story .story-grid h2,.world-journey .section-heading h2,.experience h2,.values-heading h2,.products .section-heading h2,.brand-benefits h2,.faq h2,.portal-heading h2{color:var(--ink);font-weight:600;line-height:1.22;letter-spacing:-.04em}
+ .brand-intro h2{font-size:clamp(38px,3.5vw,56px)}
+ .intro-label .eyebrow,.intro-label p,.intro-description,.intro-bottom p,.intro-bottom p>span,.intro-ambition>span,.intro-ambition div>span{color:var(--muted)}
+ .intro-label p,.intro-description{line-height:1.65}
+ .intro-bottom{border-color:var(--line)}.intro-bottom .underlined{color:var(--link)}
+ .intro-city{border-radius:var(--card-radius);box-shadow:none;background:var(--surface)}
+ .intro-city-small{border-color:#fff}
+ .intro-ambition{background:var(--surface);border:0;border-radius:var(--card-radius);box-shadow:none;padding:20px 22px;color:var(--ink)}
+ .intro-ambition strong{color:var(--ink);font-weight:600}.intro-ambition>a{color:var(--link);right:22px}
+ .intro-city-main figcaption>strong{font-weight:600;letter-spacing:-.03em}
+ .story .chapter-label{color:var(--muted)}
+ .story-copy{color:var(--muted);border-color:var(--line);line-height:1.75}.story-copy p+p{color:var(--ink)}
+ .motivation-visual{background:var(--surface);border-radius:var(--card-radius)}
+ .motivation-visual-shade{background:linear-gradient(0deg,#f5f5f7 0%,#f5f5f7 8%,#f5f5f7cc 27%,#f5f5f700 70%)}
+ .motivation-caption,.motivation-copy h3{color:var(--ink);font-weight:600}
+ .motivation-visual small,.motivation-visual-label,.motivation-copy>.eyebrow,.motivation-copy dt,.motivation-note{color:var(--muted)}
+ .motivation-copy dd{color:var(--ink)}.motivation-copy dl>div{border-color:var(--line)}
+ .motivation-tabs{border-color:var(--line)}.motivation-tabs button{color:var(--muted)}
+ .motivation-tabs button[aria-selected=true]{color:var(--link);border-color:var(--accent)}
+ /* Cities: full-color film cards with a quiet, centered segmented control. */
+ .world-journey{border:0}.world-journey .section-heading .eyebrow{color:var(--muted)}
+ .world-ambition strong{color:var(--ink);font-weight:600;letter-spacing:-.055em}
+ .world-ambition p>span{color:var(--ink)}.world-ambition>span{color:var(--muted)}
+ .destination-card{border-radius:var(--card-radius);background:#d2d2d7}
+ .destination-deck.is-enhanced .destination-card{opacity:.72}
+ .destination-deck.is-enhanced .destination-card.is-active{opacity:1;box-shadow:var(--shadow-float)}
+ .destination-shade{background:linear-gradient(0deg,#0009,transparent 68%),linear-gradient(180deg,#0003,transparent 40%)}
+ .destination-copy h3{font-weight:600;letter-spacing:-.04em}.destination-copy>span{color:#f5f5f7}
+ .destination-city-buttons{gap:4px;padding:4px;background:#e8e8ed;border-radius:980px}
+ .destination-city-buttons button{border:0;border-radius:980px;padding:10px 23px;font-size:13px;color:var(--muted);transition:background .25s,color .25s,box-shadow .25s}
+ .destination-city-buttons button[aria-pressed=true]{background:#fff;color:var(--ink);border:0;box-shadow:0 2px 5px #0000000d}
+ .destination-city-buttons button:hover{color:var(--ink)}.destination-note{color:var(--muted);font-size:10px}
+ /* Product story and authentic App screens. */
+ .portal-heading .eyebrow,.portal-heading>p:last-child,.portal-machine>span,.portal-app>span,.portal-foot>span:last-child{color:var(--muted)}
+ .portal-machine strong,.portal-app strong{color:var(--ink);font-weight:500}
+ .portal-window{border-radius:calc(28px - var(--journey)*28px);box-shadow:var(--shadow-float)}
+ .portal-window-copy strong{font-weight:600;letter-spacing:-.025em}
+ .system-principles>.eyebrow,.system-grid article>span,.system-note{color:var(--muted)}
+ .system-grid article{background:var(--surface);border:0;border-radius:var(--card-radius);box-shadow:none}
+ .system-grid article:hover{box-shadow:var(--shadow-float);transform:translateY(-4px)}
+ .system-card-image,.system-app-image{background:#e8e8ed}
+ .system-card-image>span,.validation-media-note{background:#ffffffde;color:var(--muted)}
+ .system-grid h3{color:var(--ink);font-weight:600}.system-grid p{color:var(--muted)}
+ .experience .eyebrow,.experience .section-description{color:var(--muted)}
+ .experience .step,.experience .step:last-child{background:var(--surface);border:1px solid transparent;color:var(--muted);border-radius:var(--radius-small)}
+ .experience .step:hover{background:#ededf0;color:var(--ink)}
+ .experience .step.active{background:#fff;border-color:#0071e3;color:var(--ink);box-shadow:0 4px 14px #0071e308}
+ .step strong{font-weight:500}.step.active .step-number,.step.active>span:last-child{color:var(--link)}
+ .step>span:nth-child(2)>span{color:var(--muted)}
+ .experience .app-stage{background:var(--surface);border:0;border-radius:32px}
+ .app-stage-label{color:var(--muted)}.app-stage .phone{border-color:#1d1d1f;box-shadow:0 24px 50px #00000020;transform:none}
+ .app-stage-caption strong{color:var(--ink);font-weight:500}.app-stage-caption span{color:var(--muted)}
+ /* The four product families share one selection and detail language. */
+ .products .section-heading .eyebrow,.products .eyebrow,.products .section-heading>p,.product-panel-heading p,.product-panel-heading .mono,.product-note{color:var(--muted)}
+ .product-tabs{background:#e8e8ed;border:0;padding:5px;border-radius:22px;gap:4px}
+ .product-tabs button{border:0;border-radius:18px!important;color:var(--muted);text-align:center}
+ .product-tabs button[aria-selected=true],.product-tabs button[aria-selected=true]:hover{background:#fff;color:var(--ink);border:0;box-shadow:0 2px 5px #00000008}
+ .product-tabs button:hover{background:#ffffff66;color:var(--ink)}
+ .product-tabs button strong{font-weight:600;letter-spacing:-.025em}
+ .product-tabs button[aria-selected=true]:after{background:transparent}
+ .product-card{background:#fff;border:0;border-radius:var(--card-radius);box-shadow:var(--shadow-card)}
+ .products .product-card-copy{background:#fff}
+ .product-card-media{background:#fff;border-radius:0}
+ .product-image-label{background:var(--surface);color:var(--muted)}
+ .product-card-heading h3{color:var(--ink);font-weight:600}.product-card-heading>span{color:var(--muted)}
+ .product-card-stats dt{color:var(--muted)}.product-card-stats dd{color:var(--ink)}
+ .product-detail-button{color:var(--link);border-color:transparent;font-size:13px}.product-detail-button:hover{color:var(--link);border-color:currentColor}
+ .product-consult-button{background:var(--accent);border-color:transparent;color:#fff;border-radius:980px;font-size:12px;padding:10px 19px}.product-consult-button:hover{background:#0077ed}
+ .comparison-open{border-color:var(--line);color:var(--ink)}.comparison-open>span:last-child,.comparison-open:hover{color:var(--link)}
+ /* Principles, questions, and the closing invitation. */
+ .validation-intro{border-radius:var(--card-radius)}.validation-intro:after{background:linear-gradient(0deg,#000c,transparent 98%)}
+ .validation-intro>.eyebrow,.validation h2 .accent{color:#fff}.validation-intro>p:last-child{color:#f5f5f7}
+ .validation h2{font-weight:600;letter-spacing:-.04em}
+ .validation-questions>div{background:var(--surface);border:0;border-radius:20px}.validation-questions h3{color:var(--ink);font-weight:600}
+ .validation-questions>div>span,.validation-questions p,.validation-questions>small{color:var(--muted)}
+ .brand-values .chapter-label{color:var(--muted);border-color:var(--line)}
+ .value-accordion details,.value-accordion details:last-child{background:#fff;border:0;border-radius:18px}
+ .value-accordion h3{font-weight:500}.value-accordion summary>span,.value-accordion summary b,.value-accordion small{color:var(--muted)}
+ .value-accordion details[open] summary,.value-accordion details[open] summary b{color:var(--link)}.value-accordion p{color:var(--ink)}
+ .value-emblem{border-radius:var(--card-radius)}.value-emblem:after{background:linear-gradient(90deg,#0007,transparent)}
+ .benefit-move{background:var(--surface);color:var(--ink)}.benefits-grid h3{font-weight:600;letter-spacing:-.025em}.benefit-move p{color:var(--muted)}
+ .benefit-cycle{color:var(--ink);border-color:var(--line)}.benefit-cycle i{color:var(--link)}.benefit-note{color:var(--muted)}
+ .faq .eyebrow{color:var(--muted)}.faq-list details,.faq-list details:first-child{background:var(--surface);border:0;border-radius:20px}
+ .faq-list summary{font-weight:500}.faq details p{color:var(--muted);line-height:1.75}.faq summary>span{color:var(--muted)}
+ .city-carousel{background:#1d1d1f}.city-carousel h2{font-weight:600;letter-spacing:-.04em}.city-carousel h2 span{color:#fff}
+ .cta-film-shade{background:linear-gradient(90deg,#000b, #0006 43%,transparent 82%),linear-gradient(0deg,#0009,transparent 28%)}
+ .cta-city-buttons button[aria-pressed=true]{border-color:#fff}.cta-city-buttons button[aria-pressed=true]>span,.cta-city-buttons button:hover{color:#fff}
+ .cta-carousel-toggle:hover{background:#fff;color:var(--ink)}
+ .footer{color:var(--ink);background:var(--surface);box-shadow:0 0 0 100vmax var(--surface);clip-path:inset(0 -100vmax)}
+ .footer-main>p,.footer-bottom{color:var(--muted)}.footer-bottom{border-color:var(--line)}.footer nav a:hover,.footer nav button:hover{color:var(--link)}
+ /* Dialogs and full specification tables are part of the same system. */
+ .contact-dialog,.product-dialog,.comparison-dialog{background:#fff;color:var(--ink);border:0;border-radius:28px;box-shadow:0 32px 100px #0003}
+ dialog::backdrop,.product-dialog::backdrop{background:#0006;backdrop-filter:blur(8px)}
+ .contact-dialog .dialog-close,.product-dialog .dialog-close,.comparison-dialog .dialog-close{background:#e8e8ed;color:var(--muted);border:0}
+ .contact-dialog>p:not(.eyebrow),.contact-dialog .muted,.comparison-dialog .eyebrow,.product-detail-copy .eyebrow,.product-detail-copy>p:not(.eyebrow),.product-detail-cta>span,.product-render-note{color:var(--muted)}
+ .product-gallery{background:var(--surface)}.product-image-stage>span{background:#fff;color:var(--muted)}
+ .product-thumbnails>button{background:#fff;border-color:var(--line);color:var(--muted);border-radius:10px}
+ .product-thumbnails>button[aria-pressed=true]{border-color:var(--accent);color:var(--ink)}.product-thumbnails button:hover{border-color:var(--accent)}
+ .product-spec-list>div{border-color:var(--line)}.product-spec-list dt{color:var(--muted)}.product-spec-list dd{color:var(--ink)}
+ .product-detail-cta{background:#fffffff5;border-color:var(--line)}
+ .comparison-scroll{border-color:var(--line);border-radius:14px}.comparison-scroll caption,.comparison-scroll thead th{background:var(--surface);color:var(--ink)}
+ .comparison-scroll th,.comparison-scroll td{border-color:var(--line)}.comparison-scroll tbody th{color:var(--muted)}.comparison-scroll td{color:var(--ink)}.comparison-scroll tbody tr:nth-child(even){background:#fafafa}
+ .products button:focus-visible,.products [tabindex]:focus-visible,.product-dialog button:focus-visible{outline-color:var(--accent)}
+}
+@media(min-width:901px) and (max-height:800px){
+ .hero-earth .hero-copy{padding-top:21svh}.hero-earth h1{font-size:clamp(62px,5.8vw,88px)}
+ .hero-earth .hero-description{font-size:15px;width:360px;bottom:115px}.hero-earth .hero-world-target{bottom:115px;padding:15px 23px}
+ .hero-earth .hero-world-target strong{font-size:44px}.brand-intro h2{font-size:clamp(34px,3.2vw,48px)}
+}
