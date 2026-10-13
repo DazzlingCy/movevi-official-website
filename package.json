@@ -6,6 +6,6 @@
   "scripts": {
     "dev": "node scripts/serve.mjs",
     "start": "node scripts/serve.mjs",
-    "check": "node --check dist/app.js && node --check dist/products.js && node --check dist/motion.js && node --check dist/globe.js && node --check dist/media-config.js && node --check dist/narrative.js && node --check dist/navigation.js && node --check dist/carousel.js && node --check dist/presentation.js && node --check dist/destinations.js && node --check dist/hero-earth.js && node scripts/check.mjs && node scripts/check-motion.mjs && node scripts/check-globe.mjs && node scripts/check-carousel.mjs && node scripts/check-hero-earth.mjs && node scripts/check-destinations.mjs"
+    "check": "node --check dist/app.js && node --check dist/products.js && node --check dist/motion.js && node --check dist/globe.js && node --check dist/media-config.js && node --check dist/narrative.js && node --check dist/navigation.js && node --check dist/carousel.js && node --check dist/presentation.js && node --check dist/destinations.js && node --check dist/hero-earth.js && node --check dist/hero-cities.js && node scripts/check.mjs && node scripts/check-motion.mjs && node scripts/check-globe.mjs && node scripts/check-carousel.mjs && node scripts/check-hero-earth.mjs && node scripts/check-destinations.mjs && node scripts/check-hero-cities.mjs"
   }
 }

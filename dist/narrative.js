@@ -35,7 +35,7 @@
   const index=document.querySelector('.story-index');
   const chapters=[...document.querySelectorAll('[data-chapter]')];
   const links=[...document.querySelectorAll('[data-chapter-link]')];
-  const ending=document.querySelector('#faq');
+  const ending=document.querySelector('#set-off');
   if(!index||!chapters.length)return;
   index.classList.add('is-enhanced');
   let frame=0;
