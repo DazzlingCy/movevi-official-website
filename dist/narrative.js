@@ -3,6 +3,7 @@
   const motivation=document.querySelector('#motivation');
   const reasons=[...document.querySelectorAll('[data-reason]')];
   function selectReason(index,focus=false){
+    const focusWithinPanel=[...motivation.querySelectorAll('[role="tabpanel"]')].some(panel=>panel.contains(document.activeElement));
     reasons.forEach((button,i)=>{
       const active=i===index;
       button.setAttribute('aria-selected',String(active));
@@ -10,10 +11,12 @@
       document.getElementById(button.getAttribute('aria-controls')).hidden=!active;
     });
     motivation.classList.toggle('is-exploring',index===1);
-    if(focus)reasons[index].focus();
+    motivation.dataset.reason=index===1?'after':'before';
+    if(focus||focusWithinPanel)reasons[index].focus({preventScroll:true});
   }
   if(motivation&&reasons.length){
     motivation.classList.add('is-enhanced');selectReason(0);
+    motivation.addEventListener('movevi:story-phase',event=>selectReason(event.detail.index));
     reasons.forEach((button,index)=>{
       button.addEventListener('click',()=>selectReason(index));
       button.addEventListener('keydown',event=>{
