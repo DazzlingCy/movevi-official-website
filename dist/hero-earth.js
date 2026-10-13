@@ -64,11 +64,23 @@ async function boot(){
   }));scene.add(outerAtmosphere);
   // Geographic points express exploration, not an inventory of live MOVEVI routes.
   const cities=[[31.23,121.47],[35.68,139.65],[1.35,103.82],[48.86,2.35],[51.5,-.12],[40.71,-74.01],[34.05,-118.24],[-33.87,151.21],[-33.92,18.42],[-23.55,-46.63],[25.2,55.27]];
-  const dotGeometry=new THREE.SphereGeometry(.0055,10,8),dotMaterial=new THREE.MeshBasicMaterial({color:0xcce9ff});
+  const dotGeometry=new THREE.SphereGeometry(.008,10,8),dotMaterial=new THREE.MeshBasicMaterial({color:0xe3f4ff});
   for(const [lat,lon] of cities){
    const p=location(lat,lon);const dot=new THREE.Mesh(dotGeometry,dotMaterial);dot.position.copy(p);earth.add(dot);
    const ring=new THREE.Mesh(new THREE.RingGeometry(.011,.013,32),new THREE.MeshBasicMaterial({color:0x66b4ff,side:THREE.DoubleSide,transparent:true,opacity:.55}));
    ring.position.copy(p.clone().multiplyScalar(1.001));ring.lookAt(p.clone().multiplyScalar(2));earth.add(ring);
+  }
+  // Illustrative city connections stay anchored to the rotating globe.
+  // These express the global vision, not available routes or device connections.
+  const connectionMaterial=new THREE.LineBasicMaterial({color:0x85c8ff,transparent:true,opacity:.32,depthWrite:false});
+  for(const [from,to] of [[1,2],[2,10],[10,3],[3,5],[5,6],[7,1],[3,8],[5,9]]){
+   const a=location(...cities[from],1),b=location(...cities[to],1),points=[];
+   for(let i=0;i<=48;i++){
+    const t=i/48,x=a.x*(1-t)+b.x*t,y=a.y*(1-t)+b.y*t,z=a.z*(1-t)+b.z*t;
+    const radius=1.014+Math.sin(Math.PI*t)*.09,scale=radius/Math.hypot(x,y,z);
+    points.push(new THREE.Vector3(x*scale,y*scale,z*scale));
+   }
+   earth.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(points),connectionMaterial));
   }
   ready=true;resize();draw();stage.classList.add('is-ready');sync();
  }catch(error){console.warn('Earth background unavailable; displaying the geographic fallback.');fallback();}

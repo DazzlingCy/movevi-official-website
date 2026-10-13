@@ -17,13 +17,14 @@ async function setup({gpuFailure=false,textureFailure=false,saveData=false}={}){
  connection.saveData=saveData;doc.documentElement=root;doc.hidden=false;media.matches=false;
  const nodes={'.hero-earth-stage':stage,'#hero-earth-canvas':canvas,'.hero-earth':hero};doc.querySelector=x=>nodes[x];
  let observer,mutation,renders=0,disposed=false,textureURL,group,hit=true;const frames=new Map();let next=0;
- class Vec{set(){return this;}copy(){return this;}clone(){return new Vec();}multiplyScalar(){return this;}}
+ class Vec{constructor(x=0,y=0,z=0){this.x=x;this.y=y;this.z=z;}set(){return this;}copy(){return this;}clone(){return new Vec();}multiplyScalar(){return this;}}
+ class BufferGeometry{setFromPoints(points){assert.equal(points.length,49);for(const p of points){assert(Number.isFinite(p.x)&&Number.isFinite(p.y)&&Number.isFinite(p.z));const radius=Math.hypot(p.x,p.y,p.z);assert(radius>=1.013&&radius<=1.105,'City arcs stay just above the surface');}return this;}}
  class Obj{constructor(){this.position=new Vec();this.rotation={x:0,y:0,z:0,set(x,y,z){this.x=x;this.y=y;this.z=z;}};}add(){}lookAt(){}updateProjectionMatrix(){}}
  class Group extends Obj{constructor(){super();group=this;}}
  class Raycaster{setFromCamera(){}intersectObject(){return hit?[{}]:[];}}
  class Renderer{constructor(){if(gpuFailure)throw Error('No GPU');this.capabilities={getMaxAnisotropy:()=>4};}setClearColor(){}setPixelRatio(){}setSize(){}render(){renders++;}dispose(){disposed=true;}}
  class Loader{async loadAsync(url){textureURL=url;if(textureFailure)throw Error('Missing texture');return {};}}
- const THREE={WebGLRenderer:Renderer,Scene:Obj,PerspectiveCamera:Obj,Group,Raycaster,Vector2:Vec,TextureLoader:Loader,Mesh:Obj,Vector3:Vec,MathUtils:{degToRad:n=>n*Math.PI/180},SphereGeometry:Obj,MeshBasicMaterial:Obj,MeshPhongMaterial:Obj,AmbientLight:Obj,DirectionalLight:Obj,ShaderMaterial:Obj,RingGeometry:Obj};
+ const THREE={WebGLRenderer:Renderer,Scene:Obj,PerspectiveCamera:Obj,Group,Raycaster,Vector2:Vec,TextureLoader:Loader,Mesh:Obj,Vector3:Vec,MathUtils:{degToRad:n=>n*Math.PI/180},SphereGeometry:Obj,MeshBasicMaterial:Obj,MeshPhongMaterial:Obj,AmbientLight:Obj,DirectionalLight:Obj,ShaderMaterial:Obj,RingGeometry:Obj,LineBasicMaterial:Obj,Line:Obj,BufferGeometry};
  const context={THREE,document:doc,window:win,navigator:{connection},matchMedia:()=>media,devicePixelRatio:2,innerWidth:1440,console:{warn(){}},requestAnimationFrame:fn=>{frames.set(++next,fn);return next;},cancelAnimationFrame:id=>frames.delete(id),IntersectionObserver:class{constructor(fn){observer=fn;}observe(){}},MutationObserver:class{constructor(fn){mutation=fn;}observe(){}},ResizeObserver:class{observe(){}}};
  vm.runInNewContext(source,context);await new Promise(r=>setImmediate(r));
  return {stage,canvas,button,root,doc,win,media,frames,get rotation(){return group.rotation;},hit(value){hit=value;},get renders(){return renders;},get disposed(){return disposed;},get textureURL(){return textureURL;},visible(value){observer([{isIntersecting:value}]);},reduce(value){value?root.classes.add('reduce-motion'):root.classes.delete('reduce-motion');mutation();},tick(time){const batch=[...frames.values()];frames.clear();batch.forEach(fn=>fn(time));}};
