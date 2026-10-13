@@ -1,0 +1,29 @@
+/* A world of running behind the closing invitation. */
+.city-carousel{position:relative;isolation:isolate;background:#1d292f;color:white;overflow:hidden}
+.cta-background,.cta-slide,.cta-film-shade{position:absolute;inset:0}
+.cta-background{z-index:-3}.cta-slide{opacity:0;transition:opacity 1.1s ease;pointer-events:none}.cta-slide.is-active{opacity:1}
+.cta-slide img,.cta-slide video{width:100%;height:100%;object-fit:cover;object-position:62% center}
+.cta-slide video{transition:none}
+.cta-film-shade{z-index:-2;background:linear-gradient(90deg,#0d1d2cc7 0%,#0d1d2c77 43%,#0d1d2c12 82%),linear-gradient(0deg,#07131cc4,transparent 28%)}
+.city-carousel .cta-content{position:relative;z-index:1;padding-block:0;margin-block:0}
+.city-carousel .eyebrow{color:#eff3f4;font-size:12px;letter-spacing:2px}
+.city-carousel h2{color:white;font-weight:450;text-shadow:0 2px 22px #0001}
+.city-carousel h2>span{color:#ffba92}
+.city-carousel .button{background:#f5f2ec;color:#1d333e;border-radius:50px;font-weight:500}
+.city-carousel .button:hover{background:#ffbc94;color:#162936}
+.city-carousel .cta-content>p:last-of-type{color:#d8e3e8;font-size:12px;max-width:65%}
+.city-carousel .cta-carousel-footer{position:absolute;left:0;right:0;bottom:35px;display:flex;justify-content:space-between;align-items:flex-end;gap:25px;border-top:1px solid #ffffff36;padding:24px 0 0;z-index:2}
+.cta-city-caption>span{display:block;color:#d9e6e8;font-size:8px;letter-spacing:2px;margin-bottom:11px}
+.cta-city-caption>strong{display:block;color:white;font-size:18px;font-weight:450}
+.cta-city-caption>small{display:block;color:#c0d1d7;font-size:8px;margin-top:9px;letter-spacing:.5px}
+.cta-carousel-controls{display:flex;align-items:center;gap:30px}
+.cta-city-buttons{display:flex;gap:24px}.cta-city-buttons button{position:relative;background:none;color:#bdcbd0;padding:12px 0;font-size:12px;min-height:44px;display:flex;align-items:center;gap:12px;border-bottom:1px solid transparent}
+.cta-city-buttons button>span{font-size:9px;color:#b9c9d0}.cta-city-buttons button[aria-pressed=true]{color:white;border-bottom-color:#ffba92}.cta-city-buttons button[aria-pressed=true]>span{color:#ffba92}.cta-city-buttons button:hover{color:#ffba92}
+.cta-carousel-toggle{background:#12242c55;border:1px solid #ffffff60;border-radius:30px;padding:11px 18px;color:white;font-size:10px;min-height:42px;white-space:nowrap}.cta-carousel-toggle:hover{background:#f5f2ec;color:#21363e}.cta-carousel-toggle:disabled{opacity:.7;cursor:default}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.city-carousel.is-static .cta-slide{transition:none}
+@media(min-width:901px) and (min-height:650px){.city-carousel{padding-block:100px 155px}.city-carousel .cta-content{align-self:center}.city-carousel h2{font-size:clamp(55px,6vw,88px)}}
+@media(max-width:900px){.city-carousel{min-height:100svh;display:flex;align-items:center;padding:130px 0 200px}.city-carousel .cta-content{padding-block:0}.city-carousel h2{font-size:clamp(44px,7.8vw,65px)}.city-carousel .cta-content>p:last-of-type{max-width:85%;font-size:11px}.city-carousel .cta-carousel-footer{bottom:30px;padding-top:20px}.cta-carousel-controls{gap:20px}.cta-city-caption>strong{font-size:16px}.cta-city-buttons{gap:18px}.cta-slide img,.cta-slide video{object-position:65% center}.cta-film-shade{background:linear-gradient(90deg,#0d1d2ca8,#0d1d2c55),linear-gradient(0deg,#07131ce0,transparent 36%)}}
+@media(max-width:600px){.city-carousel{min-height:max(760px,100svh);padding:125px 0 215px}.city-carousel h2{font-size:42px;line-height:1.35;letter-spacing:-2px}.city-carousel .eyebrow{font-size:10px;letter-spacing:1.5px}.city-carousel .button{margin-top:27px;min-height:48px;font-size:12px;padding-inline:22px;gap:30px}.city-carousel .cta-content>p:last-of-type{font-size:10px;max-width:95%;line-height:1.9;margin-top:22px}.city-carousel .cta-carousel-footer{bottom:26px;flex-direction:column;align-items:flex-start;gap:22px;padding-top:20px}.cta-city-caption>span{font-size:7px;margin-bottom:8px}.cta-city-caption>strong{font-size:17px}.cta-city-caption>small{font-size:7px;margin-top:7px}.cta-carousel-controls{width:100%;justify-content:space-between;gap:15px}.cta-city-buttons{gap:22px}.cta-city-buttons button{font-size:11px;gap:10px;min-height:40px}.cta-carousel-toggle{font-size:9px;min-height:38px;padding:9px 14px}}
+html.reduce-motion .cta-slide{transition:none}
+@media(prefers-reduced-motion:reduce){.cta-slide{transition:none}}
