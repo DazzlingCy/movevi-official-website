@@ -5,6 +5,7 @@
   const mobile=document.querySelector('#mobile-nav'), menu=document.querySelector('.menu-button');
   const desktop=matchMedia('(min-width:901px)');
   let lastY=scrollY, frame=0, expanded=false;
+  const contrastTargets=[header.querySelector('.brand'),cluster,header.querySelector('.header-cta'),menu];
   expand.hidden=false;
   function navigation(open){
     expanded=open;cluster.classList.toggle('is-expanded',open);
@@ -20,8 +21,16 @@
     if(y<80||delta < -4||focus||!mobile.hidden||expanded)header.classList.remove('is-hidden');
     else if(delta>4&&y>180)header.classList.add('is-hidden');
     navigation(expanded);lastY=y;
+    // Transparent controls change ink over city images, without adding a background block.
+    for(const control of contrastTargets){
+      const box=control.getBoundingClientRect(),x=Math.min(innerWidth-1,Math.max(1,box.left+box.width/2));
+      const behind=document.elementsFromPoint(x,38).find(element=>!element.closest('.header'));
+      const image=behind?.closest('.world-stage,.portal-window,.validation-intro,.benefit-world,.intro-city,.globe-panel');
+      control.classList.toggle('is-light',!!image&&mobile.hidden);
+    }
   }
   addEventListener('scroll',()=>{if(!frame)frame=requestAnimationFrame(update);},{passive:true});
+  addEventListener('resize',()=>{if(!frame)frame=requestAnimationFrame(update);},{passive:true});
   desktop.addEventListener('change',()=>{
     navigation(false);update();
     if(!desktop.matches)document.querySelectorAll('[data-expand][aria-expanded="true"]').forEach(button=>button.click());
