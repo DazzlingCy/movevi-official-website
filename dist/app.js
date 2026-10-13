@@ -9,7 +9,7 @@ document.querySelectorAll('[data-contact]').forEach(button => button.addEventLis
 document.querySelectorAll('dialog').forEach(dialog => {
   dialog.querySelector('[data-close]').addEventListener('click', () => dialog.close());
   dialog.addEventListener('click', event => { if (event.target === dialog) { const bounds = dialog.getBoundingClientRect(); if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) dialog.close(); } });
-  dialog.addEventListener('close', () => { if (!document.querySelector('dialog[open]')) { document.body.classList.remove('modal-open'); lastTrigger?.focus(); } });
+  dialog.addEventListener('close', () => { if (!document.querySelector('dialog[open]')) { document.body.classList.remove('modal-open'); if(lastTrigger?.offsetParent!==null)lastTrigger?.focus();else document.querySelector('.menu-button').focus(); } });
 });
 const menuButton = document.querySelector('.menu-button');
 const mobileNav = document.querySelector('#mobile-nav');
