@@ -15,15 +15,15 @@ class Element {
   play(){this.playCalls++;if(this.rejectPlay)return Promise.reject(new Error('Autoplay blocked'));this.paused=false;this.fire('playing');return Promise.resolve();}
 }
 const flush=()=>new Promise(resolve=>setImmediate(resolve));
-function setup({saveData=false,reduced=false,reject=false}={}){
+function setup({saveData=false,reduced=false,reject=false,noControls=false,savedReduced=false}={}){
   const hero=new Element(),world=new Element(),heroButton=new Element(),worldButton=new Element(),toggle=new Element(),root=new Element(),scene=new Element(),section=new Element();
   hero.id='hero-video';hero.dataset={media:'paris'};world.id='world-video';world.dataset={media:'tokyo'};hero.rejectPlay=reject;
   const doc=new Element();doc.documentElement=root;doc.hidden=false;
   const map={'#motion-toggle':toggle,'#hero-video':hero,'#world-video':world,'[data-video-toggle="hero-video"]':heroButton,'[data-video-toggle="world-video"]':worldButton,'.portal-scene':scene,'.portal-section':section};
-  doc.querySelector=s=>map[s];doc.querySelectorAll=s=>s==='video[data-media]'?[hero,world]:[];
+  doc.querySelector=s=>noControls&&(s==='#motion-toggle'||s.startsWith('[data-video-toggle'))?null:map[s];doc.querySelectorAll=s=>s==='video[data-media]'?[hero,world]:[];
   const observers=[];class IO{constructor(cb){this.cb=cb;observers.push(this);}observe(target){this.target=target;}unobserve(){}}
   const preferences=new Element();preferences.matches=reduced;
-  const context={document:doc,window:{MOVEVI_MEDIA:{paris:{src:'paris.mp4',mobile:'paris-mobile.mp4',poster:'paris.webp',label:'巴黎'},tokyo:{src:'tokyo.mp4',mobile:'tokyo-mobile.mp4',poster:'tokyo.webp',label:'东京'}}},navigator:{connection:{saveData}},matchMedia:q=>q.includes('prefers-reduced-motion')?preferences:{matches:q.includes('min-width'),addEventListener(){}},localStorage:{getItem(){return null;},setItem(){}},IntersectionObserver:IO,addEventListener(){},requestAnimationFrame:fn=>{fn();return 1;},innerHeight:900};
+  const context={document:doc,window:{MOVEVI_MEDIA:{paris:{src:'paris.mp4',mobile:'paris-mobile.mp4',poster:'paris.webp',label:'巴黎'},tokyo:{src:'tokyo.mp4',mobile:'tokyo-mobile.mp4',poster:'tokyo.webp',label:'东京'}}},navigator:{connection:{saveData}},matchMedia:q=>q.includes('prefers-reduced-motion')?preferences:{matches:q.includes('min-width'),addEventListener(){}},localStorage:{getItem(){return savedReduced?'true':null;},setItem(){}},IntersectionObserver:IO,addEventListener(){},requestAnimationFrame:fn=>{fn();return 1;},innerHeight:900};
   vm.runInNewContext(code,context);
   const visible=(target,value)=>observers.find(o=>o.target===target).cb([{isIntersecting:value,target}]);
   return {hero,world,heroButton,worldButton,toggle,root,doc,visible,preferences};
@@ -44,3 +44,5 @@ for(const options of [{saveData:true},{reduced:true}]){
 const mediaContext={window:{}};vm.runInNewContext(await readFile('dist/media-config.js','utf8'),mediaContext);
 for(const media of Object.values(mediaContext.window.MOVEVI_MEDIA)){assert((await stat(`dist/${media.src}`)).size<3e6);assert((await stat(`dist/${media.mobile}`)).size<1.5e6);await stat(`dist/${media.poster}`);}
 console.log('Passed: video lifecycle, manual pause, hidden tab, city switching, blocked autoplay/retry, reduced motion, save-data, media budgets.');
+
+const minimal=setup({noControls:true,savedReduced:true});minimal.visible(minimal.hero,true);await flush();assert(!minimal.hero.paused);minimal.preferences.matches=true;minimal.preferences.fire('change');await flush();assert(minimal.hero.paused);

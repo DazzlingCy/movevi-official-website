@@ -11,6 +11,7 @@
  const runnable=()=>visible&&!document.hidden&&!paused&&!reduce()&&(!connection?.saveData||optedIn);
  function label(){
   toggles.forEach((button,index)=>{
+   if(!button)return;
    button.hidden=index!==current;button.disabled=reduce();
    const playing=!videos[index].paused;
    button.textContent=reduce()?'静态画面':playing?'暂停影像 Ⅱ':'播放影像 ▷';
@@ -37,15 +38,15 @@
    card.querySelector('.destination-select').hidden=i===current;
   });
   choices.forEach((button,i)=>button.setAttribute('aria-pressed',String(i===current)));
-  deck.querySelector('#destination-count').textContent=`${String(current+1).padStart(2,'0')} / ${String(cards.length).padStart(2,'0')}`;
+  const count=deck.querySelector('#destination-count');if(count)count.textContent=`${String(current+1).padStart(2,'0')} / ${String(cards.length).padStart(2,'0')}`;
   sync();
  }
  choices.forEach((button,i)=>button.addEventListener('click',()=>select(i)));
  cards.forEach((card,i)=>card.querySelector('.destination-select').addEventListener('click',()=>select(i)));
- deck.querySelector('[data-city-prev]').addEventListener('click',()=>select(current-1));
- deck.querySelector('[data-city-next]').addEventListener('click',()=>select(current+1));
+ deck.querySelector('[data-city-prev]')?.addEventListener('click',()=>select(current-1));
+ deck.querySelector('[data-city-next]')?.addEventListener('click',()=>select(current+1));
  deck.addEventListener('keydown',event=>{if(event.key==='ArrowLeft'||event.key==='ArrowRight'){event.preventDefault();select(current+(event.key==='ArrowLeft'?-1:1));}});
- toggles.forEach((button,i)=>button.addEventListener('click',()=>{
+ toggles.forEach((button,i)=>button?.addEventListener('click',()=>{
   if(reduce())return;
   if(videos[i].paused){paused=false;optedIn=true;blocked.delete(i);}else paused=true;
   sync();

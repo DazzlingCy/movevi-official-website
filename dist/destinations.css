@@ -13,13 +13,13 @@
 .destination-select[hidden]{display:none}
 .destination-video-toggle{position:absolute;bottom:35px;right:32px;z-index:3;border:1px solid #fff9;background:#15222c66;border-radius:30px;padding:10px 16px;color:white;font-size:11px;cursor:pointer}
 .destination-video-toggle:hover{background:white;color:#243c32}.destination-video-toggle[hidden]{display:none}
-.destination-controls{display:flex;align-items:center;justify-content:space-between;gap:24px}
+.destination-controls{display:flex;align-items:center;justify-content:center;gap:24px}
 .destination-gesture{font-size:11px;color:#68766d;letter-spacing:1px}
 .destination-city-buttons{display:flex;gap:28px}.destination-city-buttons button{padding:10px 3px;border-bottom:1px solid transparent;background:none;font-size:13px;color:#647267;transition:color .2s,border-color .2s}
 .destination-city-buttons button[aria-pressed=true]{color:#bc4833;border-color:#dd563e}
 .destination-arrows{display:flex;align-items:center;gap:20px}.destination-arrows button{display:grid;place-items:center;width:42px;height:42px;border:1px solid #243c3338;background:transparent;border-radius:50%;font-size:21px;color:#304c3f}
 .destination-arrows button:hover{background:#dd563e;color:white;border-color:#dd563e}.destination-arrows span{font-size:11px;font-variant-numeric:tabular-nums;color:#657568;letter-spacing:2px}
-.destination-note{display:flex;justify-content:space-between;gap:15px;color:#6b776e;font-size:9px;line-height:1.5;padding-top:18px}
+.destination-note{display:flex;justify-content:center;text-align:center;gap:15px;color:#6b776e;font-size:9px;line-height:1.5;padding-top:18px}
 .destination-deck.is-enhanced .destination-viewport{display:block;overflow:hidden;scroll-snap-type:none;touch-action:pan-y;cursor:grab;--card-width:min(64vw,1020px);--card-step:min(57vw,910px)}
 .destination-deck.is-enhanced .destination-card{position:absolute;left:50%;top:0;bottom:0;width:var(--card-width);min-height:0;transform:translateX(calc(-50% + var(--slot)*var(--card-step) + var(--drag-offset,0px))) scale(.83);transition:transform .6s cubic-bezier(.2,.7,.2,1),opacity .5s;opacity:.64;z-index:1}
 .destination-deck.is-enhanced .destination-card.is-active{transform:translateX(calc(-50% + var(--drag-offset,0px))) scale(1);opacity:1;z-index:2}

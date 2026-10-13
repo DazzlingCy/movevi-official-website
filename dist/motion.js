@@ -4,15 +4,17 @@
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
 
   const connection=navigator.connection;
+  const control=document.querySelector('#motion-toggle');if(control)control.hidden=false;
   let userReduced=false;
-  try{userReduced=localStorage.getItem('movevi-reduce-motion')==='true';}catch{}
+  try{if(control)userReduced=localStorage.getItem('movevi-reduce-motion')==='true';}catch{}
   const reduce=()=>reduced.matches||userReduced;
-  const control=document.querySelector('#motion-toggle');control.hidden=false;
+
   const controllers=new Map();
   document.querySelectorAll('video[data-media]').forEach(video=>{
     const button=document.querySelector(`[data-video-toggle="${video.id}"]`);
     const state={key:video.dataset.media,visible:false,userPaused:false,blocked:false,loadedKey:null,epoch:0};
     function label(){
+      if(!button)return;
       const config=window.MOVEVI_MEDIA[state.key];button.hidden=!config;
       button.disabled=reduce();
       const playing=!video.paused&&!video.ended;
@@ -26,7 +28,7 @@
       video.muted=true;
       try{await video.play();if(epoch===state.epoch){video.classList.add('is-playing');label();}}catch{if(epoch===state.epoch){state.blocked=true;label();}}
     }
-    button.addEventListener('click',()=>{if(reduce())return;if(!video.paused){state.userPaused=true;++state.epoch;video.pause();label();}else{state.userPaused=false;state.blocked=false;sync(true);}});
+    button?.addEventListener('click',()=>{if(reduce())return;if(!video.paused){state.userPaused=true;++state.epoch;video.pause();label();}else{state.userPaused=false;state.blocked=false;sync(true);}});
     video.addEventListener('playing',()=>{video.classList.add('is-playing');label();});video.addEventListener('pause',label);
     video.addEventListener('error',()=>{state.blocked=true;video.classList.remove('is-playing');label();});
     const observer=new IntersectionObserver(entries=>{state.visible=entries[0].isIntersecting;sync();},{threshold:.1});observer.observe(video.closest('.media-stage'));
@@ -38,8 +40,8 @@
 
   const reveals=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.remove('awaiting');reveals.unobserve(entry.target);}}),{threshold:.1});
   document.querySelectorAll('[data-reveal]').forEach(el=>{el.classList.add('awaiting');reveals.observe(el);});
-  function applyPreference(){root.classList.toggle('reduce-motion',reduce());control.setAttribute('aria-pressed',String(reduce()));control.disabled=reduced.matches;control.textContent=reduced.matches?'已跟随系统减少动态':userReduced?'恢复动态效果':'减少动态效果';controllers.forEach(c=>c.sync());}
-  control.addEventListener('click',()=>{userReduced=!userReduced;try{localStorage.setItem('movevi-reduce-motion',String(userReduced));}catch{}applyPreference();});reduced.addEventListener('change',applyPreference);
+  function applyPreference(){root.classList.toggle('reduce-motion',reduce());if(control){control.setAttribute('aria-pressed',String(reduce()));control.disabled=reduced.matches;control.textContent=reduced.matches?'已跟随系统减少动态':userReduced?'恢复动态效果':'减少动态效果';}controllers.forEach(c=>c.sync());}
+  control?.addEventListener('click',()=>{userReduced=!userReduced;try{localStorage.setItem('movevi-reduce-motion',String(userReduced));}catch{}applyPreference();});reduced.addEventListener('change',applyPreference);
   document.addEventListener('movevi:step',()=>{if(!reduce())document.querySelector('#app-screen').animate([{opacity:.15,transform:'scale(1.035) translateY(6px)'},{opacity:1,transform:'scale(1) translateY(0)'}],{duration:420,easing:'cubic-bezier(.2,.7,.2,1)'});});
   root.classList.add('motion-ready');applyPreference();
 })();

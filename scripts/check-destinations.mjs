@@ -16,11 +16,11 @@ class Node{
  releasePointerCapture(){this.capture=null;}
 }
 const flush=()=>new Promise(r=>setImmediate(r));
-function setup({reduced=false,saveData=false,reject=false}={}){
+function setup({reduced=false,saveData=false,reject=false,noControls=false}={}){
  const doc=new Node(),root=new Node(),section=new Node(),deck=new Node(),viewport=new Node(),count=new Node(),prev=new Node(),next=new Node(),preference=new Node(),connection=new Node();
  const cards=[new Node(),new Node(),new Node()],videos=cards.map(()=>new Node()),selects=cards.map(()=>new Node()),toggles=cards.map(()=>new Node()),choices=cards.map(()=>new Node());
- cards.forEach((c,i)=>{c.dataset.cityMedia=String(i);c.attrs['aria-label']=['纽约','巴黎','伦敦'][i];c.querySelector=q=>({'video':videos[i],'.destination-video-toggle':toggles[i],'.destination-select':selects[i]}[q]);});
- deck.querySelector=q=>({'.destination-viewport':viewport,'#destination-count':count,'[data-city-prev]':prev,'[data-city-next]':next}[q]);
+ cards.forEach((c,i)=>{c.dataset.cityMedia=String(i);c.attrs['aria-label']=['纽约','巴黎','伦敦'][i];c.querySelector=q=>({'video':videos[i],'.destination-video-toggle':noControls?null:toggles[i],'.destination-select':selects[i]}[q]);});
+ deck.querySelector=q=>({'.destination-viewport':viewport,'#destination-count':noControls?null:count,'[data-city-prev]':noControls?null:prev,'[data-city-next]':noControls?null:next}[q]);
  deck.querySelectorAll=q=>q==='[data-city-card]'?cards:choices;section.querySelector=()=>deck;
  doc.querySelector=()=>section;doc.documentElement=root;doc.hidden=false;preference.matches=reduced;connection.saveData=saveData;videos[0].rejectPlay=reject;
  let intersection,mutation;
@@ -40,3 +40,5 @@ s.visible(false);assert(s.videos.every(v=>v.paused));s.visible(true);s.reduce(tr
 for(const options of [{reduced:true},{saveData:true}]){const q=setup(options);q.visible(true);await flush();assert(q.videos.every(v=>!v.src));q.next.fire('click');assert.equal(q.count.textContent,'02 / 03');if(options.saveData){q.toggles[1].fire('click');await flush();assert(!q.videos[1].paused);}}
 const blocked=setup({reject:true});blocked.visible(true);await flush();assert(blocked.videos[0].paused);assert(!blocked.videos[0].classes.has('is-playing'));const calls=blocked.videos[0].playCalls;blocked.visible(false);blocked.visible(true);await flush();assert.equal(blocked.videos[0].playCalls,calls);blocked.videos[0].rejectPlay=false;blocked.toggles[0].fire('click');await flush();assert(!blocked.videos[0].paused);
 console.log('Passed: city cards, active-only media, dragging/cancellation, vertical scroll, wraparound, pause persistence, background/offscreen, reduced motion, save-data and autoplay recovery.');
+
+const minimal=setup({noControls:true});minimal.visible(true);await flush();minimal.choices[1].fire('click');await flush();assert(minimal.videos[0].paused&&!minimal.videos[1].paused);minimal.deck.fire('keydown',{key:'ArrowRight',preventDefault(){}});await flush();assert(!minimal.videos[2].paused);minimal.reduce(true);assert(minimal.videos.every(v=>v.paused));
