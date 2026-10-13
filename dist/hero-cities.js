@@ -11,7 +11,7 @@
  const connection=navigator.connection;
  const blocked=new Set();
  let index=0,visible=false,timer=0,epoch=0,leaving=false;
- const allowed=()=>visible&&desktop.matches&&!document.hidden&&!leaving&&!reduced.matches&&!root.classList.contains('reduce-motion')&&!connection?.saveData;
+ const allowed=()=>visible&&!document.hidden&&!leaving&&!reduced.matches&&!root.classList.contains('reduce-motion')&&!connection?.saveData;
  function stopTimer(){clearTimeout(timer);timer=0;}
  async function sync(){
   stopTimer();const current=++epoch;
@@ -21,7 +21,7 @@
   timer=setTimeout(()=>{index=(index+1)%slides.length;sync();},12000);
   const video=videos[index],config=window.MOVEVI_MEDIA[slides[index].dataset.heroCity];
   if(!config||blocked.has(video)){stage.dataset.playback='poster';return;}
-  if(!video.getAttribute('src')){video.src=config.src;video.poster=config.poster;}
+  if(!video.getAttribute('src')){video.src=(!desktop.matches&&config.mobile)||config.src;video.poster=config.poster;}
   video.muted=true;stage.dataset.playback='loading';
   try{
    await video.play();

@@ -28,6 +28,8 @@
     const photo = product.gallery[index];
     const image = document.querySelector('#product-detail-image');
     image.src = photo.src; image.alt = `${product.name} ${photo.label}`;
+    document.querySelector('.product-gallery').classList.toggle('is-photo',photo.type==='photo');
+    document.querySelector('.product-render-note').textContent=photo.type==='photo'?'木卫六产品实拍':'产品渲染图';
     document.querySelector('#product-image-caption').textContent = photo.label;
     const buttons = [...document.querySelectorAll('[data-product-photo]')];
     buttons.forEach((b,i) => b.setAttribute('aria-pressed', String(i === index)));
@@ -67,7 +69,9 @@
     const article = el('article','product-card');article.dataset.series = product.series;
     const media = el('button','product-card-media');
     media.type = 'button';media.setAttribute('aria-label',`查看 ${product.name} 图片与参数`);
-    const img=el('img');img.src=product.image;img.alt=`MOVEVI ${product.name} 产品渲染图`;img.loading='lazy';img.width=1000;img.height=700;
+    const img=el('img');img.src=product.image;img.alt=`MOVEVI ${product.name} ${product.imageType==='photo'?'家庭运动实拍':'产品渲染图'}`;img.loading='lazy';img.width=1000;img.height=700;
+    media.classList.toggle('is-photo',product.imageType==='photo');
+    if(product.imageMobile){img.srcset=`${product.imageMobile} 720w, ${product.image} 1600w`;img.sizes='(max-width:600px) 100vw, 50vw';}
     media.append(img,el('span','product-image-label',product.gallery.length>1?`${product.gallery.length} 个视角 ↗`:'查看产品 ↗'));
     media.addEventListener('click',()=>showProduct(product,media));
     const copy = el('div','product-card-copy');

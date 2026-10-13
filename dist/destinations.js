@@ -25,7 +25,7 @@
    if(blocked.has(index))return;
    const media=window.MOVEVI_MEDIA[cards[index].dataset.cityMedia];
    if(!media)return;
-   if(!video.getAttribute('src')){video.src=media.src;video.muted=true;}
+   if(!video.getAttribute('src')){video.src=(matchMedia('(max-width:900px)').matches&&media.mobile)||media.src;video.muted=true;}
    if(!video.paused)return;
    video.play().then(()=>{if(ticket!==epoch||index!==current||!runnable()){if(index!==current||!runnable())video.pause();return;}video.classList.add('is-playing');label();}).catch(error=>{if(ticket===epoch&&error.name!=='AbortError'){blocked.add(index);video.classList.remove('is-playing');label();}});
   });label();

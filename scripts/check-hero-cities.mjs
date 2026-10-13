@@ -20,7 +20,7 @@ function setup(options={}){
  videos[0].reject=!!options.reject;
  let resolve;if(options.pending)videos[0].pending=new Promise(r=>resolve=r);
  stage.querySelectorAll=()=>slides;doc.querySelector=()=>stage;doc.documentElement=root;doc.hidden=false;
- win.MOVEVI_MEDIA={paris:{src:'paris.mp4',poster:'paris.webp'},tokyo:{src:'tokyo.mp4',poster:'tokyo.webp'}};
+ win.MOVEVI_MEDIA={paris:{src:'paris.mp4',mobile:'paris-mobile.mp4',poster:'paris.webp'},tokyo:{src:'tokyo.mp4',poster:'tokyo.webp'}};
  let observer,mutation,next=0;const timers=new Map();
  vm.runInNewContext(code,{document:doc,window:win,navigator:{connection},matchMedia:q=>q.includes('prefers')?preference:desktop,
  IntersectionObserver:class{constructor(cb){observer=cb;}observe(){}},MutationObserver:class{constructor(cb){mutation=cb;}observe(){}},
@@ -36,7 +36,8 @@ function setup(options={}){
  s.win.fire('pagehide');assert(s.videos.every(v=>v.paused));assert.equal(s.timers.size,0);s.win.fire('pageshow');await flush();assert(!s.videos[1].paused);
  s.connection.saveData=true;s.connection.fire('change');assert(s.videos.every(v=>v.paused));assert.equal(s.timers.size,0);
 }
-for(const options of [{reduced:true},{saveData:true},{desktop:false}]){const s=setup(options);s.visible(true);await flush();assert(s.videos.every(v=>!v.src));assert.equal(s.timers.size,0);}
+for(const options of [{reduced:true},{saveData:true}]){const s=setup(options);s.visible(true);await flush();assert(s.videos.every(v=>!v.src));assert.equal(s.timers.size,0);}
+{const s=setup({desktop:false});s.visible(true);await flush();assert.equal(s.videos[0].src,'paris-mobile.mp4');assert(!s.videos[0].paused);assert.equal(s.timers.size,1);s.visible(false);assert(s.videos.every(v=>v.paused));}
 {
  const s=setup({reject:true});s.visible(true);await flush();assert.equal(s.stage.dataset.playback,'poster');assert(!s.videos[0].classes.has('is-playing'));s.visible(false);s.visible(true);await flush();assert.equal(s.videos[0].calls,1);s.tick();await flush();assert(!s.videos[1].paused);
 }
