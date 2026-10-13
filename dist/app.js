@@ -16,6 +16,7 @@ const mobileNav = document.querySelector('#mobile-nav');
 function closeMenu(){mobileNav.hidden = true;menuButton.setAttribute('aria-expanded','false');menuButton.setAttribute('aria-label','打开导航菜单');}
 menuButton.addEventListener('click', () => { const opening = mobileNav.hidden; mobileNav.hidden = !opening;menuButton.setAttribute('aria-expanded',String(opening));menuButton.setAttribute('aria-label',opening ? '关闭导航菜单' : '打开导航菜单'); });
 mobileNav.querySelectorAll('a,button').forEach(link => link.addEventListener('click',closeMenu));
+matchMedia('(min-width: 901px)').addEventListener('change', event => { if(event.matches)closeMenu(); });
 document.addEventListener('keydown', event => { if(event.key === 'Escape' && !mobileNav.hidden){closeMenu();menuButton.focus();} });
 const panels = [
   {src:'assets/app/city.jpg',alt:'木卫六 App 2.0 城市选择页原型',title:'下一站，由你选择。'},

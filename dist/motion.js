@@ -43,7 +43,7 @@
   function draw(){
     frame=0;
     for(const item of sequences){
-      const progress=reduce()||!desktop.matches||(item.property==='--world-open'&&innerHeight<780)?0:Math.min(1,Math.max(0,-item.section.getBoundingClientRect().top/Math.max(1,item.section.offsetHeight-innerHeight)));
+      const progress=reduce()||!desktop.matches||innerHeight<780?0:Math.min(1,Math.max(0,-item.section.getBoundingClientRect().top/Math.max(1,item.section.offsetHeight-innerHeight)));
       item.scene.style.setProperty(item.property,progress.toFixed(4));
       if(item.property==='--world-open'){
         const panel=document.querySelector('.globe-panel'),hidden=progress>.68;
