@@ -38,7 +38,7 @@
   const index=document.querySelector('.story-index');
   const chapters=[...document.querySelectorAll('[data-chapter]')];
   const links=[...document.querySelectorAll('[data-chapter-link]')];
-  const ending=document.querySelector('#set-off');
+  const ending=document.querySelector('footer');
   if(!index||!chapters.length)return;
   index.classList.add('is-enhanced');
   let frame=0;
@@ -46,7 +46,7 @@
     frame=0;
     const line=innerHeight*.32;
     const current=chapters.filter(chapter=>chapter.getBoundingClientRect().top<=line).at(-1);
-    const visible=!!current&&ending.getBoundingClientRect().top>line;
+    const visible=!!current&&current.dataset.chapter!=='01'&&ending.getBoundingClientRect().top>line;
     // Keep a focused navigation link visible until focus leaves it.
     const keyboardFocus=index.contains(document.activeElement)&&document.activeElement.matches(':focus-visible');
     index.hidden=!visible&&!keyboardFocus;

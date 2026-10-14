@@ -1,0 +1,49 @@
+/* Nine chapters: question, insight, answer, experience, ambition and trust. */
+.narrative-v24 .story-index a{width:30px;height:30px;font-size:9px}
+.narrative-v24 .story-index{gap:3px;padding:8px 5px}
+.narrative-v24 .system-heading{margin-bottom:32px}
+.narrative-v24 .system-heading h2{font-size:clamp(28px,3.4vw,50px);font-weight:600;letter-spacing:-.04em;line-height:1.3;margin:18px 0}
+.narrative-v24 .system-heading h2 i{font-style:normal;font-weight:400;color:var(--link);padding:0 .12em}
+.narrative-v24 .system-factor{display:inline-block;white-space:nowrap}
+.narrative-v24 .system-heading>p:last-child{font-size:14px;color:var(--muted);line-height:1.7}
+.narrative-v24 #brand .intro-ambition strong{font-size:clamp(28px,3vw,44px);letter-spacing:-.04em;line-height:1.3}
+.narrative-v24 #brand-title .type-line{white-space:normal}
+.narrative-v24 #story .story-grid h2{font-size:clamp(32px,3.3vw,50px);line-height:1.3;max-width:760px}
+.narrative-v24 #story .story-grid{grid-template-columns:1.25fr .8fr;gap:6%}
+.narrative-v24 .portal-heading h2{font-size:clamp(38px,4vw,60px);line-height:1.22}
+.narrative-v24 #world-title{font-size:clamp(34px,3.6vw,54px);line-height:1.25}
+.narrative-v24 .world-ambition{max-width:310px}
+.narrative-v24 .destination-note{max-width:100%;line-height:1.7}
+.narrative-v24 #system .system-principles{height:auto;min-height:100svh;padding-block:100px 50px;display:flex;flex-direction:column;justify-content:center}
+.narrative-v24 #system .system-grid{margin-top:0}
+.narrative-v24 #set-off{min-height:440px!important;height:58svh}
+.narrative-v24 #set-off h2{font-size:clamp(40px,4.5vw,66px);line-height:1.25}
+.narrative-v24 #set-off .cta-content{padding-top:40px;padding-bottom:100px}
+.narrative-v24 #set-off .cta-content>p:last-child{display:none}
+.narrative-v24 #trust .validation h2{font-size:clamp(34px,3.5vw,52px);line-height:1.3}
+.narrative-v24 #benefits-title .value-times{color:var(--link);font-style:normal;font-weight:400}
+@media(min-width:901px){
+ .narrative-v24 .hero-description{max-width:440px;font-size:16px;line-height:1.8}
+ .narrative-v24 .portal-section .portal-heading{padding-top:80px}
+ .narrative-v24 .portal-section .portal-scene{height:54svh}
+ .narrative-v24 .system-card-image{height:clamp(165px,25svh,240px)}
+}
+@media(min-width:901px) and (max-height:800px){
+ .narrative-v24 #story .story-grid h2{font-size:38px}
+ .narrative-v24 .portal-section .portal-heading{padding-top:70px}.narrative-v24 .portal-heading h2{font-size:42px}
+ .narrative-v24 #system .system-principles{padding-block:85px 35px}.narrative-v24 .system-heading{margin-bottom:24px}
+}
+@media(max-width:900px){
+ .narrative-v24 .hero-description{font-size:13px;line-height:1.7}
+ .narrative-v24 #story .story-grid{grid-template-columns:1fr;gap:24px}
+ .narrative-v24 #story .story-grid h2{font-size:clamp(29px,7.5vw,42px)}
+ .narrative-v24 .portal-heading h2{font-size:clamp(30px,7vw,44px)}
+ .narrative-v24 #world-title{font-size:clamp(29px,7vw,44px)}
+ .narrative-v24 #brand .intro-ambition strong{font-size:32px}
+ .narrative-v24 .system-heading h2{font-size:30px}.narrative-v24 .system-heading h2 i{padding:0}
+ .narrative-v24 #system .system-principles{padding-block:70px 40px;min-height:0}
+ .narrative-v24 #set-off{height:550px;min-height:550px!important}
+ .narrative-v24 #set-off .cta-content{padding-bottom:130px}
+ .narrative-v24 #set-off h2{font-size:42px!important}
+ .narrative-v24 #trust .validation h2{font-size:32px}
+}
