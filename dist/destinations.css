@@ -42,3 +42,19 @@
 }
 @media(prefers-reduced-motion:reduce){.destination-deck.is-enhanced .destination-card,.destination-card>video{transition:none}}
 .reduce-motion .destination-deck.is-enhanced .destination-card,.reduce-motion .destination-card>video{transition:none}
+/* A compact visual index makes all eight cities discoverable. */
+.narrative-v24 .destination-controls{min-width:0;max-width:100%}
+.narrative-v24 .destination-city-buttons{gap:10px;padding:4px;background:none;border-radius:0;max-width:100%;overflow-x:auto;scrollbar-width:thin}
+.narrative-v24 .destination-city-buttons button{flex:0 0 80px;display:grid;gap:7px;padding:5px 5px 8px;border:0;border-bottom:2px solid transparent;border-radius:9px 9px 0 0;background:transparent;color:var(--muted);font-size:11px;box-shadow:none}
+.narrative-v24 .destination-city-buttons button img{width:70px;height:38px;object-fit:cover;border-radius:6px;opacity:.65;transition:opacity .3s,transform .3s}
+.narrative-v24 .destination-city-buttons button:hover img{opacity:1;transform:translateY(-2px)}
+.narrative-v24 .destination-city-buttons button[aria-pressed=true]{color:var(--link);border-color:var(--link);background:transparent;box-shadow:none}
+.narrative-v24 .destination-city-buttons button[aria-pressed=true] img{opacity:1}
+.narrative-v24 .destination-deck{gap:16px}
+.narrative-v24 .destination-card[data-city-card=singapore]>img{object-position:center 36%}
+@media(max-width:900px){
+ .narrative-v24 .destination-controls{width:100%;padding-inline:20px}
+ .narrative-v24 .destination-city-buttons{gap:7px;padding-bottom:5px;justify-content:flex-start}
+ .narrative-v24 .destination-city-buttons button{flex-basis:64px;min-width:64px;font-size:11px}
+ .narrative-v24 .destination-city-buttons button img{width:54px;height:33px}
+}

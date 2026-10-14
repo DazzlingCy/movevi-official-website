@@ -16,9 +16,9 @@ class Node{
  releasePointerCapture(){this.capture=null;}
 }
 const flush=()=>new Promise(r=>setImmediate(r));
-function setup({reduced=false,saveData=false,reject=false,noControls=false}={}){
+function setup({reduced=false,saveData=false,reject=false,noControls=false,mixed=false}={}){
  const doc=new Node(),root=new Node(),section=new Node(),deck=new Node(),viewport=new Node(),count=new Node(),prev=new Node(),next=new Node(),preference=new Node(),connection=new Node();
- const cards=[new Node(),new Node(),new Node()],videos=cards.map(()=>new Node()),selects=cards.map(()=>new Node()),toggles=cards.map(()=>new Node()),choices=cards.map(()=>new Node());
+ const cards=Array.from({length:mixed?8:3},()=>new Node()),videos=cards.map((_,i)=>mixed&&i>=4?null:new Node()),selects=cards.map(()=>new Node()),toggles=cards.map(()=>new Node()),choices=cards.map(()=>new Node());
  cards.forEach((c,i)=>{c.dataset.cityMedia=String(i);c.attrs['aria-label']=['纽约','巴黎','伦敦'][i];c.querySelector=q=>({'video':videos[i],'.destination-video-toggle':noControls?null:toggles[i],'.destination-select':selects[i]}[q]);});
  deck.querySelector=q=>({'.destination-viewport':viewport,'#destination-count':noControls?null:count,'[data-city-prev]':noControls?null:prev,'[data-city-next]':noControls?null:next}[q]);
  deck.querySelectorAll=q=>q==='[data-city-card]'?cards:choices;section.querySelector=()=>deck;
@@ -42,3 +42,7 @@ const blocked=setup({reject:true});blocked.visible(true);await flush();assert(bl
 console.log('Passed: city cards, active-only media, dragging/cancellation, vertical scroll, wraparound, pause persistence, background/offscreen, reduced motion, save-data and autoplay recovery.');
 
 const minimal=setup({noControls:true});minimal.visible(true);await flush();minimal.choices[1].fire('click');await flush();assert(minimal.videos[0].paused&&!minimal.videos[1].paused);minimal.deck.fire('keydown',{key:'ArrowRight',preventDefault(){}});await flush();assert(!minimal.videos[2].paused);minimal.reduce(true);assert(minimal.videos.every(v=>v.paused));
+
+const mixed=setup({mixed:true,noControls:true});mixed.visible(true);await flush();
+mixed.choices[6].fire('click');await flush();assert(mixed.videos.filter(Boolean).every(v=>v.paused),'Photo cities pause all videos');assert(mixed.cards[6].classes.has('is-active'));assert(mixed.cards[0].inert,'Distant cards leave the focus order');
+mixed.deck.fire('keydown',{key:'ArrowRight',preventDefault(){}});mixed.deck.fire('keydown',{key:'ArrowRight',preventDefault(){}});await flush();assert(mixed.cards[0].classes.has('is-active'),'Eight-city deck wraps');assert(!mixed.videos[0].paused,'Video resumes after leaving photo cities');

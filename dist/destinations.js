@@ -11,7 +11,7 @@
  const runnable=()=>visible&&!document.hidden&&!paused&&!reduce()&&(!connection?.saveData||optedIn);
  function label(){
   toggles.forEach((button,index)=>{
-   if(!button)return;
+   if(!button||!videos[index])return;
    button.hidden=index!==current;button.disabled=reduce();
    const playing=!videos[index].paused;
    button.textContent=reduce()?'静态画面':playing?'暂停影像 Ⅱ':'播放影像 ▷';
@@ -21,6 +21,7 @@
  function sync(){
   const ticket=++epoch;
   videos.forEach((video,index)=>{
+   if(!video)return;
    if(index!==current||!runnable()){video.pause();if(index!==current||reduce()||connection?.saveData&&!optedIn)video.classList.remove('is-playing');return;}
    if(blocked.has(index))return;
    const media=window.MOVEVI_MEDIA[cards[index].dataset.cityMedia];
@@ -36,6 +37,7 @@
    let slot=(i-current+cards.length)%cards.length;if(slot>cards.length/2)slot-=cards.length;
    card.style.setProperty('--slot',slot);card.dataset.position=slot<0?'previous':slot>0?'next':'current';card.classList.toggle('is-active',i===current);
    card.querySelector('.destination-select').hidden=i===current;
+   card.inert=Math.abs(slot)>1;card.setAttribute('aria-hidden',String(Math.abs(slot)>1));
   });
   choices.forEach((button,i)=>button.setAttribute('aria-pressed',String(i===current)));
   const count=deck.querySelector('#destination-count');if(count)count.textContent=`${String(current+1).padStart(2,'0')} / ${String(cards.length).padStart(2,'0')}`;
@@ -52,6 +54,7 @@
   sync();
  }));
  videos.forEach((video,i)=>{
+  if(!video)return;
   video.addEventListener('playing',()=>{if(i!==current||!runnable())video.pause();else video.classList.add('is-playing');label();});
   video.addEventListener('pause',label);
   video.addEventListener('error',()=>{blocked.add(i);video.classList.remove('is-playing');label();});

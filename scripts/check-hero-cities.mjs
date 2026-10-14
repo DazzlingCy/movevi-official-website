@@ -45,3 +45,18 @@ for(const options of [{reduced:true},{saveData:true}]){const s=setup(options);s.
  const s=setup({pending:true});s.visible(true);s.tick();await flush();s.resolve();await flush();assert(s.videos[0].paused,'A late play promise cannot revive the old city');assert(!s.videos[1].paused);
 }
 console.log('Passed: hero scenic rotation, active-only loading/playback, background/offscreen idle, bfcache restore, reduced motion/data-saving, blocked autoplay and late play resolution.');
+
+// The paired scenic windows rotate independently and stop outside the viewport.
+{
+ const doc=new Node(),win=new Node(),root=new Node(),preference=new Node(),connection=new Node();
+ const groups=Array.from({length:2},()=>[new Node(),new Node()]);groups.forEach(group=>group[0].classList.add('is-active'));
+ doc.documentElement=root;doc.querySelector=()=>new Node();doc.querySelectorAll=()=>groups.map(group=>({querySelectorAll:()=>group}));
+ let observer,mutation,next=0;const timers=new Map();
+ vm.runInNewContext(await readFile('dist/hero-landmarks.js','utf8'),{document:doc,navigator:{connection},matchMedia:()=>preference,addEventListener:(...args)=>win.addEventListener(...args),IntersectionObserver:class{constructor(cb){observer=cb;}observe(){}},MutationObserver:class{constructor(cb){mutation=cb;}observe(){}},setTimeout:cb=>{timers.set(++next,cb);return next;},clearTimeout:id=>timers.delete(id)});
+ const tick=()=>{const [id,cb]=timers.entries().next().value;timers.delete(id);cb();};
+ observer([{isIntersecting:true}]);assert.equal(timers.size,1);tick();assert(groups[0][1].classes.has('is-active'));assert(groups[1][0].classes.has('is-active'));tick();assert(groups[1][1].classes.has('is-active'));
+ observer([{isIntersecting:false}]);assert.equal(timers.size,0);observer([{isIntersecting:true}]);doc.hidden=true;doc.fire('visibilitychange');assert.equal(timers.size,0);
+ doc.hidden=false;doc.fire('visibilitychange');assert.equal(timers.size,1);win.fire('pagehide');assert.equal(timers.size,0);win.fire('pageshow');assert.equal(timers.size,1);
+ preference.matches=true;preference.fire('change');assert.equal(timers.size,0);preference.matches=false;preference.fire('change');connection.saveData=true;connection.fire('change');assert.equal(timers.size,0);
+ console.log('Passed: staggered landmark rotation, offscreen/background and page lifecycle, reduced motion and data saving.');
+}
