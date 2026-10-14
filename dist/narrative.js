@@ -39,6 +39,7 @@
   const chapters=[...document.querySelectorAll('[data-chapter]')];
   const links=[...document.querySelectorAll('[data-chapter-link]')];
   const ending=document.querySelector('footer');
+  const mainLinks=[...document.querySelectorAll('[data-nav-chapter]')];
   if(!index||!chapters.length)return;
   index.classList.add('is-enhanced');
   let frame=0;
@@ -50,6 +51,10 @@
     // Keep a focused navigation link visible until focus leaves it.
     const keyboardFocus=index.contains(document.activeElement)&&document.activeElement.matches(':focus-visible');
     index.hidden=!visible&&!keyboardFocus;
+    mainLinks.forEach(link=>{
+      if(current&&link.dataset.navChapter===current.dataset.chapter)link.setAttribute('aria-current','location');
+      else link.removeAttribute('aria-current');
+    });
     links.forEach(link=>{
       if(visible&&link.dataset.chapterLink===current.dataset.chapter)link.setAttribute('aria-current','location');
       else link.removeAttribute('aria-current');

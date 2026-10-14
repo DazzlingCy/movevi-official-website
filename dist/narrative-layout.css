@@ -47,3 +47,28 @@
  .narrative-v24 #set-off h2{font-size:42px!important}
  .narrative-v24 #trust .validation h2{font-size:32px}
 }
+/* Main navigation follows the same nine chapters as the page. */
+@media(min-width:901px){
+ .narrative-v24 .header{gap:22px}
+ .narrative-v24 .nav-cluster{max-width:860px;flex-shrink:0}
+ .narrative-v24 .header .desktop-nav{gap:clamp(12px,1.5vw,24px);padding-inline:12px;font-size:12px}
+ .narrative-v24 .header .desktop-nav a{display:flex;align-items:center;min-height:44px}
+ .narrative-v24 .header.is-scrolled .nav-cluster{max-width:50px}
+ .narrative-v24 .header.is-scrolled .nav-cluster.is-expanded{max-width:910px}
+ .narrative-v24 .desktop-nav a[aria-current="location"]{color:var(--link)}
+ .narrative-v24 .desktop-nav a[aria-current="location"]:after{transform:scaleX(1)}
+ .narrative-v24 .nav-cluster.is-light a[aria-current="location"]{color:#fff}
+}
+@media(min-width:901px) and (max-width:1199px){
+ .narrative-v24 .header{padding-inline:24px;gap:16px}
+ .narrative-v24 .header .desktop-nav{font-size:11px;gap:12px;padding-inline:8px}
+ .narrative-v24 .header .wordmark{font-size:20px}
+ .narrative-v24 .header .header-cta{min-width:112px;padding-inline:14px;gap:12px}
+}
+@media(max-width:900px){
+ .narrative-v24 .mobile-nav:not([hidden]){position:fixed;justify-content:flex-start;overflow-y:auto;overscroll-behavior:contain;padding:16px 28px max(24px,env(safe-area-inset-bottom));gap:0}
+ .narrative-v24 .mobile-nav a{display:flex;align-items:center;gap:22px;flex-shrink:0;min-height:52px;padding:12px 0;font-size:20px;line-height:1.4;font-weight:500;border-bottom:1px solid var(--line)}
+ .narrative-v24 .mobile-nav a:before{content:attr(data-nav-chapter);font-size:10px;font-weight:400;letter-spacing:.05em;color:var(--muted)}
+ .narrative-v24 .mobile-nav a[aria-current="location"],.narrative-v24 .mobile-nav a[aria-current="location"]:before{color:var(--link)}
+ .narrative-v24 .mobile-nav button{flex-shrink:0;margin-top:16px}
+}
