@@ -8,6 +8,7 @@ class Node{
  fire(k,event={}){for(const fn of this.events[k]||[])fn(event);}
  setAttribute(k,v){this.attrs[k]=v;}
  getAttribute(k){return k==='src'?this.src:this.attrs[k];}
+ getBoundingClientRect(){return {width:400};}
  closest(){return null;}
  pause(){this.paused=true;}
  play(){this.playCalls++;if(this.rejectPlay)return Promise.reject({name:'NotAllowedError'});this.paused=false;return Promise.resolve();}
@@ -23,9 +24,9 @@ function setup({reduced=false,saveData=false,reject=false,noControls=false,mixed
  deck.querySelector=q=>({'.destination-viewport':viewport,'#destination-count':noControls?null:count,'[data-city-prev]':noControls?null:prev,'[data-city-next]':noControls?null:next}[q]);
  deck.querySelectorAll=q=>q==='[data-city-card]'?cards:choices;section.querySelector=()=>deck;
  doc.querySelector=()=>section;doc.documentElement=root;doc.hidden=false;preference.matches=reduced;connection.saveData=saveData;videos[0].rejectPlay=reject;
- let intersection,mutation;
- vm.runInNewContext(code,{document:doc,navigator:{connection},window:{MOVEVI_MEDIA:{0:{src:'nyc.mp4'},1:{src:'paris.mp4'},2:{src:'london.mp4'}}},matchMedia:()=>preference,Date,IntersectionObserver:class{constructor(cb){intersection=cb;}observe(){}},MutationObserver:class{constructor(cb){mutation=cb;}observe(){}}});
- return {doc,root,section,deck,viewport,count,prev,next,cards,videos,selects,toggles,choices,visible:on=>intersection([{isIntersecting:on}]),reduce(on){root.classList.toggle('reduce-motion',on);mutation();}};
+ let intersection,mutation,timerId=0,clock=0; const timers=new Map();
+ vm.runInNewContext(code,{document:doc,navigator:{connection},window:{MOVEVI_MEDIA:{0:{src:'nyc.mp4'},1:{src:'paris.mp4'},2:{src:'london.mp4'}}},matchMedia:()=>preference,Date,requestAnimationFrame:fn=>{timers.set(++timerId,fn);return timerId;},cancelAnimationFrame:id=>timers.delete(id),getComputedStyle:()=>({getPropertyValue:()=>'16'}),IntersectionObserver:class{constructor(cb){intersection=cb;}observe(){}},MutationObserver:class{constructor(cb){mutation=cb;}observe(){}}});
+ return {timers,tick(n=1){for(let i=0;i<n;i++){clock+=20;const entry=[...timers.entries()][0];if(entry){timers.delete(entry[0]);entry[1](clock);}}},doc,root,section,deck,viewport,count,prev,next,cards,videos,selects,toggles,choices,visible:on=>intersection([{isIntersecting:on}]),reduce(on){root.classList.toggle('reduce-motion',on);mutation();}};
 }
 const s=setup();assert(s.videos.every(v=>!v.src));s.visible(true);await flush();assert(!s.videos[0].paused);assert(!s.videos[1].src);
 s.next.fire('click');await flush();assert(s.videos[0].paused&&!s.videos[1].paused);assert.equal(s.count.textContent,'02 / 03');
@@ -44,5 +45,16 @@ console.log('Passed: city cards, active-only media, dragging/cancellation, verti
 const minimal=setup({noControls:true});minimal.visible(true);await flush();minimal.choices[1].fire('click');await flush();assert(minimal.videos[0].paused&&!minimal.videos[1].paused);minimal.deck.fire('keydown',{key:'ArrowRight',preventDefault(){}});await flush();assert(!minimal.videos[2].paused);minimal.reduce(true);assert(minimal.videos.every(v=>v.paused));
 
 const mixed=setup({mixed:true,noControls:true});mixed.visible(true);await flush();
-mixed.choices[6].fire('click');await flush();assert(mixed.videos.filter(Boolean).every(v=>v.paused),'Photo cities pause all videos');assert(mixed.cards[6].classes.has('is-active'));assert(mixed.cards[0].inert,'Distant cards leave the focus order');
+const auto=setup();assert.equal(auto.timers.size,0);auto.visible(true);assert.equal(auto.timers.size,1);auto.tick(142);await flush();assert.equal(auto.count.textContent,'02 / 03','Visible deck advances automatically');
+auto.section.fire('pointerenter',{pointerType:'mouse'});assert.equal(auto.timers.size,0);assert(auto.videos.every(v=>v.paused),'Hover pauses rotation and video');
+const frozen=auto.viewport.attrs['--stream-offset'];auto.tick(40);assert.equal(auto.viewport.attrs['--stream-offset'],frozen,'Hover freezes the exact position');
+auto.section.fire('pointerleave');await flush();assert.equal(auto.timers.size,1);assert(!auto.videos[1].paused,'Leaving hover resumes current video');
+auto.tick();assert.equal(auto.viewport.attrs['--stream-offset'],frozen,'Resume does not jump');auto.tick();assert.notEqual(auto.viewport.attrs['--stream-offset'],frozen,'Resume continues immediately');
+auto.doc.hidden=true;auto.doc.fire('visibilitychange');assert.equal(auto.timers.size,0);auto.doc.hidden=false;auto.doc.fire('visibilitychange');assert.equal(auto.timers.size,1);
+auto.visible(false);assert.equal(auto.timers.size,0);auto.visible(true);auto.reduce(true);assert.equal(auto.timers.size,0);
+mixed.choices[6].fire('click');await flush();assert(mixed.videos.filter(Boolean).every(v=>v.paused),'Photo cities pause all videos');assert(mixed.cards[6].classes.has('is-active'));assert(mixed.cards[2].inert,'Distant cards leave the focus order');
 mixed.deck.fire('keydown',{key:'ArrowRight',preventDefault(){}});mixed.deck.fire('keydown',{key:'ArrowRight',preventDefault(){}});await flush();assert(mixed.cards[0].classes.has('is-active'),'Eight-city deck wraps');assert(!mixed.videos[0].paused,'Video resumes after leaving photo cities');
+const seamless=setup({mixed:true});seamless.visible(true);seamless.tick(139);
+const position=()=>Number(seamless.cards[1].attrs['--slot'])*416-parseFloat(seamless.viewport.attrs['--stream-offset']);
+let previous=position();for(let i=0;i<6;i++){seamless.tick();const next=position();assert(Math.abs((previous-next)-416/140)<.01,'Constant velocity through the card boundary');previous=next;}
+assert.equal(seamless.count.textContent,'02 / 08');assert.equal(seamless.timers.size,1,'Only one animation frame remains queued');

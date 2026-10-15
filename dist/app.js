@@ -20,7 +20,7 @@ matchMedia('(min-width: 901px)').addEventListener('change', event => { if(event.
 document.addEventListener('keydown', event => { if(event.key === 'Escape' && !mobileNav.hidden){closeMenu();menuButton.focus();} });
 const panels = [
   {src:'assets/app/city.jpg',alt:'木卫六 App 2.0 城市选择页原型',title:'从一座想去的城市，开始探索。'},
-  {src:'assets/app/routes.jpg',alt:'木卫六 App 2.0 东京路线列表原型',title:'沿着连续的路线，走进城市。'},
+  {src:'assets/app/routes.jpg',alt:'木卫六 App 2.0 东京路线列表原型',title:'选一条路线，安排今天的运动。'},
   {src:'assets/app/run.jpg',alt:'木卫六 App 2.0 运动暂停界面原型',title:'看见运动进度，按自己的节奏前进。'},
   {src:'assets/app/complete.jpg',alt:'木卫六 App 2.0 运动记录与下一路线原型',title:'走过这一程，期待下一次发现。'}
 ];

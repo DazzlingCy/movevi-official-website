@@ -1,0 +1,42 @@
+/* A two-act brand chapter driven by native scroll. */
+.problem-scene{padding-block:32px 50px;color:#1d1d1f}
+.problem-heading{display:flex;justify-content:space-between;align-items:flex-end;gap:36px;margin-bottom:28px}
+.problem-heading .eyebrow{color:#737780;font-size:10px;margin-bottom:22px}
+.problem-heading h2{font-size:clamp(34px,3.7vw,60px);line-height:1.25;letter-spacing:-.04em;font-weight:600}
+.problem-heading h2 span{font-variant-numeric:tabular-nums}
+.problem-premise{font-size:13px;line-height:1.9;color:#737780;padding-bottom:6px}
+.problem-comparison{display:grid;grid-template-columns:1fr 1fr;gap:22px;min-height:0;flex:1}
+.problem-comparison article{position:relative;isolation:isolate;overflow:hidden;border-radius:26px;min-height:320px}
+.problem-repeat{background:#eeeef0;border:1px solid #e5e5e9}
+.problem-card-label{position:absolute;inset:24px 26px auto;display:flex;justify-content:space-between;gap:12px;font-size:11px;color:#6f7279;z-index:2}
+.problem-card-label>span{font-size:8px;letter-spacing:.16em}
+.problem-clock{position:absolute;inset:16% 0 24%;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#a4a6ae}
+.problem-clock>span{font-family:Arial,sans-serif;font-size:clamp(65px,7vw,112px);font-weight:300;letter-spacing:-.055em;font-variant-numeric:tabular-nums}
+.problem-clock small{font-size:10px;letter-spacing:.25em;margin-top:18px}
+.problem-ticks{width:70%;height:16px;background:repeating-linear-gradient(90deg,#a7a9b34d 0 1px,transparent 1px 14px);mask-image:linear-gradient(90deg,transparent,#000 25% 75%,transparent)}
+.problem-card-copy{position:absolute;left:26px;right:24px;bottom:26px;z-index:2}
+.problem-card-copy h3{font-size:clamp(22px,2.3vw,34px);letter-spacing:-.02em;margin-bottom:10px;font-weight:550}
+.problem-card-copy p{font-size:12px;color:#737780}
+.problem-discover{background:#0c1823;color:white}
+.problem-discover>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 54%;transform:scale(calc(1 + var(--question-out,0)*.07))}
+.problem-discover:after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,#07142350,transparent 35%,#071423df)}
+.problem-discover .problem-card-label,.problem-discover .problem-card-copy p{color:#ffffffe0}
+.problem-bottom{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-top:22px}
+.problem-bottom p{font-size:13px;color:#666b75}.problem-bottom>span{font-size:11px;color:#0071e3}.problem-bottom b{margin-left:18px;font-weight:400}
+.problem-note{font-size:9px;color:#8a8e96;margin-top:12px}
+.screens-v40 #brand.has-curiosity-intro:not(.is-scroll-brand){height:auto;max-height:none}
+.screens-v40 #brand.has-curiosity-intro:not(.is-scroll-brand) .brand-sticky{height:auto}
+.screens-v40 #brand.has-curiosity-intro:not(.is-scroll-brand) .intro-layout{height:auto}
+@media(min-width:901px) and (min-height:650px){
+ .screens-v40 #brand.has-curiosity-intro.is-scroll-brand{height:290svh;min-height:290svh}
+ #brand.has-curiosity-intro.is-scroll-brand .brand-sticky{isolation:isolate}
+ #brand.is-scroll-brand .problem-scene{position:absolute;inset:84px 0 28px;margin-inline:auto;padding:12px 0 0;display:flex;flex-direction:column;opacity:calc(1 - var(--question-out,0));transform:translate3d(0,calc(var(--question-out,0)*-42px),0) scale(calc(1 - var(--question-out,0)*.025));transform-origin:center;pointer-events:none}
+ #brand.is-scroll-brand .problem-comparison article{min-height:0}
+ #brand.is-scroll-brand .problem-heading h2{font-size:clamp(34px,min(3.7vw,6svh),60px)}
+ #brand.is-scroll-brand .intro-layout{opacity:var(--curiosity-in,0);transform:translate3d(0,calc((1 - var(--curiosity-in,0))*44px),0)}
+ #brand.has-curiosity-intro:not(.is-scroll-brand) .city-wall-scene{height:640px}
+}
+@media(max-width:900px),(max-height:649px){.problem-scene{padding-block:40px 70px}.problem-heading{display:block}.problem-premise{margin-top:20px}.problem-comparison{gap:14px}.problem-comparison article{min-height:300px}.problem-card-label{inset:20px 18px auto}.problem-card-label>span{display:none}.problem-card-copy{left:18px;right:18px;bottom:22px}.problem-bottom{align-items:flex-start;flex-direction:column}.problem-heading h2{font-size:clamp(30px,5vw,46px)}}
+@media(max-width:600px){.problem-comparison{grid-template-columns:1fr}.problem-comparison article{min-height:285px}.problem-clock>span{font-size:82px}.problem-heading h2{font-size:30px}.problem-scene{padding-top:15px}.problem-bottom p{font-size:12px}}
+@media(prefers-reduced-motion:reduce){.problem-discover>img{transform:none}}
+.reduce-motion .problem-discover>img{transform:none}

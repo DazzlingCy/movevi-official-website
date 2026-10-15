@@ -1,0 +1,18 @@
+#experience.experience-scroll-motion :is(.comparison-heading,.comparison-watch,.comparison-movevi,.comparison-reasons,.comparison-note){
+ opacity:var(--experience-opacity,1);
+ transform:translate3d(var(--experience-x,0px),var(--experience-y,0px),0) scale(var(--experience-scale,1));
+ transform-origin:50% 50%;transition:none;
+}
+#experience.experience-scroll-motion :is(.comparison-watch,.comparison-movevi):focus-within{opacity:1}
+@media(prefers-reduced-motion:reduce){#experience.experience-scroll-motion :is(.comparison-heading,.comparison-watch,.comparison-movevi,.comparison-reasons,.comparison-note){opacity:1;transform:none}}
+.reduce-motion #experience.experience-scroll-motion :is(.comparison-heading,.comparison-watch,.comparison-movevi,.comparison-reasons,.comparison-note){opacity:1;transform:none}
+
+/* Keep the first handoff's arrival transform intact; independent transforms own exit. */
+@media(min-width:901px) and (min-height:650px){
+ #system .system-principles.comparison-handoff .system-heading[data-arrival]{opacity:calc(var(--system-heading,1)*(1 - var(--comparison-copy-exit,0)));translate:0 calc(var(--comparison-copy-exit,0)*-24px)}
+ #system .system-principles.comparison-handoff .system-grid{opacity:calc(1 - var(--comparison-handoff,0)*.94);transform:translateY(calc(var(--comparison-handoff,0)*32px));transform-origin:center bottom}
+ #system .system-principles.comparison-handoff .system-grid>article{translate:calc(var(--close-x,0px)*var(--comparison-handoff,0)) 0;scale:calc(1 - var(--comparison-handoff,0)*.08);rotate:calc(var(--close-angle,0deg)*var(--comparison-handoff,0));transform-origin:50% 85%}
+ #system .system-principles.comparison-handoff .system-grid>article:first-child{--close-x:72px;--close-angle:2deg}
+ #system .system-principles.comparison-handoff .system-grid>article:last-child{--close-x:-72px;--close-angle:-2deg}
+ #system .system-principles.comparison-handoff .system-note{opacity:calc(1 - var(--comparison-handoff,0))}
+}

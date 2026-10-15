@@ -8,7 +8,7 @@ const chapters=[...html.matchAll(/<(?:section|div)\b[^>]*\bid="([^"]+)"[^>]*\bda
 assert.deepEqual(chapters,[['vision','01'],['brand','02'],['solution','03'],['system','04'],['world','05'],['benefits','06'],['product-entry','07'],['trust','08']],'Eight chapters must follow the approved narrative');
 assert.equal((html.match(/data-chapter-link=/g)||[]).length,8,'Every chapter has an index link');
 for(const link of html.matchAll(/href="#([^"]+)"/g))assert(ids.includes(link[1]),`Missing anchor ${link[1]}`);
-for(const file of new Set([...html.matchAll(/(?:src|href)="(assets\/[^"#]+|[a-z-]+\.(?:css|js))"/g)].map(x=>x[1])))await access(`dist/${file}`);
+for(const file of new Set([...html.matchAll(/(?:src|href)="(assets\/[^"#]+|[a-z-]+\.(?:css|js))"/g)].map(x=>x[1].split('?')[0])))await access(`dist/${file}`);
 assert(!/lorem ipsum|待填|TODO|href="javascript:/i.test(html),'No unfinished placeholders');
 const dataContext={window:{}};
 vm.runInNewContext(await readFile('dist/products-data.js','utf8'),dataContext);

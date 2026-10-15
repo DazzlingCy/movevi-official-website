@@ -1,0 +1,25 @@
+/* Concept imagery explains planning and progress without inventing App UI. */
+#system .system-concept-image{overflow:hidden;background:#101c2c;isolation:isolate}
+#system .system-concept-image>img{width:100%;height:100%;padding:0;object-fit:cover;object-position:50% 50%;display:block;transition:transform .7s cubic-bezier(.22,.68,.16,1)}
+#system .system-concept-image>span{z-index:1;background:#0b1629bf;color:#d2dfef;backdrop-filter:blur(8px);border:1px solid #ffffff20}
+@media(hover:hover){#system .system-concept-image:hover>img{transform:scale(1.025)}}
+.system-image-bridge{position:fixed;z-index:8;pointer-events:none;overflow:hidden;box-sizing:border-box;background:#101c2c;border:var(--system-border,6px) solid #1d1d1f;box-shadow:0 18px 45px #10233812}
+.system-image-bridge[hidden]{display:none}
+.system-image-bridge img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.system-image-bridge .system-origin-image{opacity:calc(1 - var(--system-image-mix,0))}
+.system-image-bridge .system-destination-image{opacity:var(--system-image-mix,0)}
+@media(min-width:901px) and (min-height:650px){
+ .system-flow #solution .portal-heading{opacity:calc(var(--handoff-copy,1)*(1 - var(--system-exit,0)))}
+ .system-flow #solution .voyage-machine{opacity:calc(var(--hardware-opacity,0)*(1 - var(--system-exit,0)))}
+ .system-flow #solution .voyage-foot{opacity:calc(1 - var(--system-exit,0))}
+ .system-flow #solution .voyage-window.system-in-transit,.system-flow #system [data-system-route].system-in-transit>img{visibility:hidden}
+ .system-flow #system .system-principles{background:transparent}
+ .system-flow #system .system-heading[data-arrival]{opacity:var(--system-heading,1);transform:translate3d(0,calc((1 - var(--system-heading,1))*20px),0)}
+ .system-flow #system .system-grid>article[data-arrival]{opacity:var(--system-card,1);transform:none!important;transition:none}
+ .system-flow #system .system-grid>article:first-child{--system-card:var(--system-card-one,1)}
+ .system-flow #system .system-grid>article:nth-child(2){--system-card:var(--system-card-two,1)}
+ .system-flow #system .system-grid>article:nth-child(3){--system-card:var(--system-card-three,1)}
+ .system-flow #system [data-system-route]>span{opacity:var(--system-card-one,1)}
+}
+@media(prefers-reduced-motion:reduce){.system-image-bridge{display:none!important}#system .system-concept-image>img{transition:none;transform:none}}
+.reduce-motion #system .system-concept-image>img{transition:none;transform:none}

@@ -26,7 +26,7 @@
       if(!config||reduce()||!state.visible||state.occluded||document.hidden||state.userPaused||(!explicit&&(state.blocked||connection?.saveData))){video.pause();if(reduce()||connection?.saveData)video.classList.remove('is-playing');label();return;}
       if(state.loadedKey!==state.key){video.classList.remove('is-playing');video.poster=config.poster;video.src=matchMedia('(max-width:800px)').matches?config.mobile:config.src;video.setAttribute('aria-label',`${config.label}城市氛围影像`);state.loadedKey=state.key;}
       video.muted=true;
-      try{await video.play();if(epoch===state.epoch){video.classList.add('is-playing');label();}}catch{if(epoch===state.epoch){state.blocked=true;label();}}
+      try{await video.play();if(epoch===state.epoch){video.classList.add('is-playing');label();}}catch(error){if(epoch===state.epoch&&error?.name!=="AbortError"){state.blocked=true;label();}}
     }
     button?.addEventListener('click',()=>{if(reduce())return;if(!video.paused){state.userPaused=true;++state.epoch;video.pause();label();}else{state.userPaused=false;state.blocked=false;sync(true);}});
     video.addEventListener('playing',()=>{video.classList.add('is-playing');label();});video.addEventListener('pause',label);

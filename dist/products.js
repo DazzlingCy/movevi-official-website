@@ -7,36 +7,42 @@
     ts2: '以轻巧机身，融入日常走步时光。',
     ts3: '从走步到快跑，让每一天都有自己的节奏。'
   };
-  let activeProduct;
+  let activeProduct, activePhoto=0;
+  const reduce=()=>matchMedia('(prefers-reduced-motion: reduce)').matches||document.documentElement.classList.contains('reduce-motion');
+  function arrive(node){if(!reduce())node.animate([{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'translateY(0)'}],{duration:350,easing:'cubic-bezier(.2,.7,.2,1)'});}
   function el(tag, className, text) {
     const node = document.createElement(tag);
     if (className) node.className = className;
     if (text !== undefined) node.textContent = text;
     return node;
   }
-  function contactProduct(product, trigger) {
-    if (productDialog.open) productDialog.close();
-    openDialog(contactDialog, trigger);
-    document.querySelector('#contact-title').textContent = `了解 ${product.name}`;
+  const productStoreUrl = 'https://detail.tmall.com/item.htm?abbucket=0&id=966719578473&mi_id=0000NeCJ3-w5Qe1tv8HplC_4BBxqulmtUznrlu18DzpJ8rk&ns=1&skuId=6096784394965&spm=a21xtw.29978516.product_shelf.1.183375451TrEOJ&xxc=taobaoSearch';
+  function contactProduct() {
+    window.open(productStoreUrl, '_blank', 'noopener,noreferrer');
   }
-  contactDialog.addEventListener('close', () => {
-    document.querySelector('#contact-title').textContent = '下一站，从这里开始。';
-  });
   function selectPhoto(product, index, focus = false) {
+    activePhoto=index;
     const photo = product.gallery[index];
     const image = document.querySelector('#product-detail-image');
     image.src = photo.src; image.alt = `${product.name} ${photo.label}`;
     document.querySelector('.product-gallery').classList.toggle('is-photo',photo.type==='photo');
     document.querySelector('.product-render-note').textContent=photo.type==='photo'?'木卫六产品实拍':'产品渲染图';
     document.querySelector('#product-image-caption').textContent = photo.label;
+    document.querySelector('#product-image-count').textContent=`${String(index+1).padStart(2,'0')} / ${String(product.gallery.length).padStart(2,'0')}`;
+    document.querySelectorAll('[data-photo-prev],[data-photo-next]').forEach(button=>button.disabled=product.gallery.length<2);
+    image.getAnimations().forEach(a=>a.cancel());
+    image.onload=()=>arrive(image);
     const buttons = [...document.querySelectorAll('[data-product-photo]')];
     buttons.forEach((b,i) => b.setAttribute('aria-pressed', String(i === index)));
     if (focus) buttons[index].focus();
+    if(productDialog.open)buttons[index].scrollIntoView({block:'nearest',inline:'nearest',behavior:reduce()?'instant':'smooth'});
   }
   function showProduct(product, trigger) {
     activeProduct = {product, trigger};
     document.querySelector('#product-dialog-title').textContent = product.name;
     document.querySelector('#product-detail-description').textContent = product.description;
+    document.querySelector('#product-footer-name').textContent=`MOVEVI ${product.name}`;
+    document.querySelector('#product-detail-highlights').replaceChildren(...product.highlights.map(h=>{const item=el('div');item.append(el('dt','',h.label),el('dd','',h.value));return item;}));
     const specs = document.querySelector('#product-detail-specs');
     specs.replaceChildren(...product.specs.map(spec => {
       const row = el('div'); row.append(el('dt', '', spec.label),el('dd', '', spec.value));return row;
@@ -59,9 +65,14 @@
     productDialog.scrollTop = 0;
     openDialog(productDialog,trigger);
     productDialog.scrollTop = 0;
+    document.querySelector('.product-spec-scroll').scrollTop=0;
+    document.querySelector('.product-detail-grid').scrollTop=0;
+    document.querySelector('#product-thumbnails').scrollLeft=0;
   }
+  document.querySelector('[data-photo-prev]').addEventListener('click',()=>{if(activeProduct)selectPhoto(activeProduct.product,(activePhoto+activeProduct.product.gallery.length-1)%activeProduct.product.gallery.length);});
+  document.querySelector('[data-photo-next]').addEventListener('click',()=>{if(activeProduct)selectPhoto(activeProduct.product,(activePhoto+1)%activeProduct.product.gallery.length);});
   document.querySelector('#product-detail-contact').addEventListener('click', () => {
-    if (activeProduct) contactProduct(activeProduct.product,activeProduct.trigger);
+    if (activeProduct) contactProduct();
   });
   function card(product) {
     const article = el('article','product-card');article.dataset.series = product.series;
@@ -78,7 +89,7 @@
     product.highlights.forEach(h=>{const item=el('div');item.append(el('dt','',h.label),el('dd','',h.value));stats.append(item);});
     const actions = el('div','product-card-actions');
     const details = el('button','product-detail-button','图片与完整参数 ↗');details.type='button';details.addEventListener('click',()=>showProduct(product,details));
-    const contact = el('button','product-consult-button',`咨询 ${product.name}`);contact.type='button';contact.addEventListener('click',()=>contactProduct(product,contact));
+    const contact = el('button','product-consult-button',`咨询 ${product.name}`);contact.type='button';contact.addEventListener('click',()=>contactProduct());
     actions.append(details,contact);copy.append(heading,stats,actions);article.append(media,copy);return article;
   }
   function comparison(selected) {
@@ -100,6 +111,7 @@
     document.querySelector('#product-series-count').textContent=`${series.toUpperCase()} / 02 MODELS`;
     document.querySelector('#comparison-title').textContent=`${series.toUpperCase()} 系列参数对比`;
     document.querySelector('#product-grid').replaceChildren(...selected.map(card));
+    document.querySelectorAll('#product-grid .product-card').forEach(arrive);
     comparison(selected);
   }
   seriesButtons.forEach((button,index)=>{

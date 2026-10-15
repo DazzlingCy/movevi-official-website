@@ -195,23 +195,8 @@ window.MOVEVI_PRODUCTS = [
     "series": "ts3",
     "tagline": "走跑之间，自在切换",
     "description": "0.5–14 km/h 调速，支持折叠收纳。",
-    "image": "assets/lifestyle/ts3-home.webp",
+    "image": "assets/products/ts3.webp",
     "gallery": [
-      {
-        "src": "assets/lifestyle/ts3-home.webp",
-        "label": "家庭运动实拍",
-        "type": "photo"
-      },
-      {
-        "src": "assets/lifestyle/ts3-controls.webp",
-        "label": "操作区实拍",
-        "type": "photo"
-      },
-      {
-        "src": "assets/lifestyle/ts3-storage.webp",
-        "label": "收纳实拍",
-        "type": "photo"
-      },
       {
         "src": "assets/products/ts3.webp",
         "label": "整机外观"
@@ -231,6 +216,21 @@ window.MOVEVI_PRODUCTS = [
       {
         "src": "assets/products/ts3-controls.webp",
         "label": "扶手细节"
+      },
+      {
+        "src": "assets/lifestyle/ts3-home.webp",
+        "label": "家庭运动实拍",
+        "type": "photo"
+      },
+      {
+        "src": "assets/lifestyle/ts3-controls.webp",
+        "label": "操作区实拍",
+        "type": "photo"
+      },
+      {
+        "src": "assets/lifestyle/ts3-storage.webp",
+        "label": "收纳实拍",
+        "type": "photo"
       }
     ],
     "specs": [
@@ -323,9 +323,7 @@ window.MOVEVI_PRODUCTS = [
         "label": "坡度调节",
         "value": "手动 · 1段式调节"
       }
-    ],
-    "imageMobile": "assets/lifestyle/ts3-home-mobile.webp",
-    "imageType": "photo"
+    ]
   },
   {
     "id": "ts3pro",
@@ -333,23 +331,8 @@ window.MOVEVI_PRODUCTS = [
     "series": "ts3",
     "tagline": "给探索，多一点起伏",
     "description": "电动 15 段坡度调节，1–15% 坡度范围。",
-    "image": "assets/lifestyle/ts3pro-home.webp",
+    "image": "assets/products/ts3pro.webp",
     "gallery": [
-      {
-        "src": "assets/lifestyle/ts3pro-home.webp",
-        "label": "家庭运动实拍",
-        "type": "photo"
-      },
-      {
-        "src": "assets/lifestyle/ts3pro-controls.webp",
-        "label": "操作区实拍",
-        "type": "photo"
-      },
-      {
-        "src": "assets/lifestyle/ts3pro-storage.webp",
-        "label": "收纳实拍",
-        "type": "photo"
-      },
       {
         "src": "assets/products/ts3pro.webp",
         "label": "整机外观"
@@ -369,6 +352,21 @@ window.MOVEVI_PRODUCTS = [
       {
         "src": "assets/products/ts3pro-controls.webp",
         "label": "扶手细节"
+      },
+      {
+        "src": "assets/lifestyle/ts3pro-home.webp",
+        "label": "家庭运动实拍",
+        "type": "photo"
+      },
+      {
+        "src": "assets/lifestyle/ts3pro-controls.webp",
+        "label": "操作区实拍",
+        "type": "photo"
+      },
+      {
+        "src": "assets/lifestyle/ts3pro-storage.webp",
+        "label": "收纳实拍",
+        "type": "photo"
       }
     ],
     "specs": [
@@ -461,8 +459,6 @@ window.MOVEVI_PRODUCTS = [
         "label": "坡度调节",
         "value": "电动 · 15段式调节"
       }
-    ],
-    "imageMobile": "assets/lifestyle/ts3pro-home-mobile.webp",
-    "imageType": "photo"
+    ]
   }
 ];

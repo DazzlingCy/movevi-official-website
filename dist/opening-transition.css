@@ -1,0 +1,28 @@
+/* One Paris street frame carries the opening promise into curiosity. */
+.opening-city-bridge{position:fixed;z-index:8;pointer-events:none;overflow:hidden;margin:0;isolation:isolate;background:#e4e5e7;will-change:transform,width,height}
+.opening-city-bridge[hidden]{display:none}
+.opening-city-bridge img{width:100%;height:100%;object-fit:cover;object-position:50% 54%;display:block}
+.opening-city-bridge:after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,#071625b8,transparent 64%);opacity:var(--bridge-caption,0)}
+.opening-city-bridge:before{content:'';position:absolute;inset:40% 0 0;background:linear-gradient(transparent,#08121db3);opacity:var(--bridge-origin,1)}
+.opening-city-bridge figcaption{position:absolute;z-index:1;left:30px;right:30px;bottom:28px;color:#fff;opacity:var(--bridge-caption,0);transform:translateY(calc((1 - var(--bridge-caption,0))*12px))}
+.opening-city-bridge figcaption span{display:block;font-size:8px;letter-spacing:2px}
+.opening-city-bridge figcaption strong{display:block;font-size:clamp(24px,2.3vw,36px);font-weight:600;letter-spacing:-.03em;margin:10px 0 8px}
+.opening-city-bridge figcaption span:last-child{letter-spacing:.5px;color:#fff9}
+.opening-city-bridge .opening-origin-caption{left:12px;right:8px;bottom:10px;font-size:9px;line-height:1.5;opacity:var(--bridge-origin,1);transform:none;text-shadow:0 1px 3px #0006}
+.opening-city-bridge .opening-origin-caption span{font-size:7px;letter-spacing:.14em;margin-bottom:3px;color:#fff}
+.opening-city-bridge .opening-destination-caption{position:absolute;z-index:2;left:26px;right:24px;bottom:26px;color:white;opacity:var(--bridge-caption,0);transform:translateY(calc((1 - var(--bridge-caption,0))*12px))}
+.opening-destination-caption h3{font-size:clamp(22px,2.3vw,34px);letter-spacing:-.02em;margin:0 0 10px;font-weight:550}
+.opening-destination-caption p{font-size:12px;color:#ffffffe0}
+@media(min-width:901px) and (min-height:650px){
+ .opening-flow .voyage-v31 #vision{background:#fff}
+ .opening-flow .voyage-v31 #vision .hero-visual,.opening-flow .voyage-v31 #vision [data-opening-source]{transform:none}
+ .opening-flow #vision .hero-film{opacity:calc(1 - var(--opening-fade,0)*.75)}
+ .opening-flow #vision .hero-hardware,.opening-flow #vision .hero-city-window{opacity:calc(1 - var(--opening-fade,0))}
+ .opening-flow .voyage-v31 #brand .intro-city-main{opacity:1!important;transform:none!important;visibility:visible}
+ .opening-flow #vision [data-opening-source] img{object-position:50% 54%}
+ .opening-flow #brand .intro-city-main img{transform:none;transition:none}
+ .opening-flow #vision [data-opening-source].opening-in-transit,.opening-flow .voyage-v31 #brand .intro-city-main.opening-in-transit{visibility:hidden}
+ .opening-flow #brand .problem-discover.opening-in-transit{visibility:hidden}
+ .opening-flow #brand .problem-heading,.opening-flow #brand .problem-repeat,.opening-flow #brand .problem-bottom,.opening-flow #brand .problem-note{opacity:var(--question-entry,1);transform:translate3d(0,calc((1 - var(--question-entry,1))*30px),0)}
+}
+@media(prefers-reduced-motion:reduce){.opening-city-bridge{display:none!important}}

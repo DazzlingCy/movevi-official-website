@@ -6,9 +6,32 @@
  const videos=cards.map(card=>card.querySelector('video')),toggles=cards.map(card=>card.querySelector('.destination-video-toggle'));
  const choices=[...deck.querySelectorAll('[data-city-index]')];
  const reduced=matchMedia('(prefers-reduced-motion: reduce)'),connection=navigator.connection;
- const blocked=new Set();let current=0,visible=false,paused=false,optedIn=false,epoch=0,drag=null,suppressClick=0;
+ const autoButton=deck.querySelector('[data-city-autoplay]');
+ const blocked=new Set();let current=0,visible=false,paused=false,optedIn=false,epoch=0,drag=null,suppressClick=0,hovered=false,focused=false,autoPaused=false,frame=0,leaving=false;
+ let offset=0,step=1,lastTime=0,settleUntil=0,needsSettle=false;
  const reduce=()=>reduced.matches||document.documentElement.classList.contains('reduce-motion');
- const runnable=()=>visible&&!document.hidden&&!paused&&!reduce()&&(!connection?.saveData||optedIn);
+ const runnable=()=>visible&&!document.hidden&&!leaving&&!paused&&!hovered&&!reduce()&&(!connection?.saveData||optedIn);
+ function rotation(){
+  if(autoButton){autoButton.textContent=autoPaused?'继续轮播 ▷':'暂停轮播 Ⅱ';autoButton.setAttribute('aria-pressed',String(autoPaused));autoButton.disabled=reduce();}
+  if(visible&&!document.hidden&&!leaving&&!reduce()&&!connection?.saveData&&!hovered&&!focused&&!autoPaused&&!drag){if(!frame)frame=requestAnimationFrame(advance);}
+  else{if(frame)cancelAnimationFrame(frame);frame=0;lastTime=0;}
+ }
+ function measure(){
+  const old=step;step=Math.max(1,cards[0].getBoundingClientRect().width+(parseFloat(getComputedStyle(viewport).getPropertyValue('--stream-gap'))||16));
+  offset=offset/old*step;viewport.style.setProperty('--stream-offset',`${offset}px`);
+ }
+ function advance(time){
+  frame=0;
+  if(needsSettle){settleUntil=time+500;needsSettle=false;}
+  if(time<settleUntil){lastTime=time;rotation();return;}
+  deck.classList.add('is-streaming');
+  const dt=lastTime?Math.min(50,time-lastTime):0;lastTime=time;
+  // One card every 2.8 seconds, with no dwell or easing at the seams.
+  offset+=dt*step/2800;
+  if(offset>=step){offset-=step;select(current+1,true);}
+  viewport.style.setProperty('--stream-offset',`${offset.toFixed(3)}px`);
+  rotation();
+ }
  function label(){
   toggles.forEach((button,index)=>{
    if(!button||!videos[index])return;
@@ -19,6 +42,7 @@
   });
  }
  function sync(){
+  rotation();
   const ticket=++epoch;
   videos.forEach((video,index)=>{
    if(!video)return;
@@ -31,13 +55,14 @@
    video.play().then(()=>{if(ticket!==epoch||index!==current||!runnable()){if(index!==current||!runnable())video.pause();return;}video.classList.add('is-playing');label();}).catch(error=>{if(ticket===epoch&&error.name!=='AbortError'){blocked.add(index);video.classList.remove('is-playing');label();}});
   });label();
  }
- function select(index){
+ function select(index,automatic=false){
+  if(!automatic){offset=0;viewport.style.setProperty('--stream-offset','0px');deck.classList.remove('is-streaming');needsSettle=true;}
   current=(index+cards.length)%cards.length;
   cards.forEach((card,i)=>{
    let slot=(i-current+cards.length)%cards.length;if(slot>cards.length/2)slot-=cards.length;
    card.style.setProperty('--slot',slot);card.dataset.position=slot<0?'previous':slot>0?'next':'current';card.classList.toggle('is-active',i===current);
    card.querySelector('.destination-select').hidden=i===current;
-   card.inert=Math.abs(slot)>1;card.setAttribute('aria-hidden',String(Math.abs(slot)>1));
+   card.inert=Math.abs(slot)>3;card.setAttribute('aria-hidden',String(Math.abs(slot)>3));
   });
   choices.forEach((button,i)=>button.setAttribute('aria-pressed',String(i===current)));
   const count=deck.querySelector('#destination-count');if(count)count.textContent=`${String(current+1).padStart(2,'0')} / ${String(cards.length).padStart(2,'0')}`;
@@ -48,6 +73,11 @@
  deck.querySelector('[data-city-prev]')?.addEventListener('click',()=>select(current-1));
  deck.querySelector('[data-city-next]')?.addEventListener('click',()=>select(current+1));
  deck.addEventListener('keydown',event=>{if(event.key==='ArrowLeft'||event.key==='ArrowRight'){event.preventDefault();select(current+(event.key==='ArrowLeft'?-1:1));}});
+ section.addEventListener('pointerenter',event=>{if(event.pointerType==='mouse'){hovered=true;sync();}});
+ section.addEventListener('pointerleave',()=>{hovered=false;sync();});
+ section.addEventListener('focusin',()=>{focused=true;rotation();});
+ section.addEventListener('focusout',event=>{if(!section.contains(event.relatedTarget)){focused=false;rotation();}});
+ autoButton?.addEventListener('click',()=>{autoPaused=!autoPaused;rotation();});
  toggles.forEach((button,i)=>button?.addEventListener('click',()=>{
   if(reduce())return;
   if(videos[i].paused){paused=false;optedIn=true;blocked.delete(i);}else paused=true;
@@ -62,11 +92,12 @@
  viewport.addEventListener('pointerdown',event=>{
   if(event.button!==0||event.target.closest('.destination-video-toggle'))return;
   drag={id:event.pointerId,x:event.clientX,y:event.clientY,dx:0,started:false};
+  rotation();
  });
  viewport.addEventListener('pointermove',event=>{
   if(!drag||event.pointerId!==drag.id)return;
   const dx=event.clientX-drag.x,dy=event.clientY-drag.y;
-  if(!drag.started){if(Math.abs(dy)>Math.abs(dx)&&Math.abs(dy)>10){drag=null;return;}if(Math.abs(dx)<8)return;drag.started=true;viewport.setPointerCapture(event.pointerId);deck.classList.add('is-dragging');}
+  if(!drag.started){if(Math.abs(dy)>Math.abs(dx)&&Math.abs(dy)>10){drag=null;rotation();return;}if(Math.abs(dx)<8)return;drag.started=true;viewport.setPointerCapture(event.pointerId);deck.classList.add('is-dragging');}
   drag.dx=dx;viewport.style.setProperty('--drag-offset',`${Math.max(-240,Math.min(240,dx))}px`);
  });
  function finish(event,cancelled=false){
@@ -74,13 +105,17 @@
   const action=drag;drag=null;deck.classList.remove('is-dragging');viewport.style.removeProperty('--drag-offset');
   if(viewport.hasPointerCapture(action.id))viewport.releasePointerCapture(action.id);
   if(action.started){suppressClick=Date.now()+350;if(!cancelled&&Math.abs(action.dx)>60)select(current+(action.dx<0?1:-1));}
+  rotation();
  }
  viewport.addEventListener('pointerup',event=>finish(event));viewport.addEventListener('pointercancel',event=>finish(event,true));viewport.addEventListener('lostpointercapture',event=>finish(event,true));
  viewport.addEventListener('click',event=>{if(Date.now()<suppressClick){event.preventDefault();event.stopImmediatePropagation();}},true);
  new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;sync();},{threshold:.25}).observe(viewport);
  document.addEventListener('visibilitychange',()=>{if(document.hidden&&drag)finish({pointerId:drag.id},true);sync();});
+ window.addEventListener?.('pagehide',()=>{leaving=true;sync();});
+ window.addEventListener?.('pageshow',()=>{leaving=false;sync();});
+ window.addEventListener?.('resize',measure,{passive:true});
  new MutationObserver(sync).observe(document.documentElement,{attributes:true,attributeFilter:['class']});
  reduced.addEventListener('change',sync);connection?.addEventListener?.('change',sync);
  viewport.tabIndex=0;viewport.setAttribute('aria-label','左右拖动或使用方向键切换城市');
- deck.classList.add('is-enhanced');select(0);
+ deck.classList.add('is-enhanced');measure();select(0,true);
 })();

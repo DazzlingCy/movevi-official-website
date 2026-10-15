@@ -1,0 +1,77 @@
+#experience.city-comparison{display:flex;flex-direction:column;justify-content:center;align-items:stretch;gap:24px;color:#1d1d1f;padding-block:90px 36px}
+#experience .comparison-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:30px}
+#experience .comparison-heading .eyebrow{margin-bottom:12px;color:#73757c}
+#experience .comparison-heading h2{font-size:clamp(32px,3.1vw,48px);line-height:1.2;letter-spacing:-1.5px;color:#1d1d1f}
+#experience .comparison-heading>p{color:#73757c;font-size:13px;max-width:290px}
+.comparison-panes{display:grid;grid-template-columns:1fr 1fr;gap:24px;min-height:0;flex:1;max-height:650px}
+.comparison-pane{background:#f5f5f7;border-radius:26px;padding:24px;display:flex;flex-direction:column;gap:18px;min-width:0;min-height:0;overflow:hidden}
+.comparison-pane>header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.comparison-pane h3{font-size:20px;font-weight:600;letter-spacing:-.5px}
+.comparison-pane>header>span{font-size:10px;letter-spacing:1.6px;color:#777b85}
+.comparison-movevi{background:#f0f5fb}
+.comparison-movevi h3{color:#006bd9}
+.comparison-player{position:relative;flex:1;min-height:180px;border-radius:16px;background:#162330;overflow:hidden}
+.comparison-player video,.comparison-player>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.comparison-player:after{content:'';position:absolute;inset:45% 0 0;background:linear-gradient(transparent,#091421c9);pointer-events:none}
+.comparison-player-title{position:absolute;top:20px;left:20px;z-index:1;color:#fff;font-size:12px;letter-spacing:2px;text-shadow:0 1px 12px #000}
+.comparison-player-title strong{display:block;font-size:26px;letter-spacing:0;margin-top:5px}
+.comparison-playback{position:absolute;bottom:18px;left:20px;right:20px;z-index:2;color:#fff;display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center}
+.comparison-playback button{background:#ffffff24;color:#fff;border:1px solid #ffffff50;border-radius:24px;padding:8px 13px;font-size:11px;min-height:36px}
+.comparison-playback input{width:100%;accent-color:#fff;cursor:pointer;min-width:0}
+.comparison-playback output{font-size:10px;font-variant-numeric:tabular-nums}
+.comparison-summary{display:flex;flex-direction:column;gap:6px}
+.comparison-summary strong{font-size:21px;font-weight:600}
+.comparison-summary p{color:#73757c;font-size:12px;line-height:1.7}
+.comparison-tags{display:flex;gap:8px;flex-wrap:wrap}
+.comparison-tags span{font-size:10px;border:1px solid #dadce2;border-radius:30px;padding:6px 12px;color:#666b75}
+.comparison-app{display:grid;grid-template-columns:minmax(0,1fr) minmax(150px,1fr);gap:22px;align-items:center;min-height:0;flex:1}
+.comparison-phone{height:100%;max-height:440px;aspect-ratio:390/844;justify-self:center;border:6px solid #242529;border-radius:26px;overflow:hidden;background:#111;box-shadow:0 18px 35px #172b481c;min-height:0;max-width:100%}
+.comparison-phone img{height:100%;width:100%;object-fit:cover}
+.comparison-explanation{min-width:0}
+.comparison-explanation>span{font-size:10px;letter-spacing:1.5px;color:#006bd9}
+#experience #stage-title{display:block;font-size:clamp(19px,1.7vw,26px);line-height:1.4;margin:14px 0 12px;font-weight:600}
+#experience #stage-detail{font-size:12px;line-height:1.9;color:#666e7c}
+.comparison-route-sequence{display:flex;flex-direction:column;gap:16px;margin-top:24px;font-size:11px;color:#627187;border-left:1px solid #b9d4f0;padding-left:16px}
+.comparison-route-sequence span:before{content:'';display:inline-block;width:5px;height:5px;border-radius:50%;background:#0071e3;margin-right:8px}
+.comparison-tabs{display:flex;gap:4px;padding:4px;background:#e3eaf2;border-radius:14px}
+#experience .comparison-tabs button{flex:1;padding:10px 5px;border-radius:10px;background:transparent;color:#637187;font-size:11px;transition:background .2s,color .2s}
+#experience .comparison-tabs button.active{background:white;color:#006bd9;box-shadow:0 3px 10px #214c7910}
+.comparison-note{font-size:9px;color:#858890;line-height:1.5}
+@media(min-width:901px) and (min-height:650px){#experience.city-comparison{height:100svh;min-height:100svh;padding-block:84px 28px;gap:20px}.comparison-panes{max-height:none}.comparison-phone{max-height:100%}}
+@media(min-width:901px) and (max-height:760px){#experience.city-comparison{gap:14px}.comparison-pane{padding:18px;gap:12px}.comparison-heading h2{font-size:32px!important}.comparison-route-sequence{gap:10px;margin-top:14px}.comparison-tags{display:none}.comparison-summary strong{font-size:18px}}
+@media(max-width:900px){#experience.city-comparison{height:auto;min-height:0;padding-block:70px 45px;gap:24px}.comparison-heading{align-items:flex-start!important;flex-direction:column;gap:12px!important}.comparison-panes{grid-template-columns:1fr;max-height:none;gap:20px}.comparison-pane{padding:20px;gap:18px}.comparison-player{flex:none;height:300px}.comparison-app{flex:none;height:400px;grid-template-columns:1fr 1fr}.comparison-phone{height:100%}.comparison-heading>p{max-width:none!important}.comparison-pane h3{font-size:19px}}
+@media(max-width:480px){.comparison-player{height:255px}.comparison-app{height:330px;gap:14px;grid-template-columns:1.05fr 1fr}.comparison-phone{border-width:4px;border-radius:20px}.comparison-pane{padding:16px;border-radius:22px}.comparison-explanation>span{font-size:9px}#experience #stage-title{font-size:19px}#experience #stage-detail{font-size:11px}.comparison-route-sequence{font-size:10px;gap:12px;padding-left:10px}.comparison-playback{left:12px;right:12px;gap:8px}.comparison-playback button{font-size:10px;padding:7px}.comparison-heading h2{font-size:32px!important}}
+.video-comparison .comparison-heading>div{flex:1}
+#experience.video-comparison .comparison-heading h2{font-size:clamp(28px,2.6vw,40px);line-height:1.28;letter-spacing:-1px}
+#experience.video-comparison .comparison-heading>p{font-size:11px;flex:0 0 235px}
+.video-comparison .comparison-heading>p strong{font-size:19px;color:#1d1d1f;font-weight:500}
+#experience.video-comparison .comparison-panes{min-height:300px;flex:1;max-height:490px}
+.video-comparison .comparison-pane{padding:16px;gap:12px;border-radius:22px}
+.video-comparison .comparison-player{min-height:180px}
+.video-comparison .comparison-player video{transform:scale(1.035)}
+.video-comparison .comparison-pane h3{font-size:18px}
+.comparison-caption{font-size:12px;color:#747985;min-height:44px;display:flex;align-items:center}
+.workout-player:after{background:linear-gradient(#07162580,transparent 40%,#071625cc);inset:0}
+.workout-heading{position:absolute;z-index:2;top:16px;left:16px;right:16px;display:flex;justify-content:space-between;align-items:flex-start;color:white;gap:12px;text-shadow:0 1px 12px #0007}
+.workout-heading small{display:block;font-size:8px;letter-spacing:1.4px}
+.workout-heading strong{display:block;font-size:19px;margin-top:6px;font-weight:500}
+.workout-heading>span{font-size:8px;background:#07162565;border:1px solid #ffffff30;border-radius:20px;padding:5px 9px}
+.workout-route{position:absolute;right:16px;top:82px;width:144px;z-index:2;padding:9px 10px;background:#081a29b0;color:white;border:1px solid #ffffff25;border-radius:12px;backdrop-filter:blur(10px)}
+.workout-route>span{display:flex;justify-content:space-between;font-size:8px;gap:8px;color:#c7d5e3}
+.workout-route b{font-weight:500;color:#76cdff}.workout-route svg{display:block;width:100%;height:64px}
+.workout-bottom{position:absolute;bottom:12px;left:16px;right:16px;z-index:2;color:white}
+.workout-data{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:10px;align-items:center;border-top:1px solid #ffffff55;padding-top:12px}
+.workout-data strong{display:block;font-size:clamp(19px,2.2vw,30px);font-variant-numeric:tabular-nums;font-weight:500;letter-spacing:-.5px}
+.workout-data span{font-size:8px;color:#dbe6f0}.workout-data button{font-size:9px;color:white;background:#ffffff20;border:1px solid #ffffff50;border-radius:20px;padding:8px 10px}
+.workout-disclaimer{font-size:8px;display:block;color:#d1dce7;margin-top:8px}
+.workout-plan{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:3px;border-radius:10px;background:#e0e8f2;min-height:44px}
+.workout-plan button{display:flex;align-items:center;justify-content:center;gap:8px;background:transparent;border-radius:8px;color:#6b7a8e;font-size:10px;padding:7px 4px;transition:background .2s,color .2s}
+.workout-plan button small{font-size:9px;white-space:nowrap}.workout-plan button[aria-pressed=true]{color:#006bd9;background:white;box-shadow:0 2px 7px #10284b10}
+.comparison-reasons{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.comparison-reasons article{border-top:1px solid #d9dce3;padding-top:12px}
+.comparison-reasons article>span{font-size:9px;color:#848892}.comparison-reasons h4{font-size:16px;color:#006bd9;margin:8px 0;font-weight:500}
+.comparison-reasons p{font-size:11px;color:#686e79;line-height:1.7}
+@media(min-width:901px) and (min-height:650px){#experience.video-comparison{gap:16px}#experience.video-comparison .comparison-panes{min-height:260px;max-height:none}}
+@media(min-width:901px) and (max-height:760px){#experience.video-comparison{padding-top:68px;padding-bottom:16px;gap:10px}#experience.video-comparison .comparison-heading h2{font-size:28px!important}.comparison-reasons h4{margin:5px 0;font-size:14px}.comparison-reasons p{font-size:10px}.comparison-reasons article{padding-top:8px}.video-comparison .comparison-pane{padding:12px;gap:8px}.workout-route{top:65px;width:110px}.workout-route svg{height:40px}.workout-heading strong{font-size:16px}.workout-data{padding-top:7px}.workout-data strong{font-size:22px}}
+@media(max-width:900px){#experience.video-comparison .comparison-heading>p{flex:auto}.video-comparison .comparison-heading h2 .accent{display:block}#experience.video-comparison .comparison-panes{max-height:none;flex:none}.video-comparison .comparison-player{height:300px}.comparison-reasons{grid-template-columns:1fr 1fr;gap:20px}.workout-plan button{flex-direction:column;gap:3px}.workout-data strong{font-size:24px}}
+@media(max-width:480px){#experience.video-comparison .comparison-heading h2{font-size:27px!important}.video-comparison .comparison-player{height:310px}.comparison-reasons{grid-template-columns:1fr}.workout-heading{left:12px;right:12px}.workout-heading strong{font-size:17px}.workout-route{width:116px;right:12px;top:80px}.workout-route svg{height:54px}.workout-bottom{left:12px;right:12px}.workout-data{gap:6px}.workout-data strong{font-size:22px}.workout-data button{font-size:8px;padding:7px}.comparison-reasons h4{font-size:17px}.comparison-reasons p{font-size:12px}.comparison-reasons article>span{font-size:10px}}

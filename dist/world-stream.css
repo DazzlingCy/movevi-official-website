@@ -1,0 +1,24 @@
+/* A full-bleed ribbon: several destinations stay visible at once. */
+#world .destination-deck.is-enhanced .destination-viewport{--stream-gap:16px;--card-width:clamp(300px,29vw,520px);--card-step:calc(clamp(300px,29vw,520px) + var(--stream-gap))}
+#world .destination-deck.is-enhanced .destination-card,
+#world .destination-deck.is-enhanced .destination-card.is-active{transform:translateX(calc(-50% + var(--slot)*var(--card-step) - var(--stream-offset,0px) + var(--drag-offset,0px)));opacity:1;transition:transform .5s cubic-bezier(.22,.61,.36,1);border-radius:22px}
+#world .destination-deck.is-enhanced.is-streaming .destination-card{transition:none;will-change:transform}
+#world .destination-deck.is-dragging .destination-card{transition:none}
+#world .destination-deck.is-enhanced .destination-card[aria-hidden=true]{transition:none;visibility:hidden}
+#world .destination-card[data-position=previous] .destination-copy{left:28px;right:20px;text-align:left}
+#world .destination-card[data-position=previous] .destination-kicker{left:28px;right:auto}
+#world .destination-copy{right:20px}
+#world .destination-copy h3{font-size:clamp(30px,3.2vw,48px)}
+#world .destination-copy>span{font-size:12px}
+#world .destination-card.is-active{box-shadow:inset 0 0 0 1px #a5d8ff66}
+#world .destination-controls{flex-wrap:wrap;gap:8px 24px}
+#world .destination-city-buttons{gap:8px}
+#world .destination-city-buttons button{flex-basis:68px;min-width:68px;font-size:10px}
+#world .destination-city-buttons button img{width:58px;height:34px}
+.world-playback{display:flex;align-items:center;justify-content:center;gap:16px;color:#a8b6c6;font-size:10px}
+.world-playback button{color:#d5e7f5;background:#ffffff0a;border:1px solid #ffffff28;border-radius:30px;padding:8px 12px;font-size:10px}
+.world-playback button:hover{background:#ffffff18}.world-playback button:disabled{opacity:.5}
+#world .destination-card:focus-within{outline:2px solid #8bc8ff;outline-offset:-3px}
+@media(max-width:900px){#world .destination-deck.is-enhanced .destination-viewport{--stream-gap:12px;--card-width:72vw;--card-step:calc(72vw + var(--stream-gap))}#world .destination-controls{gap:8px}#world .destination-city-buttons{width:100%}#world .destination-copy>span{font-size:11px}}
+@media(prefers-reduced-motion:reduce){#world .destination-deck.is-enhanced .destination-card{transition:none}}
+.reduce-motion #world .destination-deck.is-enhanced .destination-card{transition:none}

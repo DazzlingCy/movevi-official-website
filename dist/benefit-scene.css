@@ -1,0 +1,12 @@
+/* One continuous home scene, with a soft wall-to-copy transition. */
+#benefits .benefits-grid .lifestyle-benefit{background:#e9eae8;padding:clamp(24px,2.3vw,38px);isolation:isolate}
+#benefits .benefits-grid .lifestyle-benefit>img{position:absolute;inset:auto 0 0;width:100%;height:82%;max-height:none;object-fit:cover;object-position:52% 50%;z-index:-1;mix-blend-mode:normal;mask-image:linear-gradient(to bottom,transparent 0%,#0008 7%,#000 17%);-webkit-mask-image:linear-gradient(to bottom,transparent 0%,#0008 7%,#000 17%);transition:transform 1s cubic-bezier(.22,.68,.16,1)}
+#benefits .benefits-grid .lifestyle-benefit>.eyebrow,#benefits .benefits-grid .lifestyle-benefit>h3,#benefits .benefits-grid .lifestyle-benefit>p{position:relative;z-index:1;max-width:100%}
+#benefits .benefits-grid .lifestyle-benefit>.eyebrow{color:#526477;margin-bottom:16px}
+#benefits .benefits-grid .lifestyle-benefit>h3{color:#1d1d1f;line-height:1.35}
+#benefits .benefits-grid .lifestyle-benefit>p{color:#4e5862;line-height:1.85;margin-top:12px}
+@media(hover:hover){#benefits .benefits-grid .lifestyle-benefit:hover>img{transform:scale(1.018)}}
+@media(max-width:900px){#benefits .benefits-grid .lifestyle-benefit{height:540px;min-height:0;padding:28px}#benefits .benefits-grid .lifestyle-benefit>img{height:76%}}
+@media(max-width:600px){#benefits .benefits-grid .lifestyle-benefit{height:510px;padding:26px}#benefits .benefits-grid .lifestyle-benefit>img{height:72%}}
+@media(prefers-reduced-motion:reduce){#benefits .benefits-grid .lifestyle-benefit>img{transition:none;transform:none}}
+.reduce-motion #benefits .benefits-grid .lifestyle-benefit>img{transition:none;transform:none}

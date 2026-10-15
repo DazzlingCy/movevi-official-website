@@ -16,7 +16,7 @@
    node.classList.toggle('is-waiting',waiting);
    if(waiting)observer.observe(node);
   });
-  document.querySelector('.steps').setAttribute('aria-orientation',matchMedia('(max-width:600px)').matches?'horizontal':'vertical');
+  document.querySelector('.steps')?.setAttribute('aria-orientation',matchMedia('(max-width:600px)').matches?'horizontal':'vertical');
  }
  targets.forEach(node=>node.addEventListener('focusin',()=>{node.classList.remove('is-waiting');seen.add(node);}));
  mobile.addEventListener('change',sync);reduced.addEventListener('change',sync);

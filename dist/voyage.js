@@ -15,7 +15,7 @@
   const lerp=(a,b,t)=>a+(b-a)*t;
   let enabled=false,frame=0,leaving=false;
   let occluded=false;
-  const source=document.querySelector('#brand .intro-city-small');
+  let source=document.querySelector('#brand [data-city="tokyo"]')||document.querySelector('#brand .intro-city-small');
   const windowNode=stage.querySelector('.voyage-window');
   const handoff=document.createElement('div');
   handoff.className='voyage-handoff';handoff.setAttribute('aria-hidden','true');handoff.hidden=true;
@@ -78,6 +78,15 @@
       solution.querySelectorAll('.voyage-stops li').forEach((node,i)=>node.classList.toggle('is-current',i===(p<.38?0:p<.72?1:2)));
       const inTransit=source&&rect.top>0&&rect.top<innerHeight*.62;
       if(inTransit){
+        if(handoff.hidden){
+          const wall=document.querySelector('#brand .city-wall-scene');
+          if(wall){
+            const bounds=wall.getBoundingClientRect();
+            const area=node=>{const r=node.getBoundingClientRect();return Math.max(0,Math.min(r.right,bounds.right)-Math.max(r.left,bounds.left))*Math.max(0,Math.min(r.bottom,bounds.bottom)-Math.max(r.top,bounds.top));};
+            source=[...wall.querySelectorAll('[data-city="tokyo"]')].sort((a,b)=>area(b)-area(a))[0]||source;
+            wall.classList.remove('is-wall-playing');
+          }
+        }
         const from=source.getBoundingClientRect(),to=windowNode.getBoundingClientRect();
         const t=ease(1-rect.top/(innerHeight*.62));
         handoff.hidden=false;source.classList.add('voyage-in-transit');windowNode.classList.add('voyage-in-transit');

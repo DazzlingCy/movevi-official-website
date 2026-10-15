@@ -1,0 +1,34 @@
+/* A city contact sheet that opens from one destination and hands Tokyo onward. */
+#brand .intro-visual{grid-template-columns:1fr!important;grid-template-rows:minmax(0,1fr)!important}
+#brand .city-wall-scene{background:#0c1520;isolation:isolate;clip-path:none!important}
+.city-photo-wall{--wall-gap:8px;--wall-tile-width:clamp(145px,14vw,220px);position:absolute;inset:-2% -2%;display:grid;grid-template-rows:repeat(4,minmax(0,1fr));gap:var(--wall-gap);padding:var(--wall-gap);background:#0c1520;transform:scale(calc(1 - var(--wall-exit,0)*.035));opacity:calc(1 - var(--wall-exit,0)*.25)}
+.city-wall-row{min-height:0;position:relative;transform:translateX(calc(var(--row-drift,0px)*var(--wall-exit,0)))}
+.city-wall-track{display:flex;width:max-content;height:100%;animation:city-wall-travel var(--wall-duration,54s) linear infinite;animation-play-state:paused}
+.city-wall-group{display:grid;grid-template-columns:repeat(6,var(--wall-tile-width));gap:var(--wall-gap);padding-right:var(--wall-gap);height:100%;flex-shrink:0}
+.city-wall-row:nth-child(1){--wall-duration:54s;--row-drift:-16px}
+.city-wall-row:nth-child(2){--wall-duration:64s;--row-drift:12px}
+.city-wall-row:nth-child(3){--wall-duration:58s;--row-drift:-12px}
+.city-wall-row:nth-child(4){--wall-duration:68s;--row-drift:14px}
+.city-wall-row:nth-child(even) .city-wall-track{animation-direction:reverse}
+.city-wall-scene.is-wall-playing .city-wall-track{animation-play-state:running}
+@keyframes city-wall-travel{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.city-wall-tile{position:relative;overflow:hidden;min-width:0;min-height:0;border-radius:14px;background:#172331;isolation:isolate;transform:translate(calc((1 - var(--wall-open,1))*var(--pile-x,0%)),calc((1 - var(--wall-open,1))*var(--pile-y,0%))) scale(calc(.8 + var(--wall-open,1)*.2));opacity:var(--wall-open,1)}
+.city-wall-tile img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.city-wall-tile:after{content:'';position:absolute;inset:55% 0 0;background:linear-gradient(transparent,#06132180);pointer-events:none}
+.city-wall-tile>span{position:absolute;left:14px;bottom:12px;z-index:1;color:#fff;font-size:10px;letter-spacing:.12em;text-shadow:0 1px 5px #0008}
+.city-wall-tile[data-city="paris"]{z-index:2}
+#brand .city-wall-scene:after{background:linear-gradient(180deg,#06132105 38%,#06132122 60%,#061321ec 100%);pointer-events:none}
+#brand .city-wall-scene>figcaption{top:auto;bottom:30px;left:30px;right:24px;pointer-events:none}
+.opening-city-bridge>.opening-source-image{position:absolute;inset:0;opacity:1;object-position:50% 54%}
+.opening-city-bridge>.city-photo-wall{opacity:var(--wall-surface,0);--wall-exit:0}
+.opening-city-bridge .city-wall-tile{opacity:1}
+.opening-city-bridge:after{background:linear-gradient(180deg,transparent 38%,#06132122 60%,#061321ec 100%)}
+.city-wall-toggle{position:absolute;top:16px;right:16px;z-index:4;border:1px solid #ffffff40;border-radius:30px;background:#071321ad;color:white;padding:8px 12px;font:inherit;font-size:10px;cursor:pointer;backdrop-filter:blur(8px)}
+.city-wall-toggle[hidden]{display:none}.city-wall-toggle:focus-visible{outline:2px solid #fff;outline-offset:3px}
+@media(min-width:901px){.voyage-v31 #brand .intro-layout{grid-template-columns:minmax(0,.65fr) minmax(0,1.35fr);gap:4%;width:min(1440px,calc(100% - 112px));margin-inline:auto}.voyage-v31 #brand #brand-title{font-size:clamp(36px,4.2vw,60px)}.voyage-v31 #brand .intro-description{font-size:14px}}
+@media(max-width:900px){#brand .intro-visual{height:auto;display:block}#brand .city-wall-scene{height:520px;min-height:0;width:100%;position:relative;inset:auto}.city-photo-wall{--wall-gap:7px;--wall-tile-width:165px}.city-wall-tile{border-radius:11px}}
+@media(max-width:600px){#brand .city-wall-scene{height:440px}#brand .city-wall-scene>figcaption{left:22px;right:18px;bottom:24px}.city-wall-tile>span{font-size:8px;left:8px;bottom:10px}.city-photo-wall{--wall-tile-width:132px;--wall-gap:6px}.city-wall-toggle{top:12px;right:12px}}
+@media(prefers-reduced-motion:reduce){.city-photo-wall{transform:none;opacity:1}.city-wall-tile{transform:none;opacity:1}}
+.reduce-motion .city-photo-wall{transform:none;opacity:1}.reduce-motion .city-wall-tile{transform:none;opacity:1}
+@media(prefers-reduced-motion:reduce){.city-wall-track{animation:none}}
+.reduce-motion .city-wall-track{animation:none}
