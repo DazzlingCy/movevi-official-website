@@ -72,3 +72,86 @@
  .narrative-v24 .mobile-nav a[aria-current="location"],.narrative-v24 .mobile-nav a[aria-current="location"]:before{color:var(--link)}
  .narrative-v24 .mobile-nav button{flex-shrink:0;margin-top:16px}
 }
+/* The opening message: promise, motivation, then company positioning. */
+.narrative-v24 .hero-mission{margin-top:24px;font-size:clamp(18px,1.5vw,23px);line-height:1.6;font-weight:500;letter-spacing:-.015em;color:var(--ink)}
+@media(min-width:901px) and (max-height:720px){
+ .narrative-v24 .hero-earth .hero-copy{padding-top:17svh}
+ .narrative-v24 .hero-mission{font-size:17px;margin-top:18px}
+ .narrative-v24 .hero-earth .button{margin-top:22px}
+}
+@media(max-width:900px){
+ .narrative-v24 .hero.hero-earth{height:max(920px,100svh);min-height:920px}
+ .narrative-v24 .hero-mission{margin:0 0 14px;font-size:16px;line-height:1.55}
+ .narrative-v24 .hero-description{font-size:12px;line-height:1.7}
+ .narrative-v24 .hero-visual{top:455px}
+}
+@media(min-width:601px) and (max-width:900px){
+ .narrative-v24 .hero.hero-earth{height:max(1040px,100svh)}
+ .narrative-v24 .hero-visual{top:490px;height:calc(100% - 580px)}
+}
+
+.narrative-v24 .system-term{display:inline-block;white-space:nowrap}
+
+/* Show how scenery becomes an exercise journey, using the existing App screens. */
+.experience-comparison .section-description{max-width:520px;line-height:1.85}
+.experience-compare-heading{display:grid;grid-template-columns:.8fr 1.2fr;gap:22px;padding:0 42px 12px 48px;font-size:11px;color:var(--muted);border-bottom:1px solid var(--line)}
+.experience-compare-heading strong{font-weight:500;color:var(--link)}
+.experience-comparison .steps{margin:10px 0 0;display:grid;gap:8px}
+.experience-comparison .step,.experience-comparison .step:last-child{padding:17px 18px;gap:14px}
+.experience-comparison .step-number{flex:0 0 16px;font-size:10px}
+.experience-comparison .step .experience-compare-pair{display:grid;grid-template-columns:.8fr 1.2fr;gap:22px;align-items:center;flex:1;min-width:0}
+.experience-comparison .step .experience-watch{font-size:13px;line-height:1.6;margin:0;color:var(--muted)}
+.experience-comparison .step .experience-participate{margin:0;line-height:1.5;color:var(--ink)}
+.experience-comparison .step .experience-participate strong{font-size:15px;font-weight:500}
+.experience-comparison .experience-participate>span{display:block;font-size:11px;color:var(--muted);margin-top:5px;line-height:1.6}
+.experience-comparison .step.active .experience-participate strong{color:var(--link)}
+.experience-comparison .step>span:last-child{font-size:18px}
+/* A four-part content atlas. Figures are explicitly marked as display data. */
+.narrative-v24 #world .section-heading{display:grid;grid-template-columns:1.5fr 1fr;gap:22px 48px;align-items:end}
+.narrative-v24 #world-title{font-size:clamp(32px,3vw,48px);line-height:1.2}
+.world-content-intro{justify-self:end;color:var(--muted);font-size:12px;line-height:1.8;padding-bottom:4px}
+.world-content-intro p{color:var(--ink);font-size:15px;margin-bottom:8px}
+.world-content-scale{grid-column:1/-1}
+.world-scale-heading{display:flex;justify-content:space-between;gap:16px;font-size:10px;color:var(--muted);padding-bottom:12px;border-bottom:1px solid var(--line)}
+.world-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:18px 0 0}
+.world-metrics>div{display:flex;flex-direction:column-reverse;gap:5px;padding-inline:26px;border-left:1px solid var(--line)}
+.world-metrics>div:first-child{padding-left:0;border-left:0}
+.world-metrics dt{font-size:12px;color:var(--muted)}
+.world-metrics dd{margin:0;font-size:clamp(32px,3.7vw,58px);line-height:1.08;font-weight:600;letter-spacing:-.055em;font-variant-numeric:tabular-nums;color:var(--ink);white-space:nowrap}
+.world-metrics dd>span{color:var(--link);font-size:.58em;font-weight:400;margin-left:3px;vertical-align:top;line-height:1.5}
+@media(min-width:901px){
+ .narrative-v24 #world .section-heading{margin-bottom:24px}
+ .narrative-v24 #world .world-sticky{min-height:800px}
+ .experience-comparison{gap:clamp(32px,4vw,70px)}
+ .experience-comparison h2{font-size:clamp(34px,3.4vw,49px)}
+}
+@media(min-width:901px) and (max-height:800px){
+ .narrative-v24 #world .world-sticky{min-height:720px}
+ .narrative-v24 #world .section-heading{gap:16px 36px;margin-bottom:18px}
+ .narrative-v24 #world-title{font-size:34px}
+ .narrative-v24 #world .eyebrow{margin-bottom:12px}
+ .world-metrics{margin-top:12px}.world-metrics dd{font-size:40px}
+ .experience-comparison .step,.experience-comparison .step:last-child{padding-block:13px}
+}
+@media(max-width:900px){
+ .narrative-v24 #world .section-heading{display:block}
+ .narrative-v24 #world-title{font-size:clamp(29px,6.8vw,44px)}
+ .world-content-intro{margin:18px 0 26px;font-size:12px}.world-content-intro br{display:none}
+ .world-content-intro p{font-size:14px;margin-bottom:4px}
+ .world-metrics{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 0}
+ .world-metrics>div{padding-inline:18px}.world-metrics>div:nth-child(odd){border-left:0;padding-left:0}
+ .world-metrics dd{font-size:clamp(28px,8.6vw,40px)}.world-metrics dt{font-size:11px}
+ .experience-compare-heading{padding-inline:0;gap:15px}
+ .experience-comparison .step .experience-compare-pair{grid-template-columns:1fr;gap:8px}
+ .experience-comparison .step .experience-watch{font-size:11px}
+ .experience-comparison .step .experience-participate strong{font-size:14px}
+}
+@media(max-width:600px){
+ .experience-comparison .steps{display:flex;margin-top:12px;padding-bottom:12px}
+ .experience-comparison .step,.experience-comparison .step:last-child{flex-basis:245px;padding:18px;min-height:160px}
+ .experience-comparison .step .experience-watch:before{content:'看风景 · ';color:var(--muted)}
+ .experience-comparison .step .experience-participate{padding-top:10px;border-top:1px solid var(--line)}
+ .experience-comparison .step-number{margin-bottom:10px}
+ .experience-comparison .experience-compare-heading{grid-template-columns:1fr 1fr}
+ .experience-comparison .app-stage{margin-top:0}
+}

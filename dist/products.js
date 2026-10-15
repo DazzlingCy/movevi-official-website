@@ -5,9 +5,7 @@
   const seriesButtons = [...document.querySelectorAll('[data-series]')];
   const descriptions = {
     ts2: '以轻巧机身，融入日常走步时光。',
-    ts3: '从走步到快跑，让每一天都有自己的节奏。',
-    ts5: '480 mm 宽跑步区域，让步幅舒展开来。',
-    ts6: '支架与大屏两种选择，打开你的运动视野。'
+    ts3: '从走步到快跑，让每一天都有自己的节奏。'
   };
   let activeProduct;
   function el(tag, className, text) {

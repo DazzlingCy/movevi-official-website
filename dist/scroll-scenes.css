@@ -1,0 +1,18 @@
+/* A scene stays one viewport tall; native document travel advances its story. */
+@media(min-width:901px) and (min-height:650px){
+ .screens-v40 #brand.is-scroll-brand{height:175svh;min-height:175svh;padding:0;overflow:visible}
+ .screens-v40 #brand.is-scroll-brand .brand-sticky{position:sticky;top:0;height:100svh;padding-block:var(--scene-top) var(--scene-bottom)}
+ .screens-v40 #solution.is-voyage{height:240svh;min-height:240svh;padding:0;overflow:visible}
+ .screens-v40 #solution.is-voyage .voyage-sticky{position:sticky;top:0;height:100svh;overflow:clip}
+ .screens-v40 #solution.is-voyage .voyage-stage{display:block;position:relative}
+ .screens-v40 #solution.is-voyage .voyage-static-app{display:none}
+ .screens-v40 #solution.is-voyage .voyage-window{height:var(--window-height,84%);width:var(--window-width,66%)}
+ .screens-v40 #solution.is-voyage .voyage-machine{height:90%;width:48%}
+ .voyage-motion [data-arrival="compact-copy"],.voyage-motion [data-arrival="compact-image"]{opacity:var(--brand-reveal,1);transform:translate3d(0,calc((1 - var(--brand-reveal,1))*54px),0)}
+}
+@media(max-width:900px),(max-height:649px){
+ .voyage-motion [data-arrival]{opacity:var(--arrival,1);transform:translate3d(0,calc((1 - var(--arrival,1))*30px),0);transition:none}
+ .voyage-motion [data-arrival="image"],.voyage-motion [data-arrival="compact-image"]{transform:translate3d(0,calc((1 - var(--arrival,1))*30px),0) scale(calc(.97 + var(--arrival,1)*.03))}
+}
+@media(prefers-reduced-motion:reduce){.voyage-motion [data-arrival]{transform:none!important;opacity:1!important}}
+.reduce-motion [data-arrival]{transform:none!important;opacity:1!important}

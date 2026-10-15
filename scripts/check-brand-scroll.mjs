@@ -8,8 +8,9 @@ class Node {
  fire(k,event={}){for(const fn of this.events[k]||[])fn(event);}
  contains(node){return !!node?.inside;}
 }
-function setup({reduced=false,desktop=true,top=0}={}){
+function setup({reduced=false,desktop=true,top=0,oneScreen=false}={}){
  const section=new Node(),root=new Node(),doc=new Node(),win=new Node(),screen=new Node(),preference=new Node();
+ doc.body=new Node();if(oneScreen)doc.body.classes.add("screens-v40");
  screen.matches=desktop;preference.matches=reduced;doc.documentElement=root;doc.hidden=false;doc.querySelector=()=>section;
  const nodes=Object.fromEntries(['.intro-label','#brand-title','.intro-city-main','.intro-description','.intro-city-small','.intro-bottom','.intro-ambition'].map(key=>[key,new Node()]));
  section.querySelector=key=>nodes[key];section.getBoundingClientRect=()=>({top});
@@ -32,3 +33,5 @@ function setup({reduced=false,desktop=true,top=0}={}){
 }
 for(const options of [{reduced:true},{desktop:false}]){const s=setup(options);assert(!s.section.classes.has('is-scroll-brand'));assert(Object.values(s.nodes).every(n=>n.vars['--brand-reveal']===undefined));}
 console.log('Passed: ordered brand reveals, complete/reverse scroll, keyboard access, offscreen/background idle and reduced-motion/static fallback.');
+
+{const s=setup({oneScreen:true});s.visible(true);assert.equal(s.value('#brand-title'),1);assert(s.value('.intro-city-main')<1,'City reveal continues after the scene reaches the viewport');assert.equal(s.value('.intro-ambition'),0);s.scroll(-600);assert(Object.keys(s.nodes).every(k=>s.value(k)===1),'Scroll completes all content within the pinned scene');s.scroll(0);assert.equal(s.value('.intro-ambition'),0,'Reverse scrolling restores the earlier state');}

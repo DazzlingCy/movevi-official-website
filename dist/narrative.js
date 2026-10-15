@@ -32,13 +32,11 @@
   values.forEach(detail=>detail.addEventListener('toggle',()=>{
     if(!detail.open)return;
     values.forEach(other=>{if(other!==detail)other.open=false;});
-    document.querySelector('#value-number').textContent=detail.dataset.number;
-    document.querySelector('#value-word').textContent=detail.dataset.value;
   }));
   const index=document.querySelector('.story-index');
   const chapters=[...document.querySelectorAll('[data-chapter]')];
   const links=[...document.querySelectorAll('[data-chapter-link]')];
-  const ending=document.querySelector('footer');
+  const ending=document.querySelector('#set-off');
   const mainLinks=[...document.querySelectorAll('[data-nav-chapter]')];
   if(!index||!chapters.length)return;
   index.classList.add('is-enhanced');
@@ -52,7 +50,7 @@
     const keyboardFocus=index.contains(document.activeElement)&&document.activeElement.matches(':focus-visible');
     index.hidden=!visible&&!keyboardFocus;
     mainLinks.forEach(link=>{
-      if(current&&link.dataset.navChapter===current.dataset.chapter)link.setAttribute('aria-current','location');
+      if(current&&link.dataset.navChapter.split(/\s+/).includes(current.dataset.chapter))link.setAttribute('aria-current','location');
       else link.removeAttribute('aria-current');
     });
     links.forEach(link=>{

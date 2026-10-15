@@ -1,0 +1,56 @@
+/* A complete 16:9 film, contained on every screen. */
+.screens-v40 #set-off.promo-finale{height:100svh;min-height:650px;padding:82px max(6vw,24px) 24px;background:#080c14;color:#f5f5f7;border-radius:0;display:flex;flex-direction:column;justify-content:center;gap:20px;overflow:hidden}
+#set-off.promo-finale::before,#set-off.promo-finale::after{display:none}
+.promo-heading{display:flex;align-items:center;justify-content:space-between;width:min(100%,1400px);margin-inline:auto;gap:30px}
+.promo-heading .eyebrow{font-size:10px;color:#8ba1bd;letter-spacing:.16em;margin:0 0 12px;max-width:none;width:auto;white-space:nowrap}
+.screens-v40 #set-off.promo-finale h2{font-size:clamp(25px,2.6vw,42px);line-height:1.2;margin:0;color:#f5f5f7;letter-spacing:-.035em}
+.promo-contact{border:1px solid #ffffff40;color:#f5f5f7;background:transparent;padding:12px 18px;border-radius:999px;font-size:12px;white-space:nowrap;cursor:pointer}
+.promo-contact span{margin-left:18px;color:#84bfff}
+.promo-player{position:relative;width:min(100%,calc((100svh - 245px)*16/9),1400px);aspect-ratio:16/9;margin-inline:auto;flex:none;border:1px solid #ffffff18;border-radius:20px;overflow:hidden;background:#080c14;box-shadow:0 25px 80px #0005}
+.promo-player video{display:block;width:100%;height:100%;object-fit:contain}
+.promo-controls{position:absolute;bottom:0;left:0;right:0;display:flex;align-items:center;gap:12px;padding:28px 22px 16px;background:linear-gradient(transparent,#03060ee8);transition:opacity .2s}
+.promo-controls button{padding:8px 10px;border:1px solid #ffffff28;border-radius:8px;background:#111a2cb3;color:white;cursor:pointer;font-size:12px;min-height:36px}
+.promo-controls button:hover,.promo-contact:hover{background:#1c2d46}
+.promo-time{font-size:11px;font-variant-numeric:tabular-nums;color:#b2bdcc;margin-left:auto}
+.promo-center-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border:1px solid #ffffff70;border-radius:99px;padding:16px 25px;background:#111c30d9;color:white;font-size:14px;cursor:pointer;backdrop-filter:blur(12px)}
+.promo-center-play[hidden]{display:none}
+.promo-player.is-playing:not(:hover):not(:focus-within) .promo-controls{opacity:0;pointer-events:none}
+.promo-progress{position:absolute;bottom:0;left:0;right:0;height:3px;background:#ffffff12}
+.promo-progress span{display:block;height:100%;width:0;background:#0071e3}
+.promo-note{width:min(100%,1400px);margin:0 auto;display:flex;justify-content:space-between;gap:16px;color:#9ca8b8;font-size:11px;line-height:1.6}
+.promo-note span{color:#758399}
+.promo-player:fullscreen{width:100%;height:100%;aspect-ratio:auto;border:0;border-radius:0;background:#080c14}
+.promo-finale button:focus-visible{outline:2px solid #84bfff;outline-offset:4px}
+@media(max-width:800px){.screens-v40 #set-off.promo-finale{min-height:100svh;height:auto;padding:100px 18px 60px;gap:28px}.promo-heading{display:block}.promo-heading .eyebrow{font-size:9px}.screens-v40 #set-off.promo-finale h2{font-size:clamp(25px,6vw,38px)}.promo-contact{margin-top:22px}.promo-player{width:100%;border-radius:12px}.promo-note{display:block;font-size:10px}.promo-note span{display:block;margin-top:8px}.promo-controls{gap:5px;padding:18px 8px 8px}.promo-controls button{font-size:10px;padding:5px;min-height:32px}.promo-time{font-size:9px}.promo-center-play{font-size:12px;padding:12px 18px;white-space:nowrap}}
+@media(max-height:650px) and (min-width:801px){.screens-v40 #set-off.promo-finale{min-height:620px;height:auto}.promo-player{width:min(100%,740px)}}
+@media(prefers-reduced-motion:reduce){.promo-controls{transition:none}}
+@media(max-width:800px){.screens-v40 #set-off.promo-finale h2{font-size:clamp(25px,6vw,38px)!important;line-height:1.3}.promo-controls button{min-height:40px}.promo-heading{width:100%}}
+
+/* Edge-to-edge final scene. The film is the page, with controls overlaid. */
+.screens-v40 #set-off.promo-finale{position:relative;isolation:isolate;width:100%;max-width:none;height:100svh;min-height:100svh;margin:0;padding:0;gap:0;border-radius:0;background:#080c14}
+.promo-finale .promo-player{position:absolute;inset:0;width:100%;height:100%;max-width:none;aspect-ratio:auto;margin:0;border:0;border-radius:0;box-shadow:none;background:#080c14;transform:scale(calc(.94 + var(--promo-entry,1)*.06));transform-origin:50% 50%;overflow:hidden}
+.promo-finale .promo-player video{object-fit:contain;background:radial-gradient(ellipse at center,#101d32,#080c14 75%)}
+@media(min-aspect-ratio:17/10) and (max-aspect-ratio:19/10){.promo-finale .promo-player video{object-fit:cover}}
+.promo-finale .promo-heading{position:absolute;z-index:2;left:0;right:0;top:0;width:100%;padding:86px max(5vw,24px) 48px;background:linear-gradient(#080c14b8,transparent);pointer-events:none}
+.promo-finale .promo-heading>div{display:none}
+.promo-finale .promo-contact{margin:0 0 0 auto;pointer-events:auto;background:#080c1433;backdrop-filter:blur(12px)}
+.promo-finale .promo-note{position:absolute;z-index:2;left:max(5vw,24px);right:max(5vw,24px);bottom:84px;width:auto;color:#c9d2df;pointer-events:none;font-size:10px;text-shadow:0 1px 8px #000}
+.promo-finale .promo-note span{color:#a8b5c6}
+.promo-finale .promo-controls{z-index:3;padding:40px max(5vw,24px) 24px}
+.promo-finale .promo-center-play{z-index:4}
+.promo-finale .promo-progress{z-index:4}
+.promo-finale .promo-player:fullscreen{transform:none}
+@media(max-aspect-ratio:4/3){
+ .promo-finale .promo-player{background:radial-gradient(ellipse at center,#182540,#080c14 70%)}
+ .promo-finale .promo-player video{object-fit:contain}
+ .promo-finale .promo-heading{padding:90px 20px 20px}
+ .promo-finale .promo-note{left:20px;right:20px;bottom:94px;display:block}
+ .promo-finale .promo-note span{display:block;margin-top:6px}
+ .promo-finale .promo-controls{padding:32px 14px 22px}
+}
+@media(prefers-reduced-motion:reduce){.promo-finale .promo-player{transform:none}}
+.reduce-motion .promo-finale .promo-player{transform:none}
+
+/* The navigation floats directly over the page without a grey panel. */
+body .header,body .header.is-scrolled,body .header.is-hidden{background:transparent!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;box-shadow:none!important;border-bottom:0!important}
+body .header::before,body .header::after{background:none!important;backdrop-filter:none!important;box-shadow:none!important}

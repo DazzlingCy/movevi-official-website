@@ -1,0 +1,243 @@
+/* Visual scale and chapter contrast. Builds on the native-scroll v31 narrative. */
+.impact-v35{--reading-width:1280px;--impact-radius:30px;--impact-space:clamp(80px,8vw,140px)}
+.impact-v35 .mobile-nav a:before{content:none}
+.impact-v35 .experience-copy>h2+.experience-compare-heading{margin-top:28px}
+/* One shared chapter pairs experience standards with the principles behind them. */
+.impact-v35 #values.trust-unified{background:#f5f5f7;padding:88px 0 64px;min-height:0;height:auto}
+.impact-v35 .trust-heading{display:grid;grid-template-columns:1fr 1fr;column-gap:64px;align-items:end;margin-bottom:32px}
+.impact-v35 .trust-heading>.eyebrow{grid-column:1/-1;margin-bottom:20px}
+.impact-v35 .trust-heading h2{font-size:clamp(34px,3.3vw,52px);line-height:1.2;letter-spacing:-.035em}
+.impact-v35 .trust-heading h2 br{display:block}
+.impact-v35 .trust-heading>p:last-child{font-size:14px;color:var(--muted);padding-bottom:5px}
+.impact-v35 .trust-layout{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.impact-v35 .trust-scene{position:relative;margin:0 0 22px;height:230px;border-radius:24px;overflow:hidden}
+.impact-v35 .trust-scene img{width:100%;height:100%;object-fit:cover;object-position:center bottom}
+.impact-v35 .trust-scene figcaption{position:absolute;right:16px;bottom:14px;padding:5px 10px;background:#ffffffdf;border-radius:20px;font-size:9px;color:#6e6e73}
+.impact-v35 .trust-column-label{font-size:13px;font-weight:500;color:#6e6e73;margin:0 0 14px}
+.impact-v35 .trust-checks>div{display:flex;align-items:start;gap:18px;border-top:1px solid #d2d2d7;padding:14px 0}
+.impact-v35 .trust-checks>div>span{font-size:10px;color:var(--link);padding-top:5px}
+.impact-v35 .trust-checks h4{font-size:18px;font-weight:500;margin:0 0 5px}
+.impact-v35 .trust-checks p{font-size:12px;color:var(--muted);line-height:1.65;margin:0}
+.impact-v35 .trust-principles .value-accordion details{border:0;border-radius:16px;margin:0 0 8px;background:#fff}
+.impact-v35 .trust-principles .value-accordion summary{min-height:56px;padding:14px 20px;gap:18px}
+.impact-v35 .trust-principles .value-accordion h3{font-size:20px}
+.impact-v35 .trust-principles .value-accordion details>div{padding:0 22px 18px 51px}
+.impact-v35 .trust-principles .value-accordion p{font-size:13px;line-height:1.8}
+.impact-v35 .trust-principles .value-accordion small{font-size:11px;margin-top:10px;line-height:1.7}
+@media(min-width:901px) and (max-height:800px){
+ .impact-v35 #values.trust-unified{padding-top:76px;padding-bottom:40px}
+ .impact-v35 .trust-heading{margin-bottom:24px}.impact-v35 .trust-heading h2{font-size:36px}
+ .impact-v35 .trust-scene{height:180px;margin-bottom:16px}
+ .impact-v35 .trust-checks>div{padding-block:11px}
+}
+@media(max-width:900px){
+ .impact-v35 #values.trust-unified{padding-block:70px 50px}
+ .impact-v35 .trust-heading{grid-template-columns:1fr;gap:0;margin-bottom:28px}
+ .impact-v35 .trust-heading h2{font-size:36px}.impact-v35 .trust-heading h2 br{display:block}
+ .impact-v35 .trust-heading>p:last-child{margin-top:18px;font-size:13px}
+ .impact-v35 .trust-layout{gap:36px;grid-template-columns:1fr}
+ .impact-v35 .trust-scene{height:auto;aspect-ratio:1.8}
+ .impact-v35 .trust-checks h4{font-size:18px}
+}
+@media(min-width:901px){
+ .impact-v35 .header .desktop-nav{gap:clamp(22px,2.3vw,36px);font-size:13px;padding-inline:16px}
+}
+.impact-v35 .hero.hero-earth{background:radial-gradient(ellipse at 78% 48%,#edf5ff 0,transparent 52%),linear-gradient(#fff 72%,#f5f5f7)}
+.impact-v35 .hero-world-word{color:#0071e3}
+.impact-v35 .hero-earth h1{font-size:clamp(70px,7.4vw,126px);line-height:1.06;font-weight:650;letter-spacing:-.055em}
+.impact-v35 .hero-earth .hero-copy{padding-top:clamp(150px,21svh,230px);width:min(1440px,calc(100% - 128px))}
+.impact-v35 .hero-copy>.eyebrow{margin-bottom:30px;color:#6e6e73}
+.impact-v35 .hero-mission{font-size:clamp(20px,1.7vw,26px);line-height:1.65;margin-top:32px}
+.impact-v35 .hero-earth .hero-description{font-size:14px;line-height:1.85;width:390px;margin-top:22px}
+.impact-v35 .hero-earth .hero-copy>.button{font-size:14px;min-height:50px;padding:14px 25px;margin-top:28px}
+.impact-v35 .hero-visual{right:-3%;top:10%;width:62%;height:80%;mix-blend-mode:normal}
+.impact-v35 .hero-earth .hero-visual .hero-film{inset:0 0 9%;mask-image:linear-gradient(#000 0%,#000 42%,transparent 88%)}
+.impact-v35 .landmark-paris{left:24%;top:1%;width:20%;height:19%}
+.impact-v35 .hero-visual .hero-city-window{right:8%;top:33%;width:26%;height:23%;border-radius:20px;box-shadow:0 16px 36px #07234416}
+.impact-v35 .hero-earth .hero-visual .hero-hardware{left:9%;width:75%;height:56%;bottom:-1%;mix-blend-mode:multiply}
+.impact-v35 .hero-visual .hero-hardware img{mask-image:none;object-fit:contain;mix-blend-mode:multiply}
+.impact-v35 .hero-visual .hero-hardware>span{font-size:10px}
+.impact-v35 .hero-bottom{border-top:0;bottom:25px;width:calc(100% - 128px);max-width:1440px}
+.impact-v35 .hero-bottom .scroll-disc{background:#fff;border-color:#d2d2d7;width:40px;height:40px}
+.impact-v35 #brand-title{font-size:clamp(46px,5vw,78px);line-height:1.16;margin:30px 0}
+.impact-v35 #brand .intro-description{font-size:16px;line-height:1.95}
+.impact-v35 #brand .intro-city-main{border-radius:var(--impact-radius)}
+.impact-v35 #brand .intro-city-main figcaption>strong{font-size:clamp(24px,2.3vw,36px)}
+.impact-v35 #brand .intro-bottom{border:0;margin-top:30px;padding-top:0}
+.impact-v35 #brand .intro-ambition{background:#f5f5f7}
+.impact-v35 #solution .portal-heading h2{font-size:clamp(40px,4.5vw,70px);line-height:1.19}
+.impact-v35 #solution .portal-heading>p:last-child{font-size:15px;line-height:1.8}
+.impact-v35 .voyage-window figcaption strong{font-size:clamp(26px,2.8vw,42px)}
+.impact-v35 #system .system-principles{padding-block:var(--impact-space)}
+.impact-v35 .system-heading{max-width:100%;margin-bottom:52px}
+.impact-v35 .system-heading h2{font-size:clamp(32px,3.4vw,52px);line-height:1.45}
+.impact-v35 .system-heading>p{font-size:15px;line-height:1.8}
+.impact-v35 .system-grid{grid-template-columns:1.25fr 1fr 1fr;gap:22px;align-items:start}
+.impact-v35 .system-grid>article{padding:0 28px 32px;background:#f5f5f7;border-radius:var(--impact-radius)}
+.impact-v35 .system-card-image{height:360px;margin:0 -28px 28px}
+.impact-v35 .system-grid>article:first-child .system-card-image{height:420px}
+.impact-v35 .system-grid h3{font-size:30px;margin:14px 0 12px}
+.impact-v35 .system-grid p{font-size:14px;line-height:1.9}
+.impact-v35 .experience-route-design{padding-block:var(--impact-space);gap:70px}
+.impact-v35 .experience-route-design h2{font-size:clamp(33px,3.2vw,48px);line-height:1.27}
+.impact-v35 .experience-route-design .app-stage{position:relative;isolation:isolate;overflow:hidden;background:#edf1f6;height:760px;max-height:none;padding-top:64px;border-radius:var(--impact-radius)}
+.impact-v35 .experience-route-design .app-stage:before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(#ffffffb3,#edf1f6 90%),url('assets/video/tokyo-poster.webp') center/cover;opacity:.8;pointer-events:none}
+.impact-v35 .experience-route-design .phone{max-height:590px;box-shadow:0 28px 55px #10172829}
+.impact-v35 .experience-route-design .app-stage-label{color:#535e70}
+.impact-v35 .experience-route-design .step{transition:border-color .25s,background .25s}
+/* One immersive chapter gives the city films their own scale and contrast. */
+.impact-v35 #world{--ink:#f5f5f7;--muted:#acb5c3;--link:#8cc7ff;--line:#ffffff26;background:#0b111b;color:var(--ink);padding-block:100px 65px;min-height:0;height:auto}
+.impact-v35 #world .world-sticky{height:auto;min-height:0;padding:0;position:relative;top:auto}
+.impact-v35 #world .section-heading{gap:30px 60px;margin-bottom:42px}
+.impact-v35 #world-title{font-size:clamp(38px,4.1vw,64px);line-height:1.22;color:var(--ink)}
+.impact-v35 #world .eyebrow,.impact-v35 #world .world-content-intro{color:var(--muted)}
+.impact-v35 #world .world-content-intro p{color:var(--ink);font-size:17px}
+.impact-v35 #world .world-scale-heading{padding-bottom:18px}
+.impact-v35 #world .world-metrics{margin-top:24px}
+.impact-v35 #world .world-metrics dd{font-size:clamp(40px,4.8vw,76px);font-weight:500;letter-spacing:-.055em}
+.impact-v35 #world .world-metrics dt{font-size:12px;color:#acb5c3}
+.impact-v35 #world .destination-card{border-radius:var(--impact-radius);box-shadow:none}
+.impact-v35 #world .destination-copy{left:40px;bottom:36px}
+.impact-v35 #world .destination-copy h3{font-size:clamp(48px,6vw,86px);letter-spacing:-.045em}
+.impact-v35 #world .destination-copy>span{font-size:15px}
+.impact-v35 #world .destination-city-buttons{background:transparent}
+.impact-v35 #world .destination-city-buttons button{color:#acb5c3}
+.impact-v35 #world .destination-city-buttons button[aria-pressed=true]{color:#a1d1ff}
+.impact-v35 #world .destination-note{color:#acb5c3;line-height:1.8;margin-top:28px}
+.impact-v35 #benefits{padding-block:var(--impact-space);background:#fff}
+.impact-v35 #benefits h2{font-size:clamp(40px,4.5vw,68px);line-height:1.24}
+.impact-v35 .benefits-grid{grid-template-columns:1.1fr 1fr;gap:28px;align-items:start;margin-top:54px}
+.impact-v35 .benefits-grid article{height:540px;border-radius:var(--impact-radius);padding:34px}
+.impact-v35 .benefits-grid article:last-child{margin-top:70px}
+.impact-v35 .benefits-grid h3{font-size:31px}
+.impact-v35 .benefits-grid .lifestyle-benefit>h3,.impact-v35 .benefits-grid .lifestyle-benefit>p,.impact-v35 .benefits-grid .lifestyle-benefit>.eyebrow{max-width:100%}
+.impact-v35 .benefits-grid .lifestyle-benefit img{width:100%;height:62%;object-position:center;z-index:-1}
+.impact-v35 .benefit-cycle{margin-top:48px}
+.impact-v35 #products{padding-block:var(--impact-space);background:#f5f5f7}
+.impact-v35 #products h2{font-size:clamp(38px,4.3vw,64px)}
+.impact-v35 #products .section-heading{margin-bottom:48px}
+.impact-v35 .product-card-media{height:410px;background:#fff}
+.impact-v35 .product-card{background:#fff}
+.impact-v35 #set-off{width:calc(100% - 48px);margin-block:24px 0;min-height:560px}
+.impact-v35 #set-off h2{font-size:clamp(42px,5.6vw,84px)}
+@media(min-width:901px) and (min-height:650px){
+ .impact-v35 #brand .intro-layout{grid-template-columns:.9fr 1.1fr;gap:6%;max-height:760px}
+ .impact-v35 #brand .intro-visual{grid-template-rows:minmax(0,1fr) 165px;gap:18px}
+ .impact-v35 #brand .intro-side{gap:18px}
+ .impact-v35 .is-voyage .voyage-sticky{padding-top:88px;gap:24px}
+ .impact-v35 .is-voyage .voyage-stage{width:min(1440px,calc(100% - 96px))}
+}
+@media(min-width:901px) and (max-height:800px){
+ .impact-v35 .hero-earth .hero-copy{padding-top:140px}
+ .impact-v35 .hero-earth h1{font-size:clamp(65px,6.9vw,100px)}
+ .impact-v35 .hero-mission{font-size:19px;margin-top:23px}
+ .impact-v35 .hero-earth .hero-description{margin-top:16px;font-size:13px}
+ .impact-v35 .hero-earth .hero-copy>.button{margin-top:20px}
+ .impact-v35 #brand-title{font-size:clamp(43px,4.4vw,64px);margin-block:22px}
+ .impact-v35 #brand .intro-description{font-size:14px}
+ .impact-v35 #solution .portal-heading h2{font-size:44px}
+ .impact-v35 .is-voyage .voyage-sticky{padding-top:74px;gap:15px}
+}
+@media(max-width:1100px) and (min-width:901px){
+ .impact-v35 .hero-earth .hero-copy{width:calc(100% - 96px)}
+ .impact-v35 .hero-earth h1{font-size:70px}
+ .impact-v35 .hero-mission{font-size:19px;max-width:45%}
+ .impact-v35 .hero-visual{width:56%;right:-3%;top:17%;height:72%}
+ .impact-v35 .system-grid{gap:16px}.impact-v35 .system-card-image{height:280px}.impact-v35 .system-grid>article:first-child .system-card-image{height:330px}
+ .impact-v35 .benefits-grid h3{font-size:26px}
+ .impact-v35 .experience-route-design{gap:34px}
+}
+@media(max-width:900px){
+ .impact-v35{--impact-space:72px;--impact-radius:24px}
+ .impact-v35 .hero-earth .hero-copy{width:calc(100% - 40px);padding-top:116px}
+ .impact-v35 .hero-earth h1{font-size:clamp(52px,10.4vw,88px);line-height:1.1;max-width:100%}
+ .impact-v35 .hero-copy>.eyebrow{margin-bottom:24px}
+ .impact-v35 .hero-mission{font-size:19px;max-width:100%;margin-top:24px}
+ .impact-v35 .hero-earth .hero-description{font-size:13px;max-width:430px;width:100%;margin-top:18px}
+ .impact-v35 .hero-earth .hero-copy>.button{margin-top:24px}
+ .impact-v35 .hero-visual{position:relative;inset:auto;width:100%;height:480px;margin:30px 0 0;transform:none}
+ .impact-v35 .hero-earth .hero-visual .hero-film{inset:0 0 9%}
+ .impact-v35 .landmark-paris{left:5%;top:5%;width:23%;height:19%}
+ .impact-v35 .hero-visual .hero-city-window{right:4%;top:26%;width:27%;height:21%}
+ .impact-v35 .hero-earth .hero-visual .hero-hardware{left:12%;width:76%;height:55%;bottom:0}
+ .impact-v35 .hero-bottom{width:calc(100% - 40px)}
+ .impact-v35 #brand-title{font-size:clamp(42px,8vw,62px);line-height:1.2;margin:26px 0}
+ .impact-v35 #brand .intro-description{font-size:15px}
+ .impact-v35 #solution .portal-heading h2{font-size:clamp(32px,6vw,48px)}
+ .impact-v35 #solution .portal-heading>p:last-child{font-size:13px}
+ .impact-v35 .system-heading h2{font-size:clamp(27px,5.4vw,40px)}
+ .impact-v35 .system-grid{grid-template-columns:1fr;gap:24px}
+ .impact-v35 .system-card-image,.impact-v35 .system-grid>article:first-child .system-card-image{height:310px}
+ .impact-v35 .experience-route-design{gap:30px}
+ .impact-v35 .experience-route-design h2{font-size:clamp(28px,5.4vw,42px)}
+ .impact-v35 .experience-route-design .app-stage{height:auto;padding:48px 20px 26px}
+ .impact-v35 #world{padding-block:70px 45px}
+ .impact-v35 #world .section-heading{margin-bottom:30px}
+ .impact-v35 #world-title{font-size:clamp(29px,6.4vw,46px)}
+ .impact-v35 #world .world-metrics dd{font-size:clamp(34px,8vw,54px)}
+ .impact-v35 #world .destination-copy{left:24px;bottom:26px}
+ .impact-v35 #world .destination-copy h3{font-size:48px}
+ .impact-v35 #world .destination-copy>span{font-size:13px}
+ .impact-v35 #benefits h2,.impact-v35 #products h2{font-size:clamp(30px,6.4vw,48px)}
+ .impact-v35 .benefits-grid{grid-template-columns:1fr;gap:24px;margin-top:32px}
+ .impact-v35 .benefits-grid article{height:480px;padding:28px}
+ .impact-v35 .benefits-grid article:last-child{margin-top:0}
+ .impact-v35 .benefits-grid h3{font-size:28px}
+ .impact-v35 .product-card-media{height:300px}
+ .impact-v35 #set-off{width:calc(100% - 24px);min-height:460px}
+ .impact-v35 #set-off h2{font-size:clamp(35px,7vw,55px)}
+}
+@media(min-width:601px) and (max-width:900px){
+ .impact-v35 .hero-visual{height:580px;width:min(760px,100%);margin-inline:auto}
+ .impact-v35 .system-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+ .impact-v35 .system-grid>article{padding-inline:16px}.impact-v35 .system-card-image{margin-inline:-16px}
+ .impact-v35 .system-card-image,.impact-v35 .system-grid>article:first-child .system-card-image{height:230px}
+ .impact-v35 .system-grid h3{font-size:24px}.impact-v35 .system-grid p{font-size:12px}
+}
+@media(prefers-reduced-motion:reduce){.impact-v35 .step{transition:none}}
+/* Keep photographic edges and labels integrated into the hero scene. */
+.impact-v35 .hero-visual{mix-blend-mode:multiply}
+.impact-v35 .hero-visual .hero-hardware img{mask-image:radial-gradient(ellipse at 50% 54%,#000 43%,transparent 73%)}
+.impact-v35 .hero-landmark .landmark-scene{border-radius:18px;overflow:hidden}
+.impact-v35 .hero-landmark .landmark-scene:after{content:'';position:absolute;inset:40% 0 0;background:linear-gradient(transparent,#08121db3);pointer-events:none}
+.impact-v35 .hero-landmark figcaption{position:absolute;left:12px;bottom:10px;right:8px;padding:0;color:#fff;font-size:9px;z-index:1;text-shadow:0 1px 3px #0006}
+.impact-v35 .hero-landmark figcaption span{color:#fff;font-size:7px}
+/* The atlas now flows naturally; give its absolute-positioned carousel a stable stage. */
+.impact-v35 #world .destination-deck{grid-template-rows:auto auto;gap:28px}
+.impact-v35 #world .destination-viewport{height:clamp(430px,40vw,620px);min-height:430px}
+@media(max-width:900px){.impact-v35 #world .destination-viewport{height:440px;min-height:440px}}
+@media(max-width:600px){.impact-v35 #world .destination-viewport{height:380px;min-height:380px}}
+/* Preserve the supplied photograph's complete person and treadmill. */
+.impact-v35 .benefits-grid .lifestyle-benefit{height:clamp(540px,48vw,680px)}
+.impact-v35 .benefits-grid .lifestyle-benefit img{height:auto;max-height:calc(100% - 250px);object-fit:contain;object-position:center bottom}
+@media(max-width:900px){.impact-v35 .benefits-grid .lifestyle-benefit{height:auto;min-height:560px;padding-bottom:calc(66.7% + 24px)}}
+/* The final invitation is a full-viewport film, following brand values. */
+.impact-v35 #set-off{width:100%;margin:0;border-radius:0;min-height:100svh!important;height:auto;padding:110px 0 180px;display:flex;align-items:center;scroll-margin-top:0}
+.impact-v35 #set-off .cta-content{width:min(1280px,calc(100% - 128px));margin-inline:auto}
+.impact-v35 #set-off .cta-film-shade{background:linear-gradient(90deg,#05121bd9 0%,#05121b7a 45%,#05121b14 100%),linear-gradient(0deg,#07111bef,transparent 40%)}
+.impact-v35 #set-off .eyebrow{font-size:12px;letter-spacing:.16em;margin:0 0 30px;color:#e1e6ea}
+.impact-v35 #set-off h2{font-size:clamp(76px,8.6vw,144px);font-weight:600;line-height:1.07;letter-spacing:-.055em;text-shadow:none}
+.impact-v35 #set-off h2 span{color:#fff}
+.impact-v35 #set-off .button{margin-top:38px;min-height:56px;font-size:15px;padding:16px 28px;gap:32px;background:#0071e3;color:white}
+.impact-v35 #set-off .button:hover{background:#0077ed;transform:translateY(-2px)}
+.impact-v35 #set-off .cta-carousel-footer{width:min(1280px,calc(100% - 128px));bottom:36px;padding-top:22px;border-color:#ffffff36}
+.impact-v35 #set-off .cta-city-caption>strong{font-size:22px;font-weight:500}
+.impact-v35 #set-off .cta-city-caption>small{color:#c7d1d9;font-size:9px}
+.impact-v35 .footer{width:100%;max-width:none;margin:0;padding:26px max(32px,calc((100% - 1280px)/2));background:#07111b;color:#f5f5f7}
+.impact-v35 .footer .footer-bottom{margin-top:20px;padding-top:16px;border-color:#ffffff26;color:#aab8c5}
+.impact-v35 .footer nav,.impact-v35 .footer nav button{color:#dce5ed}
+@media(max-width:900px){
+ .impact-v35 #set-off{min-height:100svh!important;padding:100px 0 205px}
+ .impact-v35 #set-off .cta-content,.impact-v35 #set-off .cta-carousel-footer{width:calc(100% - 48px)}
+ .impact-v35 #set-off h2{font-size:clamp(64px,12vw,100px)!important;line-height:1.12}
+ .impact-v35 #set-off .eyebrow{font-size:10px;margin-bottom:24px}
+ .impact-v35 #set-off .button{margin-top:30px;font-size:13px;min-height:50px}
+ .impact-v35 #set-off .cta-carousel-footer{bottom:26px}
+ .impact-v35 #set-off .cta-city-caption>strong{font-size:18px}
+ .impact-v35 .footer{padding:26px 24px}
+}
+@media(max-width:600px){
+ .impact-v35 #set-off .cta-film-shade{background:linear-gradient(90deg,#05121ba8,#05121b45),linear-gradient(0deg,#07111bf2,transparent 60%)}
+ .impact-v35 #set-off .cta-carousel-footer{gap:16px;padding-top:18px}
+ .impact-v35 #set-off .cta-city-caption>small{font-size:8px}
+}
