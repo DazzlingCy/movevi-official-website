@@ -4,7 +4,7 @@
 #reviews .eyebrow{font-size:10px;letter-spacing:.12em;color:#6e6e73;margin-bottom:12px}
 #reviews h2{font-size:clamp(28px,3vw,46px);line-height:1.25;letter-spacing:-.04em}
 #reviews .reviews-intro{font-size:12px;color:#6e6e73;text-align:right;flex-shrink:0}
-#reviews-toggle{font-size:11px;border:1px solid #d7dce3;border-radius:24px;background:#fff;color:#555e69;padding:7px 14px;margin-top:10px}
+
 #reviews .reviews-stream{display:grid;gap:14px;mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
 #reviews .review-stream-row{overflow-x:auto;scrollbar-width:none;outline-offset:-3px}
 #reviews .review-stream-track{display:flex;width:max-content;transform:translateZ(0)}
@@ -30,7 +30,7 @@
 #reviews .reviews-stream:is(:hover,:focus-within) .review-stream-track{animation-play-state:paused!important}
 @keyframes review-flow{to{transform:translate3d(-50%,0,0)}}
 @media(max-width:900px){#reviews{padding-top:70px;gap:20px}#reviews .reviews-heading{align-items:center}#reviews h2{font-size:30px}#reviews .reviews-intro>p{display:none}}
-@media(max-width:600px){#reviews{padding-top:64px;gap:18px}#reviews .reviews-heading{gap:10px}#reviews h2{font-size:25px;max-width:240px}#reviews .eyebrow{font-size:9px;letter-spacing:.04em}#reviews-toggle{font-size:10px;padding:6px 10px;white-space:nowrap}#reviews .review-comment{width:310px}#reviews .review-bubble{padding:13px 17px;min-height:110px}#reviews .reviews-stream{gap:12px}#reviews .reviews-footnote{align-items:flex-start;flex-direction:column;gap:4px}#reviews .reviews-footnote a{padding:0}#reviews .review-avatar{width:30px;height:30px}}
+@media(max-width:600px){#reviews{padding-top:64px;gap:18px}#reviews .reviews-heading{gap:10px}#reviews h2{font-size:25px;max-width:240px}#reviews .eyebrow{font-size:9px;letter-spacing:.04em}#reviews .review-comment{width:310px}#reviews .review-bubble{padding:13px 17px;min-height:110px}#reviews .reviews-stream{gap:12px}#reviews .reviews-footnote{align-items:flex-start;flex-direction:column;gap:4px}#reviews .reviews-footnote a{padding:0}#reviews .review-avatar{width:30px;height:30px}}
 @media(prefers-reduced-motion:reduce){#reviews .review-stream-track{animation:none!important;transform:none!important}#reviews .review-stream-copy{display:none!important}}
 .reduce-motion #reviews .review-stream-track{animation:none!important;transform:none!important}
 .reduce-motion #reviews .review-stream-copy{display:none!important}

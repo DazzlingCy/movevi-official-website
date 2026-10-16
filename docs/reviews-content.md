@@ -8,4 +8,6 @@ Avatars are inline SVG illustrations, not portraits of actual customers. The wal
 
 To replace examples, obtain actual customer quotes and permission to publish, then update the quote, attribution and any approved photo in `dist/index.html`. Remove example labels only for verified replacements; retain the section disclosure while any examples remain.
 
-Presentation lives in `dist/reviews.css`. The section fits one ordinary desktop viewport with three horizontal rows. Each row contains four distinct comments plus an aria-hidden, inert duplicate for a seamless loop. Flow pauses on hover/focus, via the pause button, outside the viewport or in a hidden tab. Reduced-motion and no-JavaScript modes show manually scrollable rows. `dist/reviews.js` manages playback and lifecycle.
+Presentation lives in `dist/reviews.css`. The section fits one ordinary desktop viewport with three horizontal rows. Each row contains four distinct comments plus an aria-hidden, inert duplicate for a seamless loop. Flow pauses on hover/focus, outside the viewport or in a hidden tab. Reduced-motion and no-JavaScript modes show manually scrollable rows. `dist/reviews.js` manages playback and lifecycle.
+
+The visible pause button was removed at the owner’s request. Hover/focus pauses and reduced-motion support remain; keyboard arrows enable manual reading until focus leaves the wall. The heading emphasizes user reviews without claiming the examples are authenticated customer testimony.
