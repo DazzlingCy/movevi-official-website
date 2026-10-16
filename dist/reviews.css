@@ -14,6 +14,8 @@
 #reviews .review-author{display:flex;align-items:center;gap:10px;margin:0 0 9px 10px}
 #reviews .review-avatar{width:34px;height:34px;flex:none}
 #reviews .review-author h3{font-size:12px;line-height:1.5;font-weight:500;margin:0;letter-spacing:0;color:#4e555e}
+#reviews .review-meta{display:flex;align-items:center;gap:7px;font-size:10px;line-height:1.5;color:#6e747d;margin-top:2px;white-space:nowrap}
+#reviews .review-meta time{font-variant-numeric:tabular-nums}
 #reviews .review-bubble{position:relative;margin-left:26px;border-radius:5px 18px 18px 18px;background:#f3f4f6;padding:15px 20px;min-height:102px}
 #reviews .review-bubble:before{content:'';position:absolute;left:0;top:-7px;width:14px;height:14px;background:inherit;clip-path:polygon(0 0,100% 100%,0 100%)}
 #reviews .review-comment:nth-child(2n+1) .review-bubble{background:#edf4fc}
