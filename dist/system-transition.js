@@ -20,6 +20,7 @@
   system.style.setProperty('--system-card-one',range(p,.32,.7).toFixed(4));
   system.style.setProperty('--system-card-two',range(p,.48,.83).toFixed(4));
   system.style.setProperty('--system-card-three',range(p,.62,.95).toFixed(4));
+  system.style.setProperty('--system-card-four',range(p,.72,.98).toFixed(4));
   if(p<=.001||p>=.999){clear();return;}
   const from=source.getBoundingClientRect(),to=target.getBoundingClientRect(),sticky=solution.querySelector('.voyage-sticky').getBoundingClientRect();
   const t=ease(p),sourceTop=from.top-sticky.top,targetTop=to.top-s.top;
@@ -31,7 +32,7 @@
  function schedule(){if(enabled&&!document.hidden&&!leaving&&!frame)frame=requestAnimationFrame(render);}
  function sync(){
   enabled=desktop.matches&&!reduced.matches&&!root.classList.contains('reduce-motion');root.classList.toggle('system-flow',enabled);
-  if(!enabled){if(frame)cancelAnimationFrame(frame);frame=0;clear();solution.style.removeProperty('--system-exit');['--system-heading','--system-card-one','--system-card-two','--system-card-three'].forEach(key=>system.style.removeProperty(key));}else schedule();
+  if(!enabled){if(frame)cancelAnimationFrame(frame);frame=0;clear();solution.style.removeProperty('--system-exit');['--system-heading','--system-card-one','--system-card-two','--system-card-three','--system-card-four'].forEach(key=>system.style.removeProperty(key));}else schedule();
  }
  addEventListener('scroll',schedule,{passive:true});addEventListener('resize',sync,{passive:true});
  desktop.addEventListener('change',sync);reduced.addEventListener('change',sync);

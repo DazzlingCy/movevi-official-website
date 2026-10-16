@@ -24,10 +24,10 @@ flush();const bridge=doc.body.children[0];assert(bridge.hidden,'Before departure
 scroll(450);assert(!bridge.hidden);assert(source.classes.has('system-in-transit'));assert(target.classes.has('system-in-transit'));
 assert.equal(bridge.style.top,'270px','The image remains inside the viewport, independent of departing sticky offset');
 assert.equal(bridge.style.left,'510px','The image travels left toward global routes');assert.equal(bridge.style.width,'360px');const midpoint={...bridge.style};
-scroll(0);assert(bridge.hidden);assert(!source.classes.has('system-in-transit'));assert(!target.classes.has('system-in-transit'));assert.equal(system.vars['--system-card-three'],'1.0000');
+scroll(0);assert(bridge.hidden);assert(!source.classes.has('system-in-transit'));assert(!target.classes.has('system-in-transit'));assert.equal(system.vars['--system-card-three'],'1.0000');assert.equal(system.vars['--system-card-four'],'1.0000','AI card finishes its staggered entrance');
 scroll(.03125);assert(bridge.hidden,'Fractional anchor rounding must still complete the handoff');
 scroll(450);assert.equal(bridge.style.top,midpoint.top);assert.equal(bridge.style.width,midpoint.width,'Reverse travel reproduces the same geometry');
-reduced.matches=true;reduced.fire('change');assert(bridge.hidden);assert(!root.classes.has('system-flow'));assert.equal(system.vars['--system-card-three'],undefined);
+reduced.matches=true;reduced.fire('change');assert(bridge.hidden);assert(!root.classes.has('system-flow'));assert.equal(system.vars['--system-card-three'],undefined);assert.equal(system.vars['--system-card-four'],undefined);
 reduced.matches=false;reduced.fire('change');flush();assert(!bridge.hidden);
 desktop.matches=false;desktop.fire('change');assert(bridge.hidden);assert(!root.classes.has('system-flow'));
 desktop.matches=true;desktop.fire('change');flush();doc.hidden=true;doc.fire('visibilitychange');scroll(0);assert.equal(frames.size,0,'No animation frames while hidden');doc.hidden=false;doc.fire('visibilitychange');flush();assert(bridge.hidden);

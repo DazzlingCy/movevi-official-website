@@ -1,0 +1,30 @@
+/* Real city imagery and everyday exercise, in four equally weighted stories. */
+#system .system-grid.system-four{grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+#system .system-four>article{padding-inline:22px;padding-bottom:26px}
+#system .system-four .system-card-image{margin-inline:-22px;border-radius:24px;overflow:hidden;background:#283439}
+#system .system-four h3{font-size:25px;line-height:1.3;margin:12px 0}
+#system .system-four p{font-size:13px;line-height:1.9}
+#system .system-four>article>span{font-size:9px;letter-spacing:.12em}
+#system .system-four .system-card-image>span{font-size:8px;right:12px;bottom:12px;letter-spacing:.025em;background:#14202bb8}
+#system .system-real-cities{display:grid;grid-template-rows:57% 43%;gap:4px}
+#system .system-real-cities>img{min-height:0;object-position:50% 55%}
+#system .system-city-pair{display:grid;grid-template-columns:1fr 1fr;gap:4px;min-height:0;overflow:hidden}
+#system .system-city-pair img{width:100%;height:100%;object-fit:cover;min-width:0;min-height:0;display:block}
+@media(min-width:901px) and (min-height:650px){
+ .system-flow #system .system-four>article:nth-child(4){--system-card:var(--system-card-four,1)}
+ #system .system-four .system-card-image,#system .system-four>article:first-child .system-card-image{min-height:240px;height:auto;flex:1}
+ #system .system-four>article{min-width:0}
+ #system .system-principles{gap:18px}
+}
+@media(min-width:601px) and (max-width:1100px){
+ #system .system-grid.system-four{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+ .screens-v40 #system .system-principles{height:auto;min-height:100svh;display:block;padding-block:90px 40px}
+ #system .system-four .system-card-image,#system .system-four>article:first-child .system-card-image{height:300px;flex:none}
+ #system .system-note{margin-top:24px}
+}
+@media(max-width:600px){
+ #system .system-grid.system-four{grid-template-columns:1fr;gap:24px}
+ #system .system-four .system-card-image,#system .system-four>article:first-child .system-card-image{height:330px}
+ #system .system-four h3{font-size:26px}
+ #system .system-four p{font-size:14px}
+}
