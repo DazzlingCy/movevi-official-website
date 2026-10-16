@@ -26,7 +26,7 @@ function setup({desktop=true,reduced=false,top=0,oneScreen=false}={}){
  source.getBoundingClientRect=()=>({top:box.top-170,left:900,width:260,height:160});
  atlas.getBoundingClientRect=()=>({top:11000});
  solution.querySelector=()=>stage;solution.querySelectorAll=()=>stops;stage.querySelector=()=>windowNode;
- const nodes={'#vision':hero,'#solution':solution,'#brand .intro-city-small':source,'#world':atlas};
+ const nodes={'#vision':hero,'#solution':solution,'#curiosity .intro-city-small':source,'#world':atlas};
  doc.querySelector=q=>nodes[q];doc.querySelectorAll=()=>[];doc.createElement=()=>new Node();
  doc.addEventListener('movevi:portal-visibility',e=>media.push(e.detail.occluded));
  vm.runInNewContext(code,{document:doc,innerHeight:900,matchMedia:q=>q.includes('prefers')?pref:screen,

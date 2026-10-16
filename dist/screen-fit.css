@@ -1,7 +1,7 @@
 /* One complete scene per desktop viewport; narrow screens retain natural flow. */
 @media (min-width:901px) and (min-height:650px) {
  .screens-v40 {--scene-top:84px;--scene-bottom:28px}
- .screens-v40 [data-screen],.screens-v40 #brand.is-scroll-brand,.screens-v40 #solution,.screens-v40 #world,.screens-v40 #values.trust-unified,.screens-v40 #system .system-principles,.screens-v40 #benefits,.screens-v40 #products {
+ .screens-v40 [data-screen],.screens-v40 :is(#brand,#curiosity).is-scroll-brand,.screens-v40 #solution,.screens-v40 #world,.screens-v40 #values.trust-unified,.screens-v40 #system .system-principles,.screens-v40 #benefits,.screens-v40 #products {
   box-sizing:border-box;height:100svh;min-height:100svh;max-height:none;padding-block:var(--scene-top) var(--scene-bottom);
  }
  .screens-v40 .hero.hero-earth{padding:0}
@@ -10,11 +10,11 @@
  .screens-v40 .hero-copy>.eyebrow{margin-bottom:22px}
  .screens-v40 .hero-mission{margin-top:24px}
  .screens-v40 .hero-earth .hero-description{margin-top:18px}
- .screens-v40 #brand{padding:0}
- .screens-v40 #brand .brand-sticky{position:relative;top:auto;height:100%;min-height:0;padding-block:var(--scene-top) var(--scene-bottom);box-sizing:border-box}
- .screens-v40 #brand .intro-layout{height:100%;max-height:none;min-height:0;align-items:center}
- .screens-v40 #brand .intro-visual{height:100%;min-height:0;grid-template-rows:minmax(0,1fr) clamp(120px,18svh,180px)}
- .screens-v40 #brand .intro-city-main{min-height:0;height:100%}
+ .screens-v40 :is(#brand,#curiosity){padding:0}
+ .screens-v40 :is(#brand,#curiosity) .brand-sticky{position:relative;top:auto;height:100%;min-height:0;padding-block:var(--scene-top) var(--scene-bottom);box-sizing:border-box}
+ .screens-v40 :is(#brand,#curiosity) .intro-layout{height:100%;max-height:none;min-height:0;align-items:center}
+ .screens-v40 :is(#brand,#curiosity) .intro-visual{height:100%;min-height:0;grid-template-rows:minmax(0,1fr) clamp(120px,18svh,180px)}
+ .screens-v40 :is(#brand,#curiosity) .intro-city-main{min-height:0;height:100%}
  .screens-v40 #brand-title{font-size:clamp(43px,min(5vw,8svh),74px)}
  .screens-v40 #solution{padding:0}
  .screens-v40 #solution .voyage-sticky{height:100%;box-sizing:border-box;padding:var(--scene-top) 0 var(--scene-bottom);display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:24px}

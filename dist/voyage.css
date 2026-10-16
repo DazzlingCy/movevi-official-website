@@ -50,11 +50,11 @@
 .voyage-v31 #story .motivation-visual{box-shadow:none}
 .voyage-v31 #story .motivation-tabs{background:var(--surface)}
 .voyage-v31 #brand-title{font-size:clamp(40px,4vw,58px);line-height:1.25}
-.voyage-v31 #brand .intro-description{font-size:15px;line-height:1.9}
-.voyage-v31 #brand .intro-bottom{border-top:1px solid var(--line)}
-.voyage-v31 #brand .intro-city-main{box-shadow:none}
-.voyage-v31 #brand .intro-city-small{box-shadow:none}
-.voyage-v31 #brand .intro-ambition{box-shadow:none;border:0}
+.voyage-v31 :is(#brand,#curiosity) .intro-description{font-size:15px;line-height:1.9}
+.voyage-v31 :is(#brand,#curiosity) .intro-bottom{border-top:1px solid var(--line)}
+.voyage-v31 :is(#brand,#curiosity) .intro-city-main{box-shadow:none}
+.voyage-v31 :is(#brand,#curiosity) .intro-city-small{box-shadow:none}
+.voyage-v31 :is(#brand,#curiosity) .intro-ambition{box-shadow:none;border:0}
 .voyage-v31 #system .system-principles{padding-block:110px 90px;min-height:0;height:auto}
 .voyage-v31 .system-heading{max-width:1020px;margin-bottom:46px}
 .voyage-v31 .system-heading h2{font-size:clamp(30px,3vw,46px);line-height:1.4}
@@ -146,9 +146,9 @@
  .voyage-motion .hero-copy>.hero-description{animation-delay:.3s}
  .voyage-motion .hero-copy>.button{animation-delay:.4s}
  .voyage-v31 #story.is-scroll-story{height:170svh;min-height:170svh}
- .voyage-v31 #brand.is-scroll-brand{height:160svh;min-height:160svh}
- .voyage-v31 #brand .intro-layout{grid-template-columns:.95fr 1.05fr;gap:7%}
- .voyage-v31 #brand .intro-visual{grid-template-rows:minmax(0,1fr) 160px}
+ .voyage-v31 :is(#brand,#curiosity).is-scroll-brand{height:160svh;min-height:160svh}
+ .voyage-v31 :is(#brand,#curiosity) .intro-layout{grid-template-columns:.95fr 1.05fr;gap:7%}
+ .voyage-v31 :is(#brand,#curiosity) .intro-visual{grid-template-rows:minmax(0,1fr) 160px}
  .voyage-v31 #solution.is-voyage{height:240svh;min-height:240svh;overflow:visible}
  .voyage-v31 .is-voyage .voyage-sticky{position:sticky;top:0;height:100svh;padding:80px 0 24px;display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:20px;overflow:clip}
  .voyage-v31 .is-voyage .voyage-stage{display:block;margin-top:0;min-height:0}
@@ -218,7 +218,7 @@
  .voyage-v31 #story .motivation-copy{padding:0;background:transparent}
  .voyage-v31 #story .story-copy{font-size:14px}.voyage-v31 #story .story-grid h2{font-size:clamp(28px,6.8vw,40px)}
  .voyage-v31 #brand-title{font-size:clamp(35px,7vw,48px)}
- .voyage-v31 #brand .intro-description{font-size:14px}
+ .voyage-v31 :is(#brand,#curiosity) .intro-description{font-size:14px}
  .voyage-v31 #solution .voyage-sticky{padding:70px 0 45px}
  .voyage-v31 #solution .portal-heading h2{font-size:clamp(30px,6vw,44px)}
  .voyage-v31 #solution .portal-heading>p:last-child{font-size:13px;margin-top:18px}

@@ -1,7 +1,7 @@
 /* A scene stays one viewport tall; native document travel advances its story. */
 @media(min-width:901px) and (min-height:650px){
- .screens-v40 #brand.is-scroll-brand{height:175svh;min-height:175svh;padding:0;overflow:visible}
- .screens-v40 #brand.is-scroll-brand .brand-sticky{position:sticky;top:0;height:100svh;padding-block:var(--scene-top) var(--scene-bottom)}
+ .screens-v40 :is(#brand,#curiosity).is-scroll-brand{height:175svh;min-height:175svh;padding:0;overflow:visible}
+ .screens-v40 :is(#brand,#curiosity).is-scroll-brand .brand-sticky{position:sticky;top:0;height:100svh;padding-block:var(--scene-top) var(--scene-bottom)}
  .screens-v40 #solution.is-voyage{height:240svh;min-height:240svh;padding:0;overflow:visible}
  .screens-v40 #solution.is-voyage .voyage-sticky{position:sticky;top:0;height:100svh;overflow:clip}
  .screens-v40 #solution.is-voyage .voyage-stage{display:block;position:relative}

@@ -198,58 +198,58 @@
 @media(min-width:901px) and (max-height:800px){.hero-earth .hero-hardware{bottom:104px}.hero-city-window{top:17%}}
 @media(prefers-reduced-motion:reduce){.hero-city-window{animation:none}.hero-city-scene,.hero-city-scene video{transition:none}}
 @media(min-width:901px){
- #brand{padding:104px 0 64px;display:flex;align-items:center;min-height:100svh;height:100svh}
- #brand .intro-layout{display:grid;grid-template-columns:1fr 1.06fr;grid-template-rows:1fr;gap:clamp(40px,5vw,88px);height:100%;max-height:700px;align-items:stretch}
- #brand .intro-copy{display:flex;flex-direction:column;align-self:stretch;justify-content:center;min-width:0;container-type:inline-size}
- #brand .intro-label{padding:0;display:block}
- #brand .intro-label .eyebrow{font-size:10px;letter-spacing:1.6px;margin:0 0 14px;color:var(--link)}
- #brand .intro-label p{font-size:15px;line-height:1.65;color:var(--muted)}
- #brand .intro-label p br{display:block}
+ :is(#brand,#curiosity){padding:104px 0 64px;display:flex;align-items:center;min-height:100svh;height:100svh}
+ :is(#brand,#curiosity) .intro-layout{display:grid;grid-template-columns:1fr 1.06fr;grid-template-rows:1fr;gap:clamp(40px,5vw,88px);height:100%;max-height:700px;align-items:stretch}
+ :is(#brand,#curiosity) .intro-copy{display:flex;flex-direction:column;align-self:stretch;justify-content:center;min-width:0;container-type:inline-size}
+ :is(#brand,#curiosity) .intro-label{padding:0;display:block}
+ :is(#brand,#curiosity) .intro-label .eyebrow{font-size:10px;letter-spacing:1.6px;margin:0 0 14px;color:var(--link)}
+ :is(#brand,#curiosity) .intro-label p{font-size:15px;line-height:1.65;color:var(--muted)}
+ :is(#brand,#curiosity) .intro-label p br{display:block}
  #brand-title{font-size:clamp(24px,7.3cqi,50px);line-height:1.3;letter-spacing:-.045em;margin:26px 0 24px}
  #brand-title .type-line{white-space:nowrap}
  #brand-title .accent{display:inline;color:var(--accent)}
- #brand .intro-body{padding:0;align-self:stretch}
- #brand .intro-description{font-size:17px;line-height:1.8;color:var(--muted);max-width:470px}
- #brand .intro-description br{display:block}
- #brand .intro-bottom{margin-top:30px;padding-top:24px;gap:23px;align-items:flex-start;border-color:var(--line)}
- #brand .intro-bottom p{font-size:14px;line-height:1.75;color:var(--ink)}
- #brand .intro-bottom p>span{font-size:11px;letter-spacing:.06em;margin-bottom:8px;color:var(--muted)}
- #brand .intro-bottom p br{display:none}
- #brand .intro-bottom .underlined{font-size:14px;gap:20px;padding:0 0 7px;min-height:28px;border-color:transparent}
- #brand .intro-bottom .underlined:hover{border-color:currentColor}
- #brand .intro-visual{display:grid;position:relative;height:100%;min-height:0;grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) 190px;gap:20px}
- #brand .intro-city-main{grid-column:auto;grid-row:auto;height:100%;min-height:0;inset:auto}
- #brand .intro-city-main img{object-position:50% 54%}
- #brand .intro-city-main figcaption{left:30px;right:30px;bottom:28px}
- #brand .intro-city-main figcaption>strong{font-size:26px;margin:10px 0 8px;letter-spacing:-.02em}
- #brand .intro-city-main:after{background:linear-gradient(0deg,#071625b8,transparent 64%)}
- #brand .intro-side{display:grid;grid-column:auto;grid-row:auto;grid-template-columns:1fr 1fr;grid-template-rows:1fr;gap:20px;height:100%;min-height:0}
- #brand .intro-city-small{height:100%;min-height:0;grid-column:auto;grid-row:auto}
- #brand .intro-city-small img{object-position:50% 58%}
- #brand .intro-city-small figcaption{font-size:11px;left:20px;right:16px;bottom:20px}
- #brand .intro-ambition{height:100%;padding:25px 24px;display:flex;flex-direction:column;justify-content:space-between}
- #brand .intro-ambition>span{font-size:9px;letter-spacing:.02em;max-width:calc(100% - 18px);line-height:1.6}
- #brand .intro-ambition>div{margin:10px 0 0;display:block}
- #brand .intro-ambition strong{display:block;font-size:64px;line-height:.95;letter-spacing:-.055em;margin-bottom:10px}
- #brand .intro-ambition div>span{display:block;font-size:10px;line-height:1.5}
- #brand .intro-ambition div>span br{display:block}
- #brand .intro-ambition>a{top:17px;right:16px;width:28px;height:28px;text-align:center;line-height:28px}
+ :is(#brand,#curiosity) .intro-body{padding:0;align-self:stretch}
+ :is(#brand,#curiosity) .intro-description{font-size:17px;line-height:1.8;color:var(--muted);max-width:470px}
+ :is(#brand,#curiosity) .intro-description br{display:block}
+ :is(#brand,#curiosity) .intro-bottom{margin-top:30px;padding-top:24px;gap:23px;align-items:flex-start;border-color:var(--line)}
+ :is(#brand,#curiosity) .intro-bottom p{font-size:14px;line-height:1.75;color:var(--ink)}
+ :is(#brand,#curiosity) .intro-bottom p>span{font-size:11px;letter-spacing:.06em;margin-bottom:8px;color:var(--muted)}
+ :is(#brand,#curiosity) .intro-bottom p br{display:none}
+ :is(#brand,#curiosity) .intro-bottom .underlined{font-size:14px;gap:20px;padding:0 0 7px;min-height:28px;border-color:transparent}
+ :is(#brand,#curiosity) .intro-bottom .underlined:hover{border-color:currentColor}
+ :is(#brand,#curiosity) .intro-visual{display:grid;position:relative;height:100%;min-height:0;grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) 190px;gap:20px}
+ :is(#brand,#curiosity) .intro-city-main{grid-column:auto;grid-row:auto;height:100%;min-height:0;inset:auto}
+ :is(#brand,#curiosity) .intro-city-main img{object-position:50% 54%}
+ :is(#brand,#curiosity) .intro-city-main figcaption{left:30px;right:30px;bottom:28px}
+ :is(#brand,#curiosity) .intro-city-main figcaption>strong{font-size:26px;margin:10px 0 8px;letter-spacing:-.02em}
+ :is(#brand,#curiosity) .intro-city-main:after{background:linear-gradient(0deg,#071625b8,transparent 64%)}
+ :is(#brand,#curiosity) .intro-side{display:grid;grid-column:auto;grid-row:auto;grid-template-columns:1fr 1fr;grid-template-rows:1fr;gap:20px;height:100%;min-height:0}
+ :is(#brand,#curiosity) .intro-city-small{height:100%;min-height:0;grid-column:auto;grid-row:auto}
+ :is(#brand,#curiosity) .intro-city-small img{object-position:50% 58%}
+ :is(#brand,#curiosity) .intro-city-small figcaption{font-size:11px;left:20px;right:16px;bottom:20px}
+ :is(#brand,#curiosity) .intro-ambition{height:100%;padding:25px 24px;display:flex;flex-direction:column;justify-content:space-between}
+ :is(#brand,#curiosity) .intro-ambition>span{font-size:9px;letter-spacing:.02em;max-width:calc(100% - 18px);line-height:1.6}
+ :is(#brand,#curiosity) .intro-ambition>div{margin:10px 0 0;display:block}
+ :is(#brand,#curiosity) .intro-ambition strong{display:block;font-size:64px;line-height:.95;letter-spacing:-.055em;margin-bottom:10px}
+ :is(#brand,#curiosity) .intro-ambition div>span{display:block;font-size:10px;line-height:1.5}
+ :is(#brand,#curiosity) .intro-ambition div>span br{display:block}
+ :is(#brand,#curiosity) .intro-ambition>a{top:17px;right:16px;width:28px;height:28px;text-align:center;line-height:28px}
 }
 @media(min-width:901px) and (max-height:800px){
- #brand{padding-block:90px 42px}
- #brand .intro-label .eyebrow{margin-bottom:10px}
+ :is(#brand,#curiosity){padding-block:90px 42px}
+ :is(#brand,#curiosity) .intro-label .eyebrow{margin-bottom:10px}
  #brand-title{font-size:clamp(24px,7.3cqi,46px);margin-block:20px}
- #brand .intro-description{font-size:15px;line-height:1.7}
- #brand .intro-bottom{margin-top:22px;padding-top:18px;gap:17px}
- #brand .intro-bottom p{font-size:13px}
- #brand .intro-visual{grid-template-rows:minmax(0,1fr) 164px;gap:16px}
- #brand .intro-side{gap:16px}
- #brand .intro-ambition{padding:20px}
- #brand .intro-ambition strong{font-size:56px;margin-bottom:8px}
+ :is(#brand,#curiosity) .intro-description{font-size:15px;line-height:1.7}
+ :is(#brand,#curiosity) .intro-bottom{margin-top:22px;padding-top:18px;gap:17px}
+ :is(#brand,#curiosity) .intro-bottom p{font-size:13px}
+ :is(#brand,#curiosity) .intro-visual{grid-template-rows:minmax(0,1fr) 164px;gap:16px}
+ :is(#brand,#curiosity) .intro-side{gap:16px}
+ :is(#brand,#curiosity) .intro-ambition{padding:20px}
+ :is(#brand,#curiosity) .intro-ambition strong{font-size:56px;margin-bottom:8px}
 }
 @media(min-width:901px) and (max-height:649px){
- #brand{height:auto;min-height:650px}
- #brand .intro-layout{height:520px}
+ :is(#brand,#curiosity){height:auto;min-height:650px}
+ :is(#brand,#curiosity) .intro-layout{height:520px}
 }
 .story-sticky{width:100%}.story-scroll-progress{display:none}
 @media(min-width:901px) and (min-height:650px){
@@ -303,14 +303,14 @@ html.reduce-motion #story [role=tabpanel]{animation:none}
 .brand-sticky{width:100%}
 @media(min-width:901px){.brand-sticky{height:100%;display:flex;align-items:center}}
 @media(min-width:901px) and (min-height:650px){
- #brand.is-scroll-brand{height:180svh;min-height:180svh;max-height:none;display:block;padding:0;align-content:normal;align-items:normal}
- #brand.is-scroll-brand .brand-sticky{position:sticky;top:0;height:100svh;padding:104px 0 64px}
- #brand.is-scroll-brand :is(.intro-label,#brand-title,.intro-description,.intro-bottom,.intro-city-main,.intro-city-small,.intro-ambition){opacity:var(--brand-reveal,1);transform:translate3d(0,calc((1 - var(--brand-reveal,1))*54px),0);transition:none}
- #brand.is-scroll-brand .intro-city{clip-path:inset(calc((1 - var(--brand-reveal,1))*9%) round 28px)}
- #brand.is-scroll-brand .intro-city>img{transform:scale(calc(1.1 - var(--brand-reveal,1)*.1));transition:none}
- #brand.is-scroll-brand .intro-ambition{transform:translate3d(0,calc((1 - var(--brand-reveal,1))*54px),0) scale(calc(.94 + var(--brand-reveal,1)*.06))}
- #brand.is-scroll-brand .brand-reveal-hidden{pointer-events:none}
+ :is(#brand,#curiosity).is-scroll-brand{height:180svh;min-height:180svh;max-height:none;display:block;padding:0;align-content:normal;align-items:normal}
+ :is(#brand,#curiosity).is-scroll-brand .brand-sticky{position:sticky;top:0;height:100svh;padding:104px 0 64px}
+ :is(#brand,#curiosity).is-scroll-brand :is(.intro-label,#brand-title,.intro-description,.intro-bottom,.intro-city-main,.intro-city-small,.intro-ambition){opacity:var(--brand-reveal,1);transform:translate3d(0,calc((1 - var(--brand-reveal,1))*54px),0);transition:none}
+ :is(#brand,#curiosity).is-scroll-brand .intro-city{clip-path:inset(calc((1 - var(--brand-reveal,1))*9%) round 28px)}
+ :is(#brand,#curiosity).is-scroll-brand .intro-city>img{transform:scale(calc(1.1 - var(--brand-reveal,1)*.1));transition:none}
+ :is(#brand,#curiosity).is-scroll-brand .intro-ambition{transform:translate3d(0,calc((1 - var(--brand-reveal,1))*54px),0) scale(calc(.94 + var(--brand-reveal,1)*.06))}
+ :is(#brand,#curiosity).is-scroll-brand .brand-reveal-hidden{pointer-events:none}
 }
 @media(min-width:901px) and (min-height:650px) and (max-height:800px){
- #brand.is-scroll-brand .brand-sticky{padding-block:90px 42px}
+ :is(#brand,#curiosity).is-scroll-brand .brand-sticky{padding-block:90px 42px}
 }

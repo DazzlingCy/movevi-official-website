@@ -15,7 +15,7 @@
   const lerp=(a,b,t)=>a+(b-a)*t;
   let enabled=false,frame=0,leaving=false;
   let occluded=false;
-  let source=document.querySelector('#brand [data-city="tokyo"]')||document.querySelector('#brand .intro-city-small');
+  let source=document.querySelector('#curiosity [data-city="tokyo"]')||document.querySelector('#curiosity .intro-city-small');
   const windowNode=stage.querySelector('.voyage-window');
   const handoff=document.createElement('div');
   handoff.className='voyage-handoff';handoff.setAttribute('aria-hidden','true');handoff.hidden=true;
@@ -40,8 +40,8 @@
   add('.experience .steps,.world-content-scale,.value-accordion','copy',.1);
   add('.benefits-grid>article','image',.08);
   if(oneScreen){
-    add('#brand .intro-label,#brand-title,#brand .intro-description','compact-copy');
-    add('#brand .intro-city-main,#brand .intro-city-small,#brand .intro-ambition','compact-image');
+    add('#curiosity .intro-label,#brand-title,#curiosity .intro-description','compact-copy');
+    add('#curiosity .intro-city-main,#curiosity .intro-city-small,#curiosity .intro-ambition','compact-image');
     add('#products .product-tabs','copy',.06);
     add('#products #product-panel','image',.16);
     add('.trust-checks','copy',.17);
@@ -79,7 +79,7 @@
       const inTransit=source&&rect.top>0&&rect.top<innerHeight*.62;
       if(inTransit){
         if(handoff.hidden){
-          const wall=document.querySelector('#brand .city-wall-scene');
+          const wall=document.querySelector('#curiosity .city-wall-scene');
           if(wall){
             const bounds=wall.getBoundingClientRect();
             const area=node=>{const r=node.getBoundingClientRect();return Math.max(0,Math.min(r.right,bounds.right)-Math.max(r.left,bounds.left))*Math.max(0,Math.min(r.bottom,bounds.bottom)-Math.max(r.top,bounds.top));};

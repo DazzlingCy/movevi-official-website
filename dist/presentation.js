@@ -33,7 +33,7 @@
   function register(selector,kind,delay){
     document.querySelectorAll(selector).forEach(node=>{
       // The brand scene has its own scroll timeline; keep title line markup only.
-      if(node.closest('#brand')){if(kind==='title')titleLines(node);return;}
+      if(node.closest('#brand,#curiosity')){if(kind==='title')titleLines(node);return;}
       node.classList.add(`present-${kind}`);
       node.style.setProperty('--present-delay',`${delay}ms`);
       if(kind==='title')titleLines(node);

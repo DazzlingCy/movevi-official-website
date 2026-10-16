@@ -6,7 +6,7 @@
 .narrative-v24 .system-heading h2 i{font-style:normal;font-weight:400;color:var(--link);padding:0 .12em}
 .narrative-v24 .system-factor{display:inline-block;white-space:nowrap}
 .narrative-v24 .system-heading>p:last-child{font-size:14px;color:var(--muted);line-height:1.7}
-.narrative-v24 #brand .intro-ambition strong{font-size:clamp(28px,3vw,44px);letter-spacing:-.04em;line-height:1.3}
+.narrative-v24 :is(#brand,#curiosity) .intro-ambition strong{font-size:clamp(28px,3vw,44px);letter-spacing:-.04em;line-height:1.3}
 .narrative-v24 #brand-title .type-line{white-space:normal}
 .narrative-v24 #story .story-grid h2{font-size:clamp(32px,3.3vw,50px);line-height:1.3;max-width:760px}
 .narrative-v24 #story .story-grid{grid-template-columns:1.25fr .8fr;gap:6%}
@@ -39,7 +39,7 @@
  .narrative-v24 #story .story-grid h2{font-size:clamp(29px,7.5vw,42px)}
  .narrative-v24 .portal-heading h2{font-size:clamp(30px,7vw,44px)}
  .narrative-v24 #world-title{font-size:clamp(29px,7vw,44px)}
- .narrative-v24 #brand .intro-ambition strong{font-size:32px}
+ .narrative-v24 :is(#brand,#curiosity) .intro-ambition strong{font-size:32px}
  .narrative-v24 .system-heading h2{font-size:30px}.narrative-v24 .system-heading h2 i{padding:0}
  .narrative-v24 #system .system-principles{padding-block:70px 40px;min-height:0}
  .narrative-v24 #set-off{height:550px;min-height:550px!important}

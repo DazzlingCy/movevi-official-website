@@ -1,7 +1,7 @@
 /* Staggered native-scroll reveal. Static content is fully readable without JS. */
 (() => {
  'use strict';
- const section=document.querySelector('#brand');
+ const section=document.querySelector('#curiosity')||document.querySelector('#brand');
  if(!section)return;
  const photoWall=!!section.querySelector('.city-wall-scene');
  const problem=section.querySelector('.problem-scene'),intro=section.querySelector('.intro-layout');

@@ -40,3 +40,17 @@
 @media(max-width:600px){.problem-comparison{grid-template-columns:1fr}.problem-comparison article{min-height:285px}.problem-clock>span{font-size:82px}.problem-heading h2{font-size:30px}.problem-scene{padding-top:15px}.problem-bottom p{font-size:12px}}
 @media(prefers-reduced-motion:reduce){.problem-discover>img{transform:none}}
 .reduce-motion .problem-discover>img{transform:none}
+/* Chapter 02 asks the question; the city wall opens chapter 03. */
+.screens-v40 #brand.problem-chapter{display:block;padding:0;overflow:visible;height:auto;min-height:100svh}
+.screens-v40 #brand.problem-chapter .brand-sticky{width:100%;height:auto;padding:0}
+#brand.problem-chapter .problem-scene{padding-block:100px 40px}
+#curiosity,#brand.problem-chapter{scroll-margin-top:0}
+.voyage-v31 #curiosity #brand-title{font-size:clamp(30px,3vw,44px);line-height:1.32;letter-spacing:-.035em}
+#curiosity #brand-title .type-line{white-space:normal}
+@media(min-width:901px) and (min-height:650px){
+ .screens-v40 #brand.problem-chapter{height:100svh}
+ #brand.problem-chapter .problem-scene{height:100svh;display:flex;flex-direction:column;padding-block:100px 40px}
+ #brand.problem-chapter .problem-comparison article{min-height:0}
+ #brand.problem-chapter .problem-heading h2{font-size:clamp(34px,min(3.7vw,6svh),60px)}
+}
+@media(max-width:900px){#brand.problem-chapter .problem-scene{padding-block:88px 40px}}
