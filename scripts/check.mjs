@@ -5,7 +5,7 @@ const html=await readFile('dist/index.html','utf8');
 assert.equal((html.match(/<h1\b/g)||[]).length,1,'Exactly one h1');
 const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(x=>x[1]);assert.equal(new Set(ids).size,ids.length,'Unique IDs');
 const chapters=[...html.matchAll(/<(?:section|div)\b[^>]*\bid="([^"]+)"[^>]*\bdata-chapter="(\d+)"/g)].map(m=>[m[1],m[2]]);
-assert.deepEqual(chapters,[['vision','01'],['brand','02'],['curiosity','03'],['solution','03'],['system','04'],['world','05'],['benefits','06'],['product-entry','07'],['trust','08']],'Eight chapters must follow the approved narrative');
+assert.deepEqual(chapters,[['vision','01'],['brand','02'],['solution','03'],['system','04'],['world','05'],['benefits','06'],['product-entry','07'],['trust','08']],'Eight chapters must follow the approved narrative');
 assert.equal((html.match(/data-chapter-link=/g)||[]).length,8,'Every chapter has an index link');
 for(const link of html.matchAll(/href="#([^"]+)"/g))assert(ids.includes(link[1]),`Missing anchor ${link[1]}`);
 for(const file of new Set([...html.matchAll(/(?:src|href)="(assets\/[^"#]+|[a-z-]+\.(?:css|js))"/g)].map(x=>x[1].split('?')[0])))await access(`dist/${file}`);

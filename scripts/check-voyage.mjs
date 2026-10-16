@@ -13,9 +13,10 @@ class Node{
  setAttribute(){}
  removeAttribute(k){if(k==='style')this.vars={};}
 }
-function setup({desktop=true,reduced=false,top=0,oneScreen=false}={}){
+function setup({desktop=true,reduced=false,top=0,oneScreen=false,merged=false}={}){
  const root=new Node(),doc=new Node(),win=new Node(),screen=new Node(),pref=new Node(),hero=new Node(),solution=new Node(),stage=new Node(),windowNode=new Node(),source=new Node(),atlas=new Node(),body=new Node();
  const stops=[new Node(),new Node(),new Node()];
+ const wall=new Node();if(merged)solution.classes.add('solution-merged');
  let box={top,height:2160},io,mutation,id=0;
  const frames=new Map(),media=[];
  if(oneScreen)body.classes.add("screens-v40");
@@ -25,7 +26,7 @@ function setup({desktop=true,reduced=false,top=0,oneScreen=false}={}){
  windowNode.getBoundingClientRect=()=>({top:330+Math.max(0,box.top),left:330,width:760,height:420});
  source.getBoundingClientRect=()=>({top:box.top-170,left:900,width:260,height:160});
  atlas.getBoundingClientRect=()=>({top:11000});
- solution.querySelector=()=>stage;solution.querySelectorAll=()=>stops;stage.querySelector=()=>windowNode;
+ solution.querySelector=()=>stage;solution.querySelectorAll=()=>stops;stage.querySelector=q=>q==='.solution-city-wall'?wall:windowNode;
  const nodes={'#vision':hero,'#solution':solution,'#curiosity .intro-city-small':source,'#world':atlas};
  doc.querySelector=q=>nodes[q];doc.querySelectorAll=()=>[];doc.createElement=()=>new Node();
  doc.addEventListener('movevi:portal-visibility',e=>media.push(e.detail.occluded));
@@ -35,7 +36,7 @@ function setup({desktop=true,reduced=false,top=0,oneScreen=false}={}){
   IntersectionObserver:class{constructor(f){io=f;}observe(){}},MutationObserver:class{constructor(f){mutation=f;}observe(){}}});
  const flush=()=>{for(const [id,f] of [...frames]){frames.delete(id);f();}};
  const visible=on=>{io([hero,solution,atlas].map(target=>({target,isIntersecting:on})));flush();};
- return{root,doc,win,screen,pref,solution,stage,source,windowNode,ghost:body.children[0],media,frames,flush,visible,scroll:top=>{box.top=top;win.fire('scroll');flush();}};
+ return{root,doc,win,screen,pref,solution,stage,source,wall,windowNode,ghost:body.children[0],media,frames,flush,visible,scroll:top=>{box.top=top;win.fire('scroll');flush();}};
 }
 {
  const s=setup();s.visible(true);assert.equal(s.solution.dataset.voyagePhase,'city');
@@ -56,5 +57,16 @@ function setup({desktop=true,reduced=false,top=0,oneScreen=false}={}){
 }
 for(const options of [{desktop:false},{reduced:true}]){const s=setup(options);s.visible(true);assert(!s.solution.classes.has('is-voyage'));assert.equal(s.frames.size,0);assert.equal(s.ghost.hidden,true);}
 console.log('Passed: reversible city/App/hardware timeline, cross-section handoff, covered-video signal, offscreen/background idle, restored scroll and static fallbacks.');
+
+{
+ const s=setup({merged:true});s.visible(true);
+ assert.equal(s.solution.dataset.voyagePhase,'wall');assert.equal(s.media.at(-1),true);
+ s.scroll(-200);assert(+s.stage.vars['--wall-mix']>0&&+s.stage.vars['--wall-mix']<1);
+ s.scroll(-400);assert.equal(s.solution.dataset.voyagePhase,'city');assert(s.wall.inert);assert.equal(s.media.at(-1),false);
+ s.scroll(-900);assert.equal(s.solution.dataset.voyagePhase,'route');
+ s.scroll(-1190);assert.equal(s.solution.dataset.voyagePhase,'hardware');
+ s.scroll(0);assert.equal(s.solution.dataset.voyagePhase,'wall');assert.equal(s.wall.inert,false);
+ s.scroll(-400);s.pref.matches=true;s.pref.fire('change');assert.equal(s.wall.inert,false);assert.equal(s.stage.vars['--wall-mix'],undefined);
+}
 
 {const s=setup({oneScreen:true});s.visible(true);assert(s.solution.classes.has('is-voyage'),'Viewport-sized scenes still enable the scroll story');assert.equal(s.solution.dataset.voyagePhase,'city');s.scroll(-756);assert.equal(s.solution.dataset.voyagePhase,'route');assert.equal(s.stage.vars['--route-opacity'],'1.0000');s.scroll(-1190);assert.equal(s.solution.dataset.voyagePhase,'hardware');s.scroll(0);assert.equal(s.solution.dataset.voyagePhase,'city');assert.equal(s.stage.vars['--hardware-opacity'],'0.0000');}

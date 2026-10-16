@@ -1,12 +1,13 @@
 /* CSS compositor loops run only while the photo wall is visible and settled. */
 (() => {
  'use strict';
- const scene=document.querySelector('.brand-intro .city-wall-scene');if(!scene)return;
+ const scene=document.querySelector('.city-wall-scene');if(!scene)return;
+ const owner=scene.closest('[data-chapter]');
  const button=scene.querySelector('.city-wall-toggle'),root=document.documentElement,reduced=matchMedia('(prefers-reduced-motion: reduce)');
  let visible=false,paused=false,leaving=false;
  function sync(){
   const staticMode=reduced.matches||root.classList.contains('reduce-motion');
-  const travelling=scene.classList.contains('opening-in-transit')||!!scene.querySelector('.voyage-in-transit')||scene.closest('.brand-intro').classList.contains('is-question-phase');
+  const travelling=scene.classList.contains('is-wall-retired')||scene.classList.contains('opening-in-transit')||!!scene.querySelector('.voyage-in-transit')||owner?.classList.contains('is-question-phase');
   const running=visible&&!paused&&!leaving&&!document.hidden&&!staticMode&&!travelling;
   if(scene.classList.contains('is-wall-playing')!==running)scene.classList.toggle('is-wall-playing',running);
   if(button){button.hidden=staticMode;button.textContent=paused?'继续流动 ▷':'暂停流动 Ⅱ';button.setAttribute('aria-label',paused?'继续照片流动':'暂停照片流动');button.setAttribute('aria-pressed',String(paused));}
@@ -15,7 +16,7 @@
  button?.addEventListener('click',()=>{paused=!paused;sync();});
  new MutationObserver(sync).observe(scene,{subtree:true,attributes:true,attributeFilter:['class']});
  new MutationObserver(sync).observe(root,{attributes:true,attributeFilter:['class']});
- new MutationObserver(sync).observe(scene.closest('.brand-intro'),{attributes:true,attributeFilter:['class']});
+ if(owner)new MutationObserver(sync).observe(owner,{attributes:true,attributeFilter:['class']});
  document.addEventListener('visibilitychange',sync);reduced.addEventListener('change',sync);
  addEventListener('pagehide',()=>{leaving=true;sync();});addEventListener('pageshow',()=>{leaving=false;sync();});sync();
 })();

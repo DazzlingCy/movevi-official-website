@@ -1,0 +1,37 @@
+/* One promise, one continuous scene: cities → route → App → equipment. */
+#solution.solution-merged{position:relative;scroll-margin-top:0}
+.solution-anchor{position:absolute;top:0;left:0}
+#solution.solution-merged .voyage-sticky{mix-blend-mode:normal}
+#solution .solution-city-wall{position:relative;isolation:isolate;margin:0;overflow:hidden;border-radius:28px;background:#0c1520;min-height:360px;grid-column:1/-1}
+#solution .solution-city-wall:after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,transparent 50%,#061321e6 100%)}
+#solution .solution-city-wall>figcaption{position:absolute;z-index:2;left:28px;bottom:24px;right:24px;color:#fff;pointer-events:none;display:grid;gap:8px}
+#solution .solution-city-wall>figcaption>span{font-size:9px;letter-spacing:.12em}
+#solution .solution-city-wall>figcaption>strong{font-size:clamp(22px,2.2vw,34px);line-height:1.3;font-weight:600}
+#solution .solution-city-wall>figcaption>span:last-child{font-size:8px;opacity:.6}
+#solution .solution-city-wall.is-wall-retired{pointer-events:none;visibility:hidden}
+@media(min-width:901px) and (min-height:650px){
+ .screens-v40 #solution.solution-merged.is-voyage{height:300svh;min-height:300svh}
+ #solution.solution-merged.is-voyage .solution-city-wall{position:absolute;inset:2.5% 0 5%;width:100%;height:auto;min-height:0;z-index:5;opacity:calc(1 - var(--wall-mix,0));transform:scale(calc(1 + var(--wall-mix,0)*.045));transform-origin:50% 50%;will-change:transform,opacity}
+ #solution.solution-merged.is-voyage .voyage-window{opacity:var(--wall-mix,0)}
+ #solution.solution-merged .portal-heading{max-width:1100px}
+ #solution.solution-merged .portal-heading h2{font-size:clamp(32px,min(3.5vw,5.7svh),54px);line-height:1.25}
+ #solution.solution-merged .city-photo-wall{--wall-tile-width:clamp(150px,14vw,220px)}
+}
+#solution.solution-merged:not(.is-voyage) .voyage-stage{display:grid;grid-template-columns:1fr 1fr;gap:24px;height:auto}
+#solution.solution-merged:not(.is-voyage) .voyage-window{grid-column:1/-1;height:280px}
+#solution.solution-merged:not(.is-voyage) .voyage-machine,#solution.solution-merged:not(.is-voyage) .voyage-static-app{height:300px;position:relative;inset:auto;width:100%;opacity:1;transform:none}
+#solution.solution-merged:not(.is-voyage) .voyage-machine img{height:250px;object-fit:contain}
+@media(max-width:900px),(max-height:649px){
+ #solution.solution-merged{height:auto;min-height:0}
+ #solution.solution-merged .voyage-sticky{height:auto;padding:88px 0 40px}
+ #solution.solution-merged .portal-heading h2{font-size:clamp(26px,4vw,42px);line-height:1.35}
+ #solution.solution-merged .solution-city-wall{min-height:380px}
+ #solution.solution-merged .voyage-stage{margin-top:28px}
+}
+@media(max-width:600px){
+ #solution.solution-merged .portal-heading h2{font-size:26px}
+ #solution.solution-merged .solution-city-wall>figcaption{left:18px;bottom:20px;right:16px}
+ #solution.solution-merged:not(.is-voyage) .voyage-stage{gap:16px}
+ #solution.solution-merged:not(.is-voyage) .voyage-machine,#solution.solution-merged:not(.is-voyage) .voyage-static-app{height:240px}
+ #solution.solution-merged:not(.is-voyage) .voyage-machine img{height:190px}
+}

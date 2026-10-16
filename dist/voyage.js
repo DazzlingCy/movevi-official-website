@@ -9,6 +9,14 @@
   const solution=document.querySelector('#solution');
   const stage=solution?.querySelector('.voyage-stage');
   if(!hero||!solution||!stage)return;
+  const merged=solution.classList.contains('solution-merged');
+  const wall=merged?stage.querySelector('.solution-city-wall'):null;
+  function wallState(retired){
+    if(!wall)return;
+    wall.classList.toggle('is-wall-retired',retired);
+    wall.inert=retired;
+    wall.setAttribute('aria-hidden',String(retired));
+  }
   const clamp=x=>Math.max(0,Math.min(1,x));
   const ease=x=>{x=clamp(x);return x*x*(3-2*x);};
   const range=(p,a,b)=>ease((p-a)/(b-a));
@@ -58,15 +66,18 @@
     if(visible.has(hero))hero.style.setProperty('--opening-progress',clamp(-hero.getBoundingClientRect().top/innerHeight).toFixed(4));
     if(desktop.matches&&(visible.has(solution)||!handoff.hidden)){
       const rect=solution.getBoundingClientRect();
-      const p=clamp(-rect.top/Math.max(1,rect.height-innerHeight));
+      const progress=clamp(-rect.top/Math.max(1,rect.height-innerHeight));
+      const p=merged?clamp((progress-.26)/.74):progress;
+      const wallMix=range(progress,.07,.26);
+      if(merged){stage.style.setProperty('--wall-mix',wallMix.toFixed(4));wallState(wallMix>=1);}
       solution.style.setProperty('--handoff-copy',range(1-rect.top/(innerHeight*.62),.9,1).toFixed(4));
-      const expand=range(p,0,.2), fold=range(p,.25,.55), hardware=range(p,.68,.88);
+      const expand=merged?1:range(p,0,.2), fold=range(p,.25,.55), hardware=range(p,.68,.88);
       const box=stage.getBoundingClientRect();
       const phoneHeight=Math.min(box.height*.95,520),phoneWidth=phoneHeight*390/844;
       stage.style.setProperty('--window-left',`${lerp(lerp(box.width*.17,0,expand),box.width*.65,fold)}px`);
-      stage.style.setProperty('--window-top',`${lerp(box.height*.08,box.height*.025,fold)}px`);
+      stage.style.setProperty('--window-top',`${lerp(box.height*(merged?.025:.08),box.height*.025,fold)}px`);
       stage.style.setProperty('--window-width',`${lerp(lerp(box.width*.66,box.width,expand),phoneWidth,fold)}px`);
-      stage.style.setProperty('--window-height',`${lerp(box.height*.84,phoneHeight,fold)}px`);
+      stage.style.setProperty('--window-height',`${lerp(box.height*(merged?.925:.84),phoneHeight,fold)}px`);
       stage.style.setProperty('--window-radius',`${lerp(28,30,fold)}px`);
       stage.style.setProperty('--window-border',`${fold*6}px`);
       stage.style.setProperty('--route-opacity',range(p,.4,.56).toFixed(4));
@@ -74,9 +85,9 @@
       stage.style.setProperty('--city-opacity',(1-range(p,.48,.6)).toFixed(4));
       stage.style.setProperty('--city-caption',(1-range(p,.22,.38)).toFixed(4));
       stage.style.setProperty('--hardware-opacity',hardware.toFixed(4));
-      solution.dataset.voyagePhase=p<.38?'city':p<.72?'route':'hardware';
+      solution.dataset.voyagePhase=merged&&progress<.26?'wall':p<.38?'city':p<.72?'route':'hardware';
       solution.querySelectorAll('.voyage-stops li').forEach((node,i)=>node.classList.toggle('is-current',i===(p<.38?0:p<.72?1:2)));
-      const inTransit=source&&rect.top>0&&rect.top<innerHeight*.62;
+      const inTransit=!merged&&source&&rect.top>0&&rect.top<innerHeight*.62;
       if(inTransit){
         if(handoff.hidden){
           const wall=document.querySelector('#curiosity .city-wall-scene');
@@ -92,7 +103,7 @@
         handoff.hidden=false;source.classList.add('voyage-in-transit');windowNode.classList.add('voyage-in-transit');
         Object.assign(handoff.style,{left:`${lerp(from.left,to.left,t)}px`,top:`${lerp(from.top,to.top,t)}px`,width:`${lerp(from.width,to.width,t)}px`,height:`${lerp(from.height,to.height,t)}px`,borderRadius:'28px'});
       }else clearHandoff();
-      videoOccluded(!!inTransit||p>=.6);
+      videoOccluded(!!inTransit||p>=.6||(merged&&wallMix<.95));
     }
     if(atlas&&visible.has(atlas))atlas.style.setProperty('--atlas-arrival',range((innerHeight-atlas.getBoundingClientRect().top)/innerHeight,.1,.85).toFixed(4));
     for(const {node,delay} of arrivals){
@@ -111,12 +122,12 @@
   function sync(){
     const next=!reduced.matches&&!root.classList.contains('reduce-motion');
     solution.classList.toggle('is-voyage',next&&desktop.matches);
-    if(!desktop.matches){clearHandoff();videoOccluded(false);stage.removeAttribute('style');solution.style.removeProperty('--handoff-copy');}
+    if(!desktop.matches){wallState(false);clearHandoff();videoOccluded(false);stage.removeAttribute('style');solution.style.removeProperty('--handoff-copy');}
     if(next===enabled){schedule();return;}
     enabled=next;root.classList.toggle('voyage-motion',enabled);
     if(frame){cancelAnimationFrame(frame);frame=0;}
     if(!enabled){
-      clearHandoff();videoOccluded(false);
+      wallState(false);clearHandoff();videoOccluded(false);
       stage.removeAttribute('style');hero.style.removeProperty('--opening-progress');
       solution.style.removeProperty('--handoff-copy');
       arrivals.forEach(({node})=>node.style.removeProperty('--arrival'));
