@@ -33,28 +33,16 @@
     if(!detail.open)return;
     values.forEach(other=>{if(other!==detail)other.open=false;});
   }));
-  const index=document.querySelector('.story-index');
   const chapters=[...document.querySelectorAll('[data-chapter]')];
-  const links=[...document.querySelectorAll('[data-chapter-link]')];
-  const ending=document.querySelector('#set-off');
   const mainLinks=[...document.querySelectorAll('[data-nav-chapter]')];
-  if(!index||!chapters.length)return;
-  index.classList.add('is-enhanced');
+  if(!chapters.length)return;
   let frame=0;
   function update(){
     frame=0;
     const line=innerHeight*.32;
     const current=chapters.filter(chapter=>chapter.getBoundingClientRect().top<=line).at(-1);
-    const visible=!!current&&current.dataset.chapter!=='01'&&ending.getBoundingClientRect().top>line;
-    // Keep a focused navigation link visible until focus leaves it.
-    const keyboardFocus=index.contains(document.activeElement)&&document.activeElement.matches(':focus-visible');
-    index.hidden=!visible&&!keyboardFocus;
     mainLinks.forEach(link=>{
       if(current&&link.dataset.navChapter.split(/\s+/).includes(current.dataset.chapter))link.setAttribute('aria-current','location');
-      else link.removeAttribute('aria-current');
-    });
-    links.forEach(link=>{
-      if(visible&&link.dataset.chapterLink===current.dataset.chapter)link.setAttribute('aria-current','location');
       else link.removeAttribute('aria-current');
     });
   }
@@ -62,6 +50,5 @@
   addEventListener('scroll',requestUpdate,{passive:true});
   addEventListener('resize',requestUpdate,{passive:true});
   document.addEventListener('visibilitychange',requestUpdate);
-  index.addEventListener('focusout',requestUpdate);
   update();
 })();
