@@ -1,29 +1,36 @@
-/* Illustrated example comments; disclosure is repeated per comment. */
-#reviews{background:#fff;color:#1d1d1f;padding:100px 0 76px;scroll-margin-top:72px}
-#reviews .reviews-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:32px;margin-bottom:44px}
-#reviews .eyebrow{font-size:10px;letter-spacing:.12em;color:#6e6e73;margin-bottom:16px}
-#reviews h2{font-size:clamp(32px,3.2vw,52px);line-height:1.25;letter-spacing:-.04em}
-#reviews .reviews-intro{max-width:300px;font-size:14px;color:#6e6e73;line-height:1.8}
-#reviews .reviews-status{font-size:11px;color:#62626a;margin-top:12px;border-top:1px solid #dcdce2;padding-top:10px}
-#reviews .reviews-wall{columns:3;column-gap:28px}
-#reviews .review-comment{break-inside:avoid;display:inline-block;vertical-align:top;width:100%;margin:0 0 30px;transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
-#reviews .review-author{display:flex;align-items:center;gap:11px;padding:0 4px;margin-bottom:14px}
-#reviews .review-avatar{width:44px;height:44px;flex:none}
-#reviews .review-author h3{font-size:14px;line-height:1.5;font-weight:600;margin:0 0 3px;letter-spacing:0}
-#reviews .review-author>div>span{font-size:10px;color:#71717a}
-#reviews .review-example{margin-left:auto;font-size:10px;border:1px solid #d7dce3;color:#62626a;border-radius:20px;padding:4px 8px;white-space:nowrap}
-#reviews .review-bubble{position:relative;margin-left:24px;border-radius:6px 22px 22px 22px;background:#f5f5f7;padding:24px 26px 20px}
-#reviews .review-bubble:before{content:'';position:absolute;left:0;top:-8px;width:16px;height:16px;background:inherit;clip-path:polygon(0 0,100% 100%,0 100%)}
-#reviews .review-comment:nth-child(4n+1) .review-bubble{background:#edf4fc}
-#reviews .review-comment:nth-child(4n+3) .review-bubble{background:#f2f4f1}
+/* One-screen comment stream. Examples are disclosed once below the wall. */
+#reviews{background:#fff;color:#1d1d1f;padding:76px 0 24px;scroll-margin-top:0;min-height:100svh;display:flex;flex-direction:column;justify-content:center;gap:24px;overflow:hidden}
+#reviews .reviews-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:24px}
+#reviews .eyebrow{font-size:10px;letter-spacing:.12em;color:#6e6e73;margin-bottom:12px}
+#reviews h2{font-size:clamp(28px,3vw,46px);line-height:1.25;letter-spacing:-.04em}
+#reviews .reviews-intro{font-size:12px;color:#6e6e73;text-align:right;flex-shrink:0}
+#reviews-toggle{font-size:11px;border:1px solid #d7dce3;border-radius:24px;background:#fff;color:#555e69;padding:7px 14px;margin-top:10px}
+#reviews .reviews-stream{display:grid;gap:14px;mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
+#reviews .review-stream-row{overflow-x:auto;scrollbar-width:none;outline-offset:-3px}
+#reviews .review-stream-track{display:flex;width:max-content;transform:translateZ(0)}
+#reviews .review-stream-group{display:flex;gap:16px;padding-right:16px;min-width:100vw;justify-content:space-around}
+#reviews .review-stream-copy{display:none}
+#reviews .review-comment{width:360px;flex:none;padding:0 0 2px;min-width:0}
+#reviews .review-author{display:flex;align-items:center;gap:10px;margin:0 0 9px 10px}
+#reviews .review-avatar{width:34px;height:34px;flex:none}
+#reviews .review-author h3{font-size:12px;line-height:1.5;font-weight:500;margin:0;letter-spacing:0;color:#4e555e}
+#reviews .review-bubble{position:relative;margin-left:26px;border-radius:5px 18px 18px 18px;background:#f3f4f6;padding:15px 20px;min-height:102px}
+#reviews .review-bubble:before{content:'';position:absolute;left:0;top:-7px;width:14px;height:14px;background:inherit;clip-path:polygon(0 0,100% 100%,0 100%)}
+#reviews .review-comment:nth-child(2n+1) .review-bubble{background:#edf4fc}
+#reviews .review-stream-row:nth-child(2) .review-bubble{background:#f0f3ef}
 #reviews blockquote{margin:0}
-#reviews blockquote p{font-size:15px;line-height:1.95;color:#41434a}
-#reviews .review-highlight{font-size:11px;color:#0066cc;margin-top:18px;line-height:1.5}
-#reviews .review-highlight:before{content:'—';margin-right:8px;color:#7c9dbf}
-#reviews .reviews-footnote{margin-top:8px;border-top:1px solid #e1e4e9;padding-top:24px;display:flex;align-items:center;justify-content:space-between;gap:24px;font-size:12px;line-height:1.8;color:#6e6e73}
-#reviews .reviews-footnote a{color:#0071e3;white-space:nowrap;padding:10px 0}
-@media(max-width:1100px){#reviews .reviews-wall{columns:2;column-gap:24px}}
-@media(max-width:900px){#reviews{padding:76px 0 52px}#reviews .reviews-heading{display:block}#reviews .reviews-intro{margin-top:22px;max-width:none}#reviews .reviews-status{display:inline-block}}
-@media(max-width:650px){#reviews .reviews-wall{columns:1}#reviews .review-bubble{padding:22px;margin-left:20px}#reviews .review-comment{margin-bottom:26px}#reviews .reviews-footnote{align-items:flex-start;flex-direction:column;gap:8px}#reviews .reviews-heading{margin-bottom:32px}}
-@media(prefers-reduced-motion:reduce){#reviews .review-comment{transition:none!important;transform:none!important;opacity:1!important}}
-.reduce-motion #reviews .review-comment{transition:none!important;transform:none!important;opacity:1!important}
+#reviews blockquote p{font-size:13px;line-height:1.85;color:#41434a}
+#reviews .reviews-footnote{display:flex;align-items:center;justify-content:space-between;gap:16px;font-size:11px;color:#6e6e73;line-height:1.5}
+#reviews .reviews-footnote a{color:#0071e3;white-space:nowrap;padding:8px 0}
+#reviews.reviews-enhanced:not(.reviews-static) .review-stream-copy{display:flex}
+#reviews.reviews-enhanced:not(.reviews-static) .review-stream-track{animation:review-flow 34s linear infinite;animation-play-state:paused}
+#reviews.reviews-enhanced:not(.reviews-static) .review-stream-row:nth-child(2) .review-stream-track{animation-direction:reverse;animation-duration:39s}
+#reviews.reviews-enhanced:not(.reviews-static) .review-stream-row:nth-child(3) .review-stream-track{animation-duration:36s;animation-delay:-12s}
+#reviews.reviews-running .review-stream-track{animation-play-state:running!important}
+#reviews .reviews-stream:is(:hover,:focus-within) .review-stream-track{animation-play-state:paused!important}
+@keyframes review-flow{to{transform:translate3d(-50%,0,0)}}
+@media(max-width:900px){#reviews{padding-top:70px;gap:20px}#reviews .reviews-heading{align-items:center}#reviews h2{font-size:30px}#reviews .reviews-intro>p{display:none}}
+@media(max-width:600px){#reviews{padding-top:64px;gap:18px}#reviews .reviews-heading{gap:10px}#reviews h2{font-size:25px;max-width:240px}#reviews .eyebrow{font-size:9px;letter-spacing:.04em}#reviews-toggle{font-size:10px;padding:6px 10px;white-space:nowrap}#reviews .review-comment{width:310px}#reviews .review-bubble{padding:13px 17px;min-height:110px}#reviews .reviews-stream{gap:12px}#reviews .reviews-footnote{align-items:flex-start;flex-direction:column;gap:4px}#reviews .reviews-footnote a{padding:0}#reviews .review-avatar{width:30px;height:30px}}
+@media(prefers-reduced-motion:reduce){#reviews .review-stream-track{animation:none!important;transform:none!important}#reviews .review-stream-copy{display:none!important}}
+.reduce-motion #reviews .review-stream-track{animation:none!important;transform:none!important}
+.reduce-motion #reviews .review-stream-copy{display:none!important}
