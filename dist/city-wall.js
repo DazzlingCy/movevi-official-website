@@ -7,7 +7,7 @@
  let visible=false,paused=false,leaving=false;
  function sync(){
   const staticMode=reduced.matches||root.classList.contains('reduce-motion');
-  const travelling=scene.classList.contains('is-wall-retired')||scene.classList.contains('opening-in-transit')||!!scene.querySelector('.voyage-in-transit')||owner?.classList.contains('is-question-phase');
+  const travelling=scene.classList.contains('question-in-transit')||scene.classList.contains('is-wall-retired')||scene.classList.contains('opening-in-transit')||!!scene.querySelector('.voyage-in-transit')||owner?.classList.contains('is-question-phase');
   const running=visible&&!paused&&!leaving&&!document.hidden&&!staticMode&&!travelling;
   if(scene.classList.contains('is-wall-playing')!==running)scene.classList.toggle('is-wall-playing',running);
   if(button){button.hidden=staticMode;button.textContent=paused?'继续流动 ▷':'暂停流动 Ⅱ';button.setAttribute('aria-label',paused?'继续照片流动':'暂停照片流动');button.setAttribute('aria-pressed',String(paused));}
